@@ -26,7 +26,9 @@ class _HomepageState extends State<Homepage> {
             //Application Details Component Use
              ApplicationDetails(),
              //Chart
-             PieChartSample2()
+             SizedBox(height: 10,),
+             CustomTextWidget(text: 'Chart Overview',fontWeight: FontWeight.bold,fontsize: 14,),
+             PieChartSample2(),
              
           ],
         ),

@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       locale: const Locale('en', 'US'), 
       fallbackLocale: const Locale('en', 'US'),
       theme: ThemeData(
+        fontFamily: 'Poppins',
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),

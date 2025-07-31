@@ -1,8 +1,8 @@
 import 'package:admin_jantasewa/components/custom_drawer.dart';
-import 'package:admin_jantasewa/view/bottomPages/homePage.dart';
-import 'package:admin_jantasewa/view/bottomPages/notificationPage.dart';
-import 'package:admin_jantasewa/view/bottomPages/profilePage.dart';
-import 'package:admin_jantasewa/view/bottomPages/requestPage.dart';
+import 'package:admin_jantasewa/view/bottomPages/home_page.dart';
+import 'package:admin_jantasewa/view/bottomPages/notification_page.dart';
+import 'package:admin_jantasewa/view/bottomPages/profile_page.dart';
+import 'package:admin_jantasewa/view/bottomPages/request_page.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
