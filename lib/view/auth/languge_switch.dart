@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 class LanguageSwitch extends StatelessWidget {
   //final LanguageController languageController = Get.find();
 
-  LanguageSwitch({super.key});
+  const LanguageSwitch({super.key});
 
   @override
   Widget build(BuildContext context) {
