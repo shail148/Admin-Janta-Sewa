@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 class PasswordVisibility extends GetxController {
   RxBool isPasswordVisible = false.obs;
 
@@ -7,3 +6,4 @@ class PasswordVisibility extends GetxController {
     isPasswordVisible.value = !isPasswordVisible.value;
   }
 }
+

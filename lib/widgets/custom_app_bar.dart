@@ -8,14 +8,16 @@ class CustomTopAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leftIcon;
   final Widget? rightIcon;
   final String? title ;
+  final double? fontsize;
 
   const CustomTopAppBar({
     super.key,
     this.onLeftTap,
     this.onRightTap,
-    this.leftIcon,
+    this.leftIcon ,
     this.rightIcon,
     this.title,
+    this.fontsize,
   });
 
   @override
@@ -23,6 +25,7 @@ class CustomTopAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.white,
       automaticallyImplyLeading: false,
+      surfaceTintColor: Colors.white,
       centerTitle: true,
       leading: leftIcon != null
           ? IconButton(
@@ -42,7 +45,7 @@ class CustomTopAppBar extends StatelessWidget implements PreferredSizeWidget {
         text: title ??'Janta Sewa',
         color: AppColors.textColor,
         fontWeight: FontWeight.bold,
-        fontsize: 24,
+        fontsize:fontsize?? 24,
       ),
     );
   }

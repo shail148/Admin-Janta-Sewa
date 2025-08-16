@@ -1,11 +1,11 @@
-
 import 'package:admin_jantasewa/view/auth/login_page.dart';
+import 'package:admin_jantasewa/view/complains/complain_request_page.dart';
+import 'package:admin_jantasewa/view/letters/letters_request_page.dart';
+import 'package:admin_jantasewa/view/users/users_page.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -29,7 +29,7 @@ class CustomDrawer extends StatelessWidget {
                     CircleAvatar(
                       radius: 30,
                       backgroundColor: Colors.white,
-                      backgroundImage: AssetImage('assets/sliderimages/1.png'),
+                     
                     ),
                     SizedBox(height: 10),
                     CustomTextWidget(text: 'Welcome Admin', color: Colors.white,
@@ -67,18 +67,31 @@ class CustomDrawer extends StatelessWidget {
                   _drawerItem(
                     Icons.report,
                     'Complain'.tr,
-                    onTap: () {}
+                    onTap: () {
+                      Get.to(()=>ComplainRequestPage());
+                    }
                   ),
                   _drawerItem(
                     Icons.description,
                     'Letters'.tr,
-                    onTap: () {}
+                    onTap: () {
+                      Get.to(()=>LettersRequestPage());
+                    }
                   ),
-                  // _drawerItem(Icons.person, 'Profile', onTap: () => Get.to(() => const ProfileScreen())),
+                  _drawerItem(
+                    Icons.campaign,
+                    'Speech'.tr,
+                    onTap: () {
+                      //Get.to(()=>LettersRequestPage());
+                    }
+                  ),
+                
                   _drawerItem(
                     Icons.supervised_user_circle_outlined,
                     'Users'.tr,
-                    onTap: () {}
+                    onTap: () {
+                       Get.to(()=>UsersPage());
+                    }
                   ),
                   _drawerItem(
                     Icons.report,
@@ -155,12 +168,10 @@ class CustomDrawer extends StatelessWidget {
       onTap: onTap,
     );
   }
-
-  
-
-
-
 }
+
+
+
 
 
 

@@ -1,3 +1,5 @@
+import 'package:admin_jantasewa/components/language_toggle_switch.dart';
+import 'package:admin_jantasewa/view/auth/login_page.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
@@ -6,12 +8,13 @@ import 'package:get/get.dart';
 
 
 class LanguageSwitch extends StatelessWidget {
-  //final LanguageController languageController = Get.find();
 
   const LanguageSwitch({super.key});
 
   @override
+  @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -69,10 +72,11 @@ class LanguageSwitch extends StatelessWidget {
                 // CustomTextWidget(
                 //   text: 'हिंदी',
                 //   fontsize: 14,
+
                 //   color: AppColors.textColor,
                 //   fontWeight: FontWeight.w600,
                 // ),
-               // LanguageToggleSwitch(),
+               LanguageToggleSwitch(),
               ],
             ),
             SizedBox(height: 30),
@@ -84,7 +88,7 @@ class LanguageSwitch extends StatelessWidget {
               width: double.infinity,
               height: 50,
               onPressed: () {
-               // Get.to(() => LoginPage());
+                Get.to(() => LoginPage());
               },
             ),
           ],

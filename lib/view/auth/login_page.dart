@@ -1,4 +1,5 @@
 import 'package:admin_jantasewa/utils/form_validator.dart';
+import 'package:admin_jantasewa/view/auth/registeration/admin_register.dart';
 import 'package:admin_jantasewa/view/dashboard/dashboard.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
@@ -199,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () {
                         //add ontap Btn
 
-                       // Get.to(() => MainRegisterPage());
+                        Get.to(() => AuthorizedPersonRegister());
                       },
                       child: CustomTextWidget(
                         text: 'register_here'.tr,

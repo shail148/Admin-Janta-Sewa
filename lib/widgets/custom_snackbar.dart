@@ -11,7 +11,7 @@ class CustomSnackbar {
     Duration duration = const Duration(seconds: 2),
     IconData? icon,
   }) {
-    Get.snackbar( 
+    Get.snackbar(  
       title,
       message,
       snackPosition: position,

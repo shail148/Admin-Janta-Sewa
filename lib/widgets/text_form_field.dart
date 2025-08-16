@@ -7,6 +7,8 @@ class CustomTextFormField extends StatelessWidget {
   final bool obscureText;
   final bool enabled;
   final bool readOnly; 
+  final int? minLines;
+  final int? maxLines;
   final TextInputType keyboardType;
   final Color fillColor;
   final double fontSize;
@@ -31,6 +33,8 @@ class CustomTextFormField extends StatelessWidget {
     this.enabled = true,
     this.onSuffixTap,
     this.readOnly = false, 
+    this.maxLines=1,
+    this.minLines,
   });
 
   @override
@@ -38,6 +42,8 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8, bottom: 8),
       child: TextFormField(
+        minLines: minLines,
+        maxLines: maxLines,
         controller: controller,
         obscureText: obscureText,
         keyboardType: keyboardType,

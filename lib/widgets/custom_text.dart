@@ -13,7 +13,7 @@ class CustomTextWidget extends StatelessWidget {
     this.fontsize = 14,
     this.color = Colors.black,
     this.fontWeight,
-    this.textAlign,
+    this.textAlign, 
   });
   @override
   Widget build(BuildContext context) {

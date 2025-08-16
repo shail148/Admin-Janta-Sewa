@@ -1,12 +1,13 @@
-import 'package:admin_jantasewa/components/custom_drawer.dart';
+import 'package:admin_jantasewa/view/bottomPages/send_notification_dashboard.dart';
+import 'package:admin_jantasewa/view/drawerPages/custom_drawer.dart';
 import 'package:admin_jantasewa/view/bottomPages/home_page.dart';
-import 'package:admin_jantasewa/view/bottomPages/notification_page.dart';
 import 'package:admin_jantasewa/view/bottomPages/profile_page.dart';
 import 'package:admin_jantasewa/view/bottomPages/request_page.dart';
+import 'package:admin_jantasewa/view/notification/notification_appbar.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -16,24 +17,19 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-   int selectedIndex = 0;
+  int selectedIndex = 0;
   final List<Widget> pages = [
-    Homepage(),
-
-    Notificationpage(),
-    Profilepage(),
+    HomePage(),
+    SendNotificationDashboard(),
     Requestpage(),
-    // MainNewsDashboard(),
-    // ServicesHomeScreen(),
-    // TrackPage(),
-    // ProfileScreen(),
+    ProfileScreen(),
   ];
-
   void onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
     });
   }
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -41,13 +37,15 @@ class _DashboardPageState extends State<DashboardPage> {
       key: _scaffoldKey,
       appBar: CustomTopAppBar(
         leftIcon: Icon(Icons.menu, color: AppColors.btnBgColor, size: 30),
-        onLeftTap: 
-           () => _scaffoldKey.currentState?.openDrawer(),
-        rightIcon:
-
-            Icon(Icons.notifications, color: AppColors.btnBgColor, size: 30,),onRightTap: (){
-              //Get.to(()=>NotificationPage());
-            },
+        onLeftTap: () => _scaffoldKey.currentState?.openDrawer(),
+        rightIcon: Icon(
+          Icons.notifications,
+          color: AppColors.btnBgColor,
+          size: 30,
+        ),
+        onRightTap: () {
+          Get.to(()=>NotificationAppbarPage());
+        },
       ),
       drawer: CustomDrawer(),
       body: pages[selectedIndex],
@@ -67,19 +65,19 @@ class _DashboardPageState extends State<DashboardPage> {
           type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined,size: 30,),
+              icon: Icon(Icons.home_outlined, size: 30),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.send,size: 30,),
+              icon: Icon(Icons.send, size: 30),
               label: 'Notification',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.request_page_outlined,size: 30,),
+              icon: Icon(Icons.request_page_outlined, size: 30),
               label: 'Request',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline,size: 30,),
+              icon: Icon(Icons.person_outline, size: 30),
               label: 'Profile',
             ),
           ],
