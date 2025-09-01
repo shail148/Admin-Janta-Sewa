@@ -51,6 +51,7 @@ dependencies:
   fl_chart: ^1.0.0
   image_cropper: ^9.1.0
   flutter_image_compress: ^2.1.0
+  flutter_svg: ^2.2.0
   
 
 
@@ -98,7 +99,7 @@ flutter:
       fonts:
         - asset: assets/fonts/Poppins-Regular.ttf
         - asset: assets/fonts/Poppins-Bold.ttf
-          weight: 700
+          # weight: 700
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

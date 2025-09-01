@@ -8,7 +8,7 @@ class CustomLabelText extends StatelessWidget {
   const CustomLabelText({
     super.key,
     required this.text,
-    this.fontsize = 16,
+    this.fontsize = 14,
     this.color,
     this.isRequired = false, 
   });

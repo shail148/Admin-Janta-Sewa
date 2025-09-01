@@ -17,109 +17,69 @@ class RailTicketController extends GetxController {
     List<TicketModel> data = [
       TicketModel(
         ticketId: 'TKT001',
-        passengerName: 'Ravi Kumar',
         trainName: 'Shatabdi Express',
-        route: 'Delhi - Bhopal',
+        trainNumber: '12002', // <-- Add this line
+        pnrNumber: '1234567890',
+        journeyDate: '2025-08-10',
+        from: 'Delhi',
+        to: 'Bhopal',
         requestDate: '2025-08-01',
         status: 'Approved',
+        userId: '9876543210',
+        reason: 'Official meeting in Bhopal',
+        passengerDetails: [
+          PassengerDetail(name: 'Ravi Kumar', age: 30, gender: 'Male', mobile: '9876543210'),
+        ],
       ),
       TicketModel(
         ticketId: 'TKT002',
-        passengerName: 'Meena Sharma',
         trainName: 'Rajdhani Express',
-        route: 'Mumbai - Delhi',
+        trainNumber: '12951', // <-- Add this line
+        pnrNumber: '2345678901',
+        journeyDate: '2025-08-12',
+        from: 'Mumbai',
+        to: 'Delhi',
         requestDate: '2025-08-03',
         status: 'Pending',
+        userId: '9123456780',
+        reason: 'Family function in Delhi',
+        passengerDetails: [
+          PassengerDetail(name: 'Meena Sharma', age: 27, gender: 'Female', mobile: '9123456780'),
+        ],
       ),
       TicketModel(
         ticketId: 'TKT003',
-        passengerName: 'Ankit Verma',
         trainName: 'Garib Rath',
-        route: 'Lucknow - Kolkata',
+        trainNumber: '12203', // <-- Add this line
+        pnrNumber: '3456789012',
+        journeyDate: '2025-08-15',
+        from: 'Lucknow',
+        to: 'Kolkata',
         requestDate: '2025-08-04',
         status: 'Rejected',
+        userId: '9988776655',
+        reason: 'Medical appointment',
+        passengerDetails: [
+          PassengerDetail(name: 'Ankit Verma', age: 35, gender: 'Male', mobile: '9988776655'),
+        ],
       ),
       TicketModel(
-  ticketId: 'TKT004',
-  passengerName: 'Sunita Mishra',
-  trainName: 'Duronto Express',
-  route: 'Patna - Delhi',
-  requestDate: '2025-08-05',
-  status: 'Approved',
-),
-TicketModel(
-  ticketId: 'TKT005',
-  passengerName: 'Amit Yadav',
-  trainName: 'Tejas Express',
-  route: 'Lucknow - New Delhi',
-  requestDate: '2025-08-06',
-  status: 'Pending',
-),
-TicketModel(
-  ticketId: 'TKT006',
-  passengerName: 'Neha Agarwal',
-  trainName: 'Vande Bharat',
-  route: 'Varanasi - Delhi',
-  requestDate: '2025-08-07',
-  status: 'Rejected',
-),
-TicketModel(
-  ticketId: 'TKT007',
-  passengerName: 'Rohan Mehta',
-  trainName: 'Howrah Express',
-  route: 'Kolkata - Mumbai',
-  requestDate: '2025-08-08',
-  status: 'Approved',
-),
-TicketModel(
-  ticketId: 'TKT008',
-  passengerName: 'Priya Singh',
-  trainName: 'Intercity Express',
-  route: 'Kanpur - Lucknow',
-  requestDate: '2025-08-08',
-  status: 'Pending',
-),
-TicketModel(
-  ticketId: 'TKT009',
-  passengerName: 'Mohit Saini',
-  trainName: 'Goa Express',
-  route: 'Delhi - Goa',
-  requestDate: '2025-08-09',
-  status: 'Rejected',
-),
-TicketModel(
-  ticketId: 'TKT010',
-  passengerName: 'Divya Thakur',
-  trainName: 'Deccan Queen',
-  route: 'Pune - Mumbai',
-  requestDate: '2025-08-09',
-  status: 'Approved',
-),
-TicketModel(
-  ticketId: 'TKT011',
-  passengerName: 'Vikram Chauhan',
-  trainName: 'Janshatabdi Express',
-  route: 'Agra - Delhi',
-  requestDate: '2025-08-10',
-  status: 'Pending',
-),
-TicketModel(
-  ticketId: 'TKT012',
-  passengerName: 'Pooja Bhatt',
-  trainName: 'Palace on Wheels',
-  route: 'Jaipur - Jodhpur',
-  requestDate: '2025-08-11',
-  status: 'Approved',
-),
-TicketModel(
-  ticketId: 'TKT013',
-  passengerName: 'Suresh Gupta',
-  trainName: 'Kalka Mail',
-  route: 'Howrah - Kalka',
-  requestDate: '2025-08-11',
-  status: 'Rejected',
-),
-
+        ticketId: 'TKT004',
+        trainName: 'Duronto Express',
+        trainNumber: '12274', // <-- Add this line
+        pnrNumber: '4567890123',
+        journeyDate: '2025-08-18',
+        from: 'Patna',
+        to: 'Delhi',
+        requestDate: '2025-08-05',
+        status: 'Approved',
+        userId: '9001122334',
+        reason: 'Family visit',
+        passengerDetails: [
+          PassengerDetail(name: 'Sunita Mishra', age: 42, gender: 'Female', mobile: '9001122334'),
+          PassengerDetail(name: 'Amit Mishra', age: 45, gender: 'Male', mobile: '9005566778'),
+        ],
+      ),
     ];
 
     ticketList.assignAll(data);
@@ -136,4 +96,6 @@ TicketModel(
       );
     }
   }
+
+  statusBadgeCount(String status) {}
 }

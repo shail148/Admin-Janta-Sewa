@@ -8,7 +8,7 @@ class ApplicationOverviewChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      //padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         
         color: Colors.white,
@@ -63,7 +63,7 @@ class ApplicationOverviewChart extends StatelessWidget {
                     sideTitles: SideTitles(
                       showTitles: true,
                       
-                      reservedSize: 40,
+                      reservedSize: 50,
                       getTitlesWidget: (value, _) {
                         if (value == 0) return const Text('0');
                         if (value == 2000) return const Text('2K');
@@ -78,7 +78,7 @@ class ApplicationOverviewChart extends StatelessWidget {
                   bottomTitles: AxisTitles(
 
                     sideTitles: SideTitles(
-
+                      interval: 1,
                       showTitles: true,
                       getTitlesWidget: (value, _) {
                         switch (value.toInt()) {
@@ -113,9 +113,9 @@ class ApplicationOverviewChart extends StatelessWidget {
                 lineBarsData: [
                   LineChartBarData(
                     spots: const [
-                      FlSpot(0, 2000),
+                      FlSpot(0, 1000),
                       FlSpot(1, 3500),
-                      FlSpot(2, 50),
+                      FlSpot(2, 500),
                       FlSpot(3, 4500),
                       FlSpot(4, 8000),
                       FlSpot(5, 5000),
@@ -132,7 +132,9 @@ class ApplicationOverviewChart extends StatelessWidget {
                       show: true,
                       gradient: LinearGradient(
                         colors: [
+                          // ignore: deprecated_member_use
                           Colors.blue.withOpacity(0.3),
+                          // ignore: deprecated_member_use
                           Colors.blue.withOpacity(0.05)
                         ],
                         begin: Alignment.topCenter,
@@ -142,14 +144,16 @@ class ApplicationOverviewChart extends StatelessWidget {
                   ),
                 ],
                 lineTouchData: LineTouchData(
+                  
                   touchTooltipData: LineTouchTooltipData(
                     
                     getTooltipItems: (touchedSpots) {
                       return touchedSpots.map((spot) {
                         return LineTooltipItem(
+                          
                           "${spot.y.toInt()}",
                           const TextStyle(
-                            color: Colors.black,
+                            color: Colors.blue,
                             fontWeight: FontWeight.bold,
                           ),
                         );

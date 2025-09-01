@@ -1,6 +1,6 @@
+import 'package:admin_jantasewa/view/bottomPages/new_home_page.dart';
 import 'package:admin_jantasewa/view/bottomPages/send_notification_dashboard.dart';
 import 'package:admin_jantasewa/view/drawerPages/custom_drawer.dart';
-import 'package:admin_jantasewa/view/bottomPages/home_page.dart';
 import 'package:admin_jantasewa/view/bottomPages/profile_page.dart';
 import 'package:admin_jantasewa/view/bottomPages/request_page.dart';
 import 'package:admin_jantasewa/view/notification/notification_appbar.dart';
@@ -18,12 +18,14 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   int selectedIndex = 0;
+
   final List<Widget> pages = [
-    HomePage(),
+    NewHomePage(),
     SendNotificationDashboard(),
     Requestpage(),
     ProfileScreen(),
   ];
+
   void onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
@@ -31,6 +33,7 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,42 +47,64 @@ class _DashboardPageState extends State<DashboardPage> {
           size: 30,
         ),
         onRightTap: () {
-          Get.to(()=>NotificationAppbarPage());
+          Get.to(() => NotificationAppbarPage());
         },
       ),
       drawer: CustomDrawer(),
       body: pages[selectedIndex],
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Color(0xFFF4F6FE),
-          border: Border(top: BorderSide(color: Colors.grey.shade200)),
-        ),
-        child: BottomNavigationBar(
-          currentIndex: selectedIndex,
-          onTap: onItemTapped,
 
-          selectedItemColor: AppColors.btnBgColor,
-          unselectedItemColor: AppColors.textGrey,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined, size: 30),
-              label: 'Home',
+      // ✅ Custom Bottom Navigation
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+        decoration: const BoxDecoration(
+          color: Color(0xFFF4F6FE),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            buildNavItem(Icons.home_outlined, "Home", 0),
+            buildNavItem(Icons.dashboard_customize_outlined, "Dashboard", 1),
+            buildNavItem(Icons.history, "Request", 2),
+            buildNavItem(Icons.person_outline, "Profile", 3),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildNavItem(IconData icon, String label, int index) {
+    bool isSelected = selectedIndex == index;
+    return GestureDetector(
+      onTap: () => onItemTapped(index),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.btnBgColor.withOpacity(0.1) : Colors.transparent,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: 24,
+              color: isSelected ? AppColors.btnBgColor : Colors.blue.shade900,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.send, size: 30),
-              label: 'Notification',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.request_page_outlined, size: 30),
-              label: 'Request',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline, size: 30),
-              label: 'Profile',
-            ),
+            if (isSelected) ...[
+              const SizedBox(width: 6),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.btnBgColor,
+                ),
+              ),
+            ],
           ],
         ),
       ),

@@ -1,4 +1,6 @@
-import 'package:admin_jantasewa/controllers/parliamentVisit/parliament_visit_controller.dart';
+import 'package:admin_jantasewa/controllers/hospital/hospital_admission_controller.dart';
+import 'package:admin_jantasewa/models/hospital/hospital_admission_model.dart';
+import 'package:admin_jantasewa/view/hospital/hospital_admission_details_page.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
@@ -7,14 +9,18 @@ import 'package:admin_jantasewa/widgets/view_details_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// Move controller initialization outside the widget to avoid re-creating it
-final ParliamentVisitController controller = Get.put(
-  ParliamentVisitController(),
-  permanent: true,
-);
+class HospitalMainPage extends StatefulWidget {
+  const HospitalMainPage({super.key});
 
-class ParliamentVisitPage extends StatelessWidget {
-  const ParliamentVisitPage({super.key});
+  @override
+  State<HospitalMainPage> createState() => _HospitalMainPageState();
+}
+
+class _HospitalMainPageState extends State<HospitalMainPage> {
+  final HospitalAdmissionController controller = Get.put(
+    HospitalAdmissionController(),
+  );
+
   Color getStatusColor(String status) {
     switch (status) {
       case 'Approved':
@@ -27,12 +33,15 @@ class ParliamentVisitPage extends StatelessWidget {
         return Colors.grey;
     }
   }
+
+  // Count admissions by status
   int getStatusCount(String status) {
     if (status == "All") {
-      return controller.visitList.length;
+      return controller.admissionList.length;
     }
-    return controller.visitList.where((v) => v.status == status).length;
+    return controller.admissionList.where((a) => a.status == status).length;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,48 +80,55 @@ class ParliamentVisitPage extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: controller.filteredList.length,
                   itemBuilder: (context, index) {
-                    final visit = controller.filteredList[index];
-                    return SideCustomCard(child: Column(
+                    final HospitalAdmissionModel admission =
+                        controller.filteredList[index];
+
+                    return SideCustomCard(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            visit.visitId,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          Container(
+                            padding: EdgeInsets.only(left: 4, right: 4),
+                            decoration: BoxDecoration(
+                              color: Color(0xFFC9D8F8),
+                              border: Border.all(color: AppColors.btnBgColor),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Text(
+                              admission.requestId,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: AppColors.textColor,
+                              ),
+                            ),
                           ),
                           const SizedBox(height: 8),
                           Row(
                             children: [
                               const Icon(Icons.person, size: 20),
                               const SizedBox(width: 8),
-                              Text(visit.visitorName),
+                              Text(admission.patientName),
                             ],
                           ),
                           Row(
                             children: [
-                              const Icon(Icons.location_city, size: 20),
+                              const Icon(Icons.local_hospital, size: 20),
                               const SizedBox(width: 8),
-                              Text('Constituency: ${visit.constituency}'),
+                              Expanded(child: Text(admission.hospitalName)),
                             ],
                           ),
                           Row(
                             children: [
-                              const Icon(Icons.account_circle, size: 20),
+                              const Icon(Icons.medical_information, size: 20),
                               const SizedBox(width: 8),
-                              Text('MP: ${visit.mpName}'),
+                              Text(admission.diseaseName),
                             ],
                           ),
                           Row(
                             children: [
                               const Icon(Icons.date_range, size: 20),
                               const SizedBox(width: 8),
-                              Text('Visit Date: ${visit.visitDate}'),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              const Icon(Icons.calendar_today, size: 20),
-                              const SizedBox(width: 8),
-                              Text('Request Date: ${visit.requestDate}'),
+                              Text('Requested Date : ${admission.requestDate}'),
                             ],
                           ),
                           const SizedBox(height: 10),
@@ -127,27 +143,34 @@ class ParliamentVisitPage extends StatelessWidget {
                                 ),
                                 decoration: BoxDecoration(
                                   color: getStatusColor(
-                                    visit.status,
+                                    admission.status,
                                   ).withValues(alpha: 0.2),
                                   // border: Border.all(
-                                  //   color: getStatusColor(visit.status),
+                                  //   color: getStatusColor(admission.status),
                                   // ),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: CustomTextWidget(
-                                  text: visit.status,
-                                  color: getStatusColor(visit.status),
+                                  text: admission.status,
+                                  color: getStatusColor(admission.status),
                                   fontsize: 10,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                               const Spacer(),
-                              ViewDetailsButton(onTap: (){
-
-                              })
+                              ViewDetailsButton(
+                                onTap: () {
+                                  Get.to(
+                                    () => HospitalAdmissionDetailsPage(),
+                                    arguments: admission,
+                                  );
+                                },
+                              ),
                             ],
                           ),
                         ],
-                      ),);
+                      ),
+                    );
                   },
                 ),
               ),
@@ -171,7 +194,7 @@ class ParliamentVisitPage extends StatelessWidget {
         ),
         child: TextButton(
           onPressed: () {
-            controller.filterVisits(status);
+            controller.filterAdmissions(status);
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

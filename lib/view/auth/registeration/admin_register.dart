@@ -130,7 +130,7 @@ class _AuthorizedPersonRegisterState extends State<AuthorizedPersonRegister> {
                                 selectOrgAppointedOfficials = value;
                               });
                             },
-                            label: 'org_appointed_officials'.tr,
+                            label: 'org_appointed_officials'.tr, 
                           ),
         
                           SizedBox(height: 10),
@@ -142,7 +142,7 @@ class _AuthorizedPersonRegisterState extends State<AuthorizedPersonRegister> {
                               setState(() {
                                 selectMember = value;
                               });
-                            },
+                            }, 
                           ),
         
                           SizedBox(height: 10),
@@ -158,7 +158,7 @@ class _AuthorizedPersonRegisterState extends State<AuthorizedPersonRegister> {
                               setState(() {
                                 selectAreaRights = value;
                               });
-                            },
+                            }, 
                           ),
                           SizedBox(height: 10),
                           

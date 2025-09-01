@@ -1,19 +1,20 @@
+import 'package:admin_jantasewa/components/custom_dropdown.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
-import 'package:admin_jantasewa/widgets/custom_snackbar.dart';
-import 'package:flutter/material.dart';
-import 'package:admin_jantasewa/widgets/custom_drop_down.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
+import 'package:admin_jantasewa/widgets/custom_snackbar.dart';
 import 'package:admin_jantasewa/widgets/label_text.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RailTicketForwordsPage extends StatefulWidget {
-  const RailTicketForwordsPage({super.key});
+class HospitalForwordingPage extends StatefulWidget {
+  const HospitalForwordingPage({super.key});
 
   @override
-  State<RailTicketForwordsPage> createState() => _RailTicketForwordsPageState();
+  State<HospitalForwordingPage> createState() => _HospitalForwordingPageState();
 }
-class _RailTicketForwordsPageState extends State<RailTicketForwordsPage> {
+
+class _HospitalForwordingPageState extends State<HospitalForwordingPage> {
   final _formKey = GlobalKey<FormState>();
 
   String? selectedForwardTo;
@@ -27,11 +28,7 @@ class _RailTicketForwordsPageState extends State<RailTicketForwordsPage> {
   //   'Other',
   // ];
 
-  final List<String> priorityList = [
-    'Normal',
-    'High',
-    'Urgent',
-  ];
+  final List<String> priorityList = ['Normal', 'High', 'Urgent'];
 
   final List<String> forwardPersonList = [
     'Person 1',
@@ -52,7 +49,6 @@ class _RailTicketForwordsPageState extends State<RailTicketForwordsPage> {
       items: items,
       selectedValue: value,
       onChanged: onChanged,
-      hintText: hint,
     );
   }
 
@@ -80,7 +76,11 @@ class _RailTicketForwordsPageState extends State<RailTicketForwordsPage> {
               //   onChanged: (val) => setState(() => selectedForwardTo = val),
               // ),
               const SizedBox(height: 16),
-              CustomLabelText(text: 'Forward Person', fontsize: 14, color: Colors.black),
+              CustomLabelText(
+                text: 'Forward Person',
+                fontsize: 14,
+                color: Colors.black,
+              ),
               buildDropdown(
                 hint: 'Select Person',
                 value: selectedForwardPerson,
@@ -88,7 +88,11 @@ class _RailTicketForwordsPageState extends State<RailTicketForwordsPage> {
                 onChanged: (val) => setState(() => selectedForwardPerson = val),
               ),
               const SizedBox(height: 16),
-              CustomLabelText(text: 'Priority', fontsize: 14, color: Colors.black),
+              CustomLabelText(
+                text: 'Priority',
+                fontsize: 14,
+                color: Colors.black,
+              ),
               buildDropdown(
                 hint: 'Select Priority',
                 value: selectedPriority,
@@ -96,7 +100,11 @@ class _RailTicketForwordsPageState extends State<RailTicketForwordsPage> {
                 onChanged: (val) => setState(() => selectedPriority = val),
               ),
               const SizedBox(height: 16),
-              CustomLabelText(text: 'Message', fontsize: 14, color: Colors.black),
+              CustomLabelText(
+                text: 'Message',
+                fontsize: 14,
+                color: Colors.black,
+              ),
               TextFormField(
                 controller: _messageController,
                 maxLength: 250,
@@ -115,12 +123,12 @@ class _RailTicketForwordsPageState extends State<RailTicketForwordsPage> {
                 children: [
                   CustomButton(
                     text: 'Cancel',
-                     height: 40,
+                    height: 40,
                     width: 100,
                     textSize: 14,
                     backgroundColor: Colors.white,
                     textColor: Colors.black,
-                    borderColor:AppColors.btnBgColor,
+                    borderColor: AppColors.btnBgColor,
                     onPressed: () => Navigator.pop(context),
                   ),
                   const SizedBox(width: 12),
@@ -133,12 +141,15 @@ class _RailTicketForwordsPageState extends State<RailTicketForwordsPage> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         // send action
-                        CustomSnackbar.showSuccess(title: 'Success', message: 'Ticket forwarded successfully');
+                        CustomSnackbar.showSuccess(
+                          title: 'Success',
+                          message: 'Ticket forwarded successfully',
+                        );
                       }
                     },
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
