@@ -24,30 +24,30 @@ Future<void> showCustomCalendarDialog({
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
-                fontFamily: 'Poppins',
+                fontFamily: 'Inter',
                 color: AppColors.btnBgColor,
               ),
             ),
             const SizedBox(height: 20),
             Theme(
-              
               data: ThemeData.light().copyWith(
                 primaryColor: AppColors.btnBgColor,
                 hintColor: AppColors.btnBgColor,
                 colorScheme: ColorScheme.light(primary: AppColors.btnBgColor),
-                buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+                buttonTheme: ButtonThemeData(
+                  textTheme: ButtonTextTheme.primary,
+                ),
                 textTheme: TextTheme(
-                  bodyMedium: TextStyle(fontFamily: 'Poppins', fontSize: 14),
-                  bodySmall: TextStyle(fontFamily: 'Poppins', fontSize: 12),
-                  bodyLarge: TextStyle(fontFamily: 'Poppins', fontSize: 14),
+                  bodyMedium: TextStyle(fontFamily: 'Inter', fontSize: 14),
+                  bodySmall: TextStyle(fontFamily: 'Inter', fontSize: 12),
+                  bodyLarge: TextStyle(fontFamily: 'Inter', fontSize: 14),
                   titleSmall: TextStyle(
-                    fontFamily: 'Poppins',
+                    fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
               child: CalendarDatePicker(
-
                 initialDate: selectedDate,
                 firstDate: DateTime(1950),
                 lastDate: DateTime(2100),
@@ -65,7 +65,7 @@ Future<void> showCustomCalendarDialog({
                   onPressed: () => Get.back(),
                   child: Text(
                     "Cancel",
-                    style: TextStyle(color: Colors.grey, fontFamily: 'Poppins'),
+                    style: TextStyle(color: Colors.grey, fontFamily: 'Inter'),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -81,10 +81,7 @@ Future<void> showCustomCalendarDialog({
                   },
                   child: Text(
                     "Done",
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      color: Colors.white,
-                    ),
+                    style: TextStyle(fontFamily: 'Inter', color: Colors.white),
                   ),
                 ),
               ],

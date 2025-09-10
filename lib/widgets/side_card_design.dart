@@ -10,7 +10,7 @@ class SideCustomCard extends StatelessWidget {
   const SideCustomCard({
     super.key,
     required this.child,
-    this.bgColor = const Color(0xFF2E6ED9), // default like AppColors.btnBgColor
+    this.bgColor = const Color(0xFF403572), // default like AppColors.btnBgColor
     this.borderRadius = 8,
     this.margin,
     this.padding,

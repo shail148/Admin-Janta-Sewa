@@ -1,0 +1,72 @@
+[
+    {
+        "date": "2025-09-21",
+        "letterId": "SL0001",
+        "userId": "ID4532568553",
+        "title": "Suggestion Letter",
+        "message": "Suggesting to provide free school uniforms for underprivileged children.",
+        "status": "Approved",
+        "location": {
+            "district": "Bhilai",
+            "block": "Bhilai",
+            "villageWard": "Ward-01",
+            "constituency": "65-Bhilai Nagar"
+        },
+        "benefit": {
+            "benefitName": "Free School Uniforms",
+            "description": "Uniforms for children from low-income families.",
+            "remark": "Highly recommended by local teachers."
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "uniform_proposal.pdf",
+                "fileSize": "1MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-22",
+        "letterId": "SL0002",
+        "userId": "ID4539992221",
+        "title": "Suggestion Letter",
+        "message": "Suggesting to launch a new health insurance scheme for senior citizens.",
+        "status": "Pending",
+        "location": {
+            "district": "Bhilai",
+            "block": "Hudco",
+            "villageWard": "Ward-02",
+            "constituency": "65-Bhilai Nagar"
+        },
+        "scheme": {
+            "schemeName": "Senior Citizen Health Insurance",
+            "eligibility": "Age 60 and above, resident of Bhilai.",
+            "remark": "Scheme draft attached."
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "insurance_scheme.pdf",
+                "fileSize": "2MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-23",
+        "letterId": "SL0003",
+        "userId": "ID1200345333",
+        "title": "Suggestion Letter",
+        "message": "Suggesting to improve the efficiency of the electricity department.",
+        "status": "Rejected",
+        "location": {
+            "district": "Bhilai",
+            "block": "Bhilai",
+            "villageWard": "Ward-03",
+            "constituency": "65-Bhilai Nagar"
+        },
+        "govDepartment": {
+            "departmentName": "Electricity",
+            "issue": "Frequent power cuts in the area.",
+            "remark": "Needs urgent attention."
+        },
+        "uploadedDocuments": []
+    }
+]

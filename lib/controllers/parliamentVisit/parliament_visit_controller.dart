@@ -1,131 +1,299 @@
-import 'package:get/get.dart';
+import 'dart:convert';
 import 'package:admin_jantasewa/models/parliament_visit/parliament_visit_model.dart';
+import 'package:admin_jantasewa/shared/chart_range.dart';
+import 'package:get/get.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class ParliamentVisitController extends GetxController {
-  // Full list of visits
-  RxList<ParliamentVisitModel> visitList = <ParliamentVisitModel>[].obs;
+  // ---------------- Source / UI lists ----------------
+  final RxList<ParliamentVisitModel> visitList = <ParliamentVisitModel>[].obs;
+  final RxList<ParliamentVisitModel> filteredList =
+      <ParliamentVisitModel>[].obs;
 
-  // Selected filter status
-  RxString selectedFilter = 'All'.obs;
+  // ---------------- Filters / Search / Sort ----------------
+  final RxString selectedFilter =
+      'All'.obs; // All | Approved | Pending | Rejected
+  final RxString selectedSort = 'Newest'.obs; // Newest | Oldest
+  final RxString searchText = ''.obs;
+  final TextEditingController searchController = TextEditingController();
 
-  // Filtered visits based on status
-  RxList<ParliamentVisitModel> filteredList = <ParliamentVisitModel>[].obs;
+  // ---------------- Chart state (multi-series) ----------------
+  final Rx<ChartRange> chartRange = ChartRange.week.obs;
+  final RxList<String> graphLabels = <String>[].obs; // x-axis
+  final RxList<FlSpot> approvedSpots = <FlSpot>[].obs;
+  final RxList<FlSpot> pendingSpots = <FlSpot>[].obs;
+  final RxList<FlSpot> rejectedSpots = <FlSpot>[].obs;
 
+  // optional single series
+  final RxList<FlSpot> graphPoints = <FlSpot>[].obs;
+
+  // ---------------- Lifecycle ----------------
   @override
   void onInit() {
     super.onInit();
     loadVisits();
   }
 
-  // Load initial data
-  void loadVisits() {
-    List<ParliamentVisitModel> data = [
-      ParliamentVisitModel(
-        visitId: 'PV001',
-        visitorName: 'Ravi Kumar',
-        constituency: 'Delhi South',
-        mpName: 'Meenakshi Lekhi',
-        visitDate: '2025-09-10',
-        requestDate: '2025-08-01',
-        status: 'Approved',
-      ),
-      ParliamentVisitModel(
-        visitId: 'PV002',
-        visitorName: 'Meena Sharma',
-        constituency: 'Mumbai North',
-        mpName: 'Gopal Shetty',
-        visitDate: '2025-09-12',
-        requestDate: '2025-08-02',
-        status: 'Pending',
-      ),
-      ParliamentVisitModel(
-        visitId: 'PV003',
-        visitorName: 'Ankit Verma',
-        constituency: 'Lucknow',
-        mpName: 'Rajnath Singh',
-        visitDate: '2025-09-14',
-        requestDate: '2025-08-03',
-        status: 'Rejected',
-      ),
-      ParliamentVisitModel(
-        visitId: 'PV004',
-        visitorName: 'Pooja Yadav',
-        constituency: 'Jaipur Rural',
-        mpName: 'Col. Rajyavardhan Rathore',
-        visitDate: '2025-09-15',
-        requestDate: '2025-08-04',
-        status: 'Approved',
-      ),
-      ParliamentVisitModel(
-        visitId: 'PV005',
-        visitorName: 'Amit Sharma',
-        constituency: 'Varanasi',
-        mpName: 'Narendra Modi',
-        visitDate: '2025-09-18',
-        requestDate: '2025-08-05',
-        status: 'Pending',
-      ),
-      ParliamentVisitModel(
-        visitId: 'PV006',
-        visitorName: 'Sunita Joshi',
-        constituency: 'Bhopal',
-        mpName: 'Pragya Singh Thakur',
-        visitDate: '2025-09-20',
-        requestDate: '2025-08-06',
-        status: 'Approved',
-      ),
-      ParliamentVisitModel(
-        visitId: 'PV007',
-        visitorName: 'Rahul Meena',
-        constituency: 'Kolkata Uttar',
-        mpName: 'Sudip Bandyopadhyay',
-        visitDate: '2025-09-21',
-        requestDate: '2025-08-07',
-        status: 'Rejected',
-      ),
-      ParliamentVisitModel(
-        visitId: 'PV008',
-        visitorName: 'Kavita Joshi',
-        constituency: 'Chandigarh',
-        mpName: 'Kirron Kher',
-        visitDate: '2025-09-22',
-        requestDate: '2025-08-08',
-        status: 'Approved',
-      ),
-      ParliamentVisitModel(
-        visitId: 'PV009',
-        visitorName: 'Deepak Kumar',
-        constituency: 'Amritsar',
-        mpName: 'Gurjit Singh Aujla',
-        visitDate: '2025-09-23',
-        requestDate: '2025-08-09',
-        status: 'Pending',
-      ),
-      ParliamentVisitModel(
-        visitId: 'PV010',
-        visitorName: 'Priya Singh',
-        constituency: 'Pune',
-        mpName: 'Girish Bapat',
-        visitDate: '2025-09-25',
-        requestDate: '2025-08-10',
-        status: 'Approved',
-      ),
-    ];
+  // ---------------- Data load (JSON asset) ----------------
+  Future<void> loadVisits() async {
+    // Path: assets/data/parliament_visits.json
+    final raw = await rootBundle.loadString(
+      'assets/data/parliament_visit_200.json',
+    );
+    final List<dynamic> list = jsonDecode(raw) as List<dynamic>;
+    final data = list.map((e) => ParliamentVisitModel.fromJson(e)).toList();
 
     visitList.assignAll(data);
-    filteredList.assignAll(data);
+    apply(); // initial filter + chart build
   }
 
-  // Set filter and update UI
-  void filterVisits(String status) {
-    selectedFilter.value = status;
-    if (status == 'All') {
-      filteredList.assignAll(visitList);
-    } else {
-      filteredList.assignAll(
-        visitList.where((v) => v.status == status),
-      );
+  // ---------------- Public API (UI actions) ----------------
+  void setSearch(String v) {
+    searchText.value = v;
+    apply();
+  }
+
+  void clearSearch() {
+    searchController.clear();
+    searchText.value = '';
+    apply();
+  }
+
+  void setStatusFilter(String v) {
+    selectedFilter.value = v;
+    apply();
+  }
+
+  void setSort(String v) {
+    selectedSort.value = v;
+    apply();
+  }
+
+  void setChartRange(ChartRange r) {
+    if (chartRange.value == r) return;
+    chartRange.value = r;
+    _rebuildChartSeries(filteredList);
+  }
+
+  // ---------------- Pipeline (search → filter → sort → chart) ----------------
+  void apply() {
+    List<ParliamentVisitModel> results = List.from(visitList);
+
+    // Search across useful fields
+    final q = searchText.value.trim().toLowerCase();
+    if (q.isNotEmpty) {
+      results = results.where((a) {
+        return a.parliamentVisitId.toLowerCase().contains(q) ||
+            a.userId.toLowerCase().contains(q) ||
+            a.reason.toLowerCase().contains(q) ||
+            a.visitDetail.headedPersonName.toLowerCase().contains(q) ||
+            a.visitDetail.mobileNumber.toLowerCase().contains(q) ||
+            a.locationDetail.state.toLowerCase().contains(q) ||
+            a.locationDetail.district.toLowerCase().contains(q) ||
+            a.locationDetail.constituency.toLowerCase().contains(q);
+      }).toList();
+    }
+
+    // Filter by status
+    if (selectedFilter.value != 'All') {
+      results = results.where((a) => a.status == selectedFilter.value).toList();
+    }
+
+    // Sort by requestDate
+    switch (selectedSort.value) {
+      case 'Newest':
+        results.sort(
+          (a, b) =>
+              _parseDate(b.requestDate).compareTo(_parseDate(a.requestDate)),
+        );
+        break;
+      case 'Oldest':
+        results.sort(
+          (a, b) =>
+              _parseDate(a.requestDate).compareTo(_parseDate(b.requestDate)),
+        );
+        break;
+    }
+
+    filteredList.assignAll(results);
+
+    // Charts
+    _rebuildChartSeries(results);
+    _rebuildSingleSeries(results);
+  }
+
+  // ---------------- Chart builders ----------------
+  void _rebuildChartSeries(List<ParliamentVisitModel> list) {
+    switch (chartRange.value) {
+      case ChartRange.week:
+        final labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        final a = List<int>.filled(7, 0);
+        final p = List<int>.filled(7, 0);
+        final r = List<int>.filled(7, 0);
+
+        final now = DateTime.now();
+        final monday = now.subtract(Duration(days: (now.weekday + 6) % 7));
+
+        for (int i = 0; i < 7; i++) {
+          final day = monday.add(Duration(days: i));
+          for (final t in list) {
+            final d = _parseDate(t.requestDate);
+            if (d.year == day.year &&
+                d.month == day.month &&
+                d.day == day.day) {
+              if (t.status == 'Approved') {
+                a[i]++;
+              } else if (t.status == 'Pending') {
+                p[i]++;
+              } else if (t.status == 'Rejected') {
+                r[i]++;
+              }
+            }
+          }
+        }
+
+        graphLabels.assignAll(labels);
+        approvedSpots.assignAll([
+          for (int i = 0; i < 7; i++) FlSpot(i.toDouble(), a[i].toDouble()),
+        ]);
+        pendingSpots.assignAll([
+          for (int i = 0; i < 7; i++) FlSpot(i.toDouble(), p[i].toDouble()),
+        ]);
+        rejectedSpots.assignAll([
+          for (int i = 0; i < 7; i++) FlSpot(i.toDouble(), r[i].toDouble()),
+        ]);
+        break;
+
+      case ChartRange.month:
+        final now = DateTime.now();
+        final first = DateTime(now.year, now.month, 1);
+        final days = DateTime(now.year, now.month + 1, 0).day;
+
+        final a = List<int>.filled(days, 0);
+        final p = List<int>.filled(days, 0);
+        final r = List<int>.filled(days, 0);
+        final labels = List<String>.generate(days, (i) => (i + 1).toString());
+
+        for (final t in list) {
+          final d = _parseDate(t.requestDate);
+          if (d.year == first.year && d.month == first.month) {
+            final idx = d.day - 1;
+            if (idx >= 0 && idx < days) {
+              if (t.status == 'Approved') {
+                a[idx]++;
+              } else if (t.status == 'Pending') {
+                p[idx]++;
+              } else if (t.status == 'Rejected') {
+                r[idx]++;
+              }
+            }
+          }
+        }
+
+        graphLabels.assignAll(labels);
+        approvedSpots.assignAll([
+          for (int i = 0; i < days; i++) FlSpot(i.toDouble(), a[i].toDouble()),
+        ]);
+        pendingSpots.assignAll([
+          for (int i = 0; i < days; i++) FlSpot(i.toDouble(), p[i].toDouble()),
+        ]);
+        rejectedSpots.assignAll([
+          for (int i = 0; i < days; i++) FlSpot(i.toDouble(), r[i].toDouble()),
+        ]);
+        break;
+
+      case ChartRange.year:
+        final months = [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ];
+        final a = List<int>.filled(12, 0);
+        final p = List<int>.filled(12, 0);
+        final r = List<int>.filled(12, 0);
+        final now = DateTime.now();
+
+        for (final t in list) {
+          final d = _parseDate(t.requestDate);
+          if (d.year == now.year) {
+            final idx = d.month - 1;
+            if (t.status == 'Approved')
+              a[idx]++;
+            else if (t.status == 'Pending')
+              p[idx]++;
+            else if (t.status == 'Rejected')
+              r[idx]++;
+          }
+        }
+
+        graphLabels.assignAll(months);
+        approvedSpots.assignAll([
+          for (int i = 0; i < 12; i++) FlSpot(i.toDouble(), a[i].toDouble()),
+        ]);
+        pendingSpots.assignAll([
+          for (int i = 0; i < 12; i++) FlSpot(i.toDouble(), p[i].toDouble()),
+        ]);
+        rejectedSpots.assignAll([
+          for (int i = 0; i < 12; i++) FlSpot(i.toDouble(), r[i].toDouble()),
+        ]);
+        break;
+    }
+  }
+
+  // Optional: total series for current week
+  void _rebuildSingleSeries(List<ParliamentVisitModel> list) {
+    final now = DateTime.now();
+    final monday = now.subtract(Duration(days: (now.weekday + 6) % 7));
+    final counts = List<int>.filled(7, 0);
+
+    for (int i = 0; i < 7; i++) {
+      final day = monday.add(Duration(days: i));
+      for (final t in list) {
+        final d = _parseDate(t.requestDate);
+        if (d.year == day.year && d.month == day.month && d.day == day.day) {
+          counts[i]++;
+        }
+      }
+    }
+    graphPoints.assignAll([
+      for (int i = 0; i < 7; i++) FlSpot(i.toDouble(), counts[i].toDouble()),
+    ]);
+  }
+
+  // ---------------- Helpers ----------------
+  int statusBadgeCount(String status) => status == 'All'
+      ? visitList.length
+      : visitList.where((t) => t.status == status).length;
+
+  Color statusColor(String s) {
+    switch (s) {
+      case 'Approved':
+        return const Color(0xFF16A34A);
+      case 'Pending':
+        return const Color(0xFFF59E0B);
+      case 'Rejected':
+        return const Color(0xFFDC2626);
+      default:
+        return Colors.grey;
+    }
+  }
+
+  DateTime _parseDate(String iso) {
+    try {
+      return DateTime.parse(iso);
+    } catch (_) {
+      return DateTime.now();
     }
   }
 }
-

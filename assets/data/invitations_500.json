@@ -1,0 +1,35 @@
+[
+  {
+    "invitationId": "INV001",
+    "userId": "USER123",
+    "requestDate": "2025-09-08",
+    "reason": "Official Parliament Visit",
+    "status": "Approved",
+    "invitationDetail": {
+      "typeOfInvitation": "Parliament Visit",
+      "programmeName": "Annual Session of Parliament",
+      "date": "2025-09-15",
+      "time": "10:00 AM",
+      "contactPersonName": "Mr. Sharma",
+      "mobileNumber": "9876543210",
+      "remarks": "Please carry your ID card",
+      "location": "New Delhi"
+    },
+    "locationDetail": {
+      "district": "New Delhi",
+      "block": "Chanakyapuri",
+      "villageWard": "Ward 12",
+      "constituency": "South Delhi"
+    },
+    "uploadedDocuments": [
+      {
+        "fileName": "id_proof.pdf",
+        "fileSize": "500 KB"
+      },
+      {
+        "fileName": "invitation_letter.jpg",
+        "fileSize": "1.2 MB"
+      }
+    ]
+  }
+]

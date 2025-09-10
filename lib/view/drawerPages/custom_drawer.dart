@@ -20,20 +20,19 @@ class CustomDrawer extends StatelessWidget {
           children: [
             // Header
             DrawerHeader(
-              decoration: const BoxDecoration(color: AppColors.btnBgColor),
+              decoration: const BoxDecoration(color: AppColors.primary),
               child: SizedBox.expand(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundColor: Colors.white,
-                     
-                    ),
+                    CircleAvatar(radius: 30, backgroundColor: Colors.white),
                     SizedBox(height: 10),
-                    CustomTextWidget(text: 'Welcome Admin', color: Colors.white,
-                    fontsize: 12,),
+                    CustomTextWidget(
+                      text: 'Welcome Admin',
+                      color: Colors.white,
+                      fontsize: 12,
+                    ),
                     CustomTextWidget(
                       text: 'admin@gmail.com',
                       color: Colors.white,
@@ -49,74 +48,55 @@ class CustomDrawer extends StatelessWidget {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
-                  _drawerItem(
-                    Icons.home,
-                    'home'.tr,
-                    onTap:() {}
-                  ),
+                  _drawerItem(Icons.home, 'home'.tr, onTap: () {}),
                   // _drawerItem(
                   //   Icons.dashboard,
                   //   'Dashboard',
                   //   onTap: () => Get.to(() => const ServicesHomeScreen()),
                   // ),
-                  _drawerItem(
-                    Icons.event,
-                    'Application'.tr,
-                    onTap:  () {},
-                  ),
+                  _drawerItem(Icons.event, 'Application'.tr, onTap: () {}),
                   _drawerItem(
                     Icons.report,
                     'Complain'.tr,
                     onTap: () {
-                      Get.to(()=>ComplainRequestPage());
-                    }
+                      Get.to(() => ComplainRequestPage());
+                    },
                   ),
                   _drawerItem(
                     Icons.description,
                     'Letters'.tr,
                     onTap: () {
-                      Get.to(()=>LettersRequestPage());
-                    }
+                      Get.to(() => LettersRequestPage());
+                    },
                   ),
                   _drawerItem(
                     Icons.campaign,
                     'Speech'.tr,
                     onTap: () {
                       //Get.to(()=>LettersRequestPage());
-                    }
+                    },
                   ),
-                
+
                   _drawerItem(
                     Icons.supervised_user_circle_outlined,
                     'Users'.tr,
                     onTap: () {
-                       Get.to(()=>UsersPage());
-                    }
+                      Get.to(() => UsersPage());
+                    },
                   ),
-                  _drawerItem(
-                    Icons.report,
-                    'Reports'.tr,
-                    onTap: () {}
-                  ),
+                  _drawerItem(Icons.report, 'Reports'.tr, onTap: () {}),
                   _drawerItem(
                     Icons.mail_outline,
                     'Invitation'.tr,
-                    onTap: () {}
+                    onTap: () {},
                   ),
-                  _drawerItem(
-                    Icons.settings,
-                    'Settings'.tr,
-                    onTap: (){
-                     
-       
-                    },
-                  ),
+                  _drawerItem(Icons.settings, 'Settings'.tr, onTap: () {}),
                   _drawerItem(
                     Icons.logout,
                     'logout'.tr,
-                    onTap:  () {
-                      Get.to(()=>LoginPage());
-                    }
+                    onTap: () {
+                      Get.to(() => LoginPage());
+                    },
                   ),
                 ],
               ),
@@ -144,10 +124,12 @@ class CustomDrawer extends StatelessWidget {
                         throw 'Could not launch $url';
                       }
                     },
-                      child: CustomTextWidget(text: 'Kasper Infotech Pvt. Ltd.',color: AppColors.textColor,
-                      fontsize: 10,),
+                    child: CustomTextWidget(
+                      text: 'Kasper Infotech Pvt. Ltd.',
+                      color: AppColors.textColor,
+                      fontsize: 10,
                     ),
-                  
+                  ),
                 ],
               ),
             ),
@@ -163,15 +145,9 @@ class CustomDrawer extends StatelessWidget {
     VoidCallback? onTap,
   }) {
     return ListTile(
-      leading: Icon(icon, color: AppColors.btnBgColor,size: 32,),
+      leading: Icon(icon, color: AppColors.primary, size: 32),
       title: CustomTextWidget(text: title),
       onTap: onTap,
     );
   }
 }
-
-
-
-
-
-

@@ -6,7 +6,7 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? prefixIcon;
   final bool obscureText;
   final bool enabled;
-  final bool readOnly; 
+  final bool readOnly;
   final int? minLines;
   final int? maxLines;
   final TextInputType keyboardType;
@@ -32,8 +32,8 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.enabled = true,
     this.onSuffixTap,
-    this.readOnly = false, 
-    this.maxLines=1,
+    this.readOnly = false,
+    this.maxLines = 1,
     this.minLines,
   });
 
@@ -49,11 +49,8 @@ class CustomTextFormField extends StatelessWidget {
         keyboardType: keyboardType,
         validator: validator,
         enabled: enabled,
-        readOnly: readOnly, 
-        style: const TextStyle(
-          fontFamily: 'Poppins',
-          color: AppColors.textGrey,
-        ),
+        readOnly: readOnly,
+        style: const TextStyle(fontFamily: 'Inter', color: AppColors.textGrey),
         decoration: InputDecoration(
           filled: true,
           fillColor: fillColor,
@@ -73,10 +70,7 @@ class CustomTextFormField extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(
-              color: AppColors.btnBgColor,
-              width: 1,
-            ),
+            borderSide: const BorderSide(color: AppColors.btnBgColor, width: 1),
           ),
         ),
       ),

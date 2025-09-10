@@ -1,0 +1,456 @@
+[
+    {
+        "date": "2025-09-01",
+        "recommendationId": "R0001",
+        "userId": "ID1001",
+        "title": "Recommendation Letter",
+        "message": "Approval for cultural programme at city hall.",
+        "status": "Approved",
+        "culturalProgramme": {
+            "applicantName": "Suresh",
+            "mobileNumber": "+91-8659325763",
+            "hostDetail": "Dr. Ramesh",
+            "date": "10-10-2025",
+            "culturalProgrammeName": "Annual Fest",
+            "inLetterOf": "Festival",
+            "address": "Sector 12, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc1.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-02",
+        "recommendationId": "R0002",
+        "userId": "ID1002",
+        "title": "Recommendation Letter",
+        "message": "Transfer request for promotion.",
+        "status": "Pending",
+        "transfer": {
+            "typeOfTransfer": "Promotion",
+            "applicantName": "Rakesh",
+            "mobileNumber": "+91-8659325764",
+            "designation": "Sr. Clerk",
+            "department": "State Government",
+            "postOffice": "Public Works",
+            "optedOffice": "Health Department",
+            "reasonForTransfer": "Family relocation",
+            "address": "Sector 15, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc2.pdf",
+                "fileSize": "1.5 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-03",
+        "recommendationId": "R0003",
+        "userId": "ID1003",
+        "title": "Recommendation Letter",
+        "message": "Posting request for new position.",
+        "status": "Rejected",
+        "posting": {
+            "typeOfPosting": "New Position",
+            "applicantName": "Priya",
+            "mobileNumber": "+91-8659325765",
+            "designation": "Assistant Engineer",
+            "department": "PWD",
+            "postOffice": "PWD Main",
+            "optedOffice": "PWD Branch",
+            "reasonForPosting": "Promotion",
+            "address": "Sector 10, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc3.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-04",
+        "recommendationId": "R0004",
+        "userId": "ID1004",
+        "title": "Recommendation Letter",
+        "message": "Quarter allotment for government employee.",
+        "status": "Approved",
+        "quarterAllotment": {
+            "typeOfAllotment": "Promotion",
+            "fullName": "Rahul Sharma",
+            "mobileNumber": "+91-8659325766",
+            "department": "PWD",
+            "optedOffice": "PWD Main",
+            "reasonForAllotment": "Family relocation",
+            "address": "Sector 11, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc4.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-05",
+        "recommendationId": "R0005",
+        "userId": "ID1005",
+        "title": "Recommendation Letter",
+        "message": "Award recommendation for public service.",
+        "status": "Pending",
+        "award": {
+            "typeOfAward": "National",
+            "applicantName": "Ravi Sharma",
+            "mobileNumber": "+91-8659325767",
+            "careerAchievement": "Achievement Award",
+            "awardName": "Public Service Award 2025",
+            "briefDetail": "Outstanding work in welfare.",
+            "address": "House No. 78, Raipur, Chhattisgarh"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc5.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-06",
+        "recommendationId": "R0006",
+        "userId": "ID1006",
+        "title": "Recommendation Letter",
+        "message": "Admission recommendation for school.",
+        "status": "Approved",
+        "admission": {
+            "typeOfAdmission": "School",
+            "applicantName": "Rahul Sharma",
+            "mobileNumber": "+91-8659325768",
+            "studentName": "Riya Sharma",
+            "classCourse": "Class 6 - CBSE",
+            "address": "Sector 12, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc6.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-07",
+        "recommendationId": "R0007",
+        "userId": "ID1007",
+        "title": "Recommendation Letter",
+        "message": "Land allotment for new project.",
+        "status": "Rejected",
+        "landAllotment": {
+            "applicantName": "Rahul Sharma",
+            "mobileNumber": "+91-8659325769",
+            "optedDepartment": "PWD",
+            "optedLandOffice": "PWD Land",
+            "reasonForLandAllotment": "Project expansion",
+            "address": "Sector 13, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc7.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-08",
+        "recommendationId": "R0008",
+        "userId": "ID1008",
+        "title": "Recommendation Letter",
+        "message": "Job recommendation for government post.",
+        "status": "Approved",
+        "jobRecommendation": {
+            "jobRecommendationType": "Government",
+            "applicantName": "Rahul Sharma",
+            "mobileNumber": "+91-8659325770",
+            "postName": "Assistant Engineer",
+            "department": "PWD",
+            "address": "Sector 14, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc8.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-09",
+        "recommendationId": "R0009",
+        "userId": "ID1009",
+        "title": "Recommendation Letter",
+        "message": "Financial recommendation for project.",
+        "status": "Pending",
+        "financialRecommendation": {
+            "department": "PWD",
+            "applicantName": "Rahul Sharma",
+            "mobileNumber": "+91-8659325771",
+            "reasonOfProblem": "Budget shortfall",
+            "tentativeAmount": "₹100000",
+            "address": "Sector 15, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc9.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-10",
+        "recommendationId": "R0010",
+        "userId": "ID1010",
+        "title": "Recommendation Letter",
+        "message": "Other recommendation for health need.",
+        "status": "Approved",
+        "otherRecommendation": {
+            "applicantName": "Rahul Sharma",
+            "mobileNumber": "+91-8659325772",
+            "recommendationNeed": "Health",
+            "address": "Sector 16, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc10.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-11",
+        "recommendationId": "R0011",
+        "userId": "ID1011",
+        "title": "Recommendation Letter",
+        "message": "Approval for cultural programme at city hall.",
+        "status": "Pending",
+        "culturalProgramme": {
+            "applicantName": "Suresh",
+            "mobileNumber": "+91-8659325773",
+            "hostDetail": "Dr. Ramesh",
+            "date": "11-10-2025",
+            "culturalProgrammeName": "Annual Fest",
+            "inLetterOf": "Festival",
+            "address": "Sector 17, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc11.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-12",
+        "recommendationId": "R0012",
+        "userId": "ID1012",
+        "title": "Recommendation Letter",
+        "message": "Transfer request for promotion.",
+        "status": "Rejected",
+        "transfer": {
+            "typeOfTransfer": "Promotion",
+            "applicantName": "Rakesh",
+            "mobileNumber": "+91-8659325774",
+            "designation": "Sr. Clerk",
+            "department": "State Government",
+            "postOffice": "Public Works",
+            "optedOffice": "Health Department",
+            "reasonForTransfer": "Family relocation",
+            "address": "Sector 18, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc12.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-13",
+        "recommendationId": "R0013",
+        "userId": "ID1013",
+        "title": "Recommendation Letter",
+        "message": "Posting request for new position.",
+        "status": "Approved",
+        "posting": {
+            "typeOfPosting": "New Position",
+            "applicantName": "Priya",
+            "mobileNumber": "+91-8659325775",
+            "designation": "Assistant Engineer",
+            "department": "PWD",
+            "postOffice": "PWD Main",
+            "optedOffice": "PWD Branch",
+            "reasonForPosting": "Promotion",
+            "address": "Sector 19, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc13.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-14",
+        "recommendationId": "R0014",
+        "userId": "ID1014",
+        "title": "Recommendation Letter",
+        "message": "Quarter allotment for government employee.",
+        "status": "Pending",
+        "quarterAllotment": {
+            "typeOfAllotment": "Promotion",
+            "fullName": "Rahul Sharma",
+            "mobileNumber": "+91-8659325776",
+            "department": "PWD",
+            "optedOffice": "PWD Main",
+            "reasonForAllotment": "Family relocation",
+            "address": "Sector 20, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc14.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-15",
+        "recommendationId": "R0015",
+        "userId": "ID1015",
+        "title": "Recommendation Letter",
+        "message": "Award recommendation for public service.",
+        "status": "Rejected",
+        "award": {
+            "typeOfAward": "National",
+            "applicantName": "Ravi Sharma",
+            "mobileNumber": "+91-8659325777",
+            "careerAchievement": "Achievement Award",
+            "awardName": "Public Service Award 2025",
+            "briefDetail": "Outstanding work in welfare.",
+            "address": "House No. 79, Raipur, Chhattisgarh"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc15.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-16",
+        "recommendationId": "R0016",
+        "userId": "ID1016",
+        "title": "Recommendation Letter",
+        "message": "Admission recommendation for school.",
+        "status": "Approved",
+        "admission": {
+            "typeOfAdmission": "School",
+            "applicantName": "Rahul Sharma",
+            "mobileNumber": "+91-8659325778",
+            "studentName": "Riya Sharma",
+            "classCourse": "Class 7 - CBSE",
+            "address": "Sector 21, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc16.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-17",
+        "recommendationId": "R0017",
+        "userId": "ID1017",
+        "title": "Recommendation Letter",
+        "message": "Land allotment for new project.",
+        "status": "Pending",
+        "landAllotment": {
+            "applicantName": "Rahul Sharma",
+            "mobileNumber": "+91-8659325779",
+            "optedDepartment": "PWD",
+            "optedLandOffice": "PWD Land",
+            "reasonForLandAllotment": "Project expansion",
+            "address": "Sector 22, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc17.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-18",
+        "recommendationId": "R0018",
+        "userId": "ID1018",
+        "title": "Recommendation Letter",
+        "message": "Job recommendation for government post.",
+        "status": "Rejected",
+        "jobRecommendation": {
+            "jobRecommendationType": "Government",
+            "applicantName": "Rahul Sharma",
+            "mobileNumber": "+91-8659325780",
+            "postName": "Assistant Engineer",
+            "department": "PWD",
+            "address": "Sector 23, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc18.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-19",
+        "recommendationId": "R0019",
+        "userId": "ID1019",
+        "title": "Recommendation Letter",
+        "message": "Financial recommendation for project.",
+        "status": "Approved",
+        "financialRecommendation": {
+            "department": "PWD",
+            "applicantName": "Rahul Sharma",
+            "mobileNumber": "+91-8659325781",
+            "reasonOfProblem": "Budget shortfall",
+            "tentativeAmount": "₹200000",
+            "address": "Sector 24, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc19.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-20",
+        "recommendationId": "R0020",
+        "userId": "ID1020",
+        "title": "Recommendation Letter",
+        "message": "Other recommendation for health need.",
+        "status": "Pending",
+        "otherRecommendation": {
+            "applicantName": "Rahul Sharma",
+            "mobileNumber": "+91-8659325782",
+            "recommendationNeed": "Health",
+            "address": "Sector 25, Bhilai, India"
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "doc20.pdf",
+                "fileSize": "2 MB"
+            }
+        ]
+    }
+]

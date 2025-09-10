@@ -5,16 +5,13 @@ import 'package:flutter_svg/svg.dart';
 class CustomForwardButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const CustomForwardButton({
-    super.key,
-    required this.onPressed,
-  });
+  const CustomForwardButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: onPressed,
-      backgroundColor: AppColors.btnBgColor,
+      backgroundColor: AppColors.primary,
       child: SvgPicture.asset(
         'assets/icons/forward_icon.svg',
         fit: BoxFit.cover,

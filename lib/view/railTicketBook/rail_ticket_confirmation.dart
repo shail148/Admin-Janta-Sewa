@@ -2,217 +2,177 @@ import 'package:admin_jantasewa/controllers/railTicket/rail_ticket_controller.da
 import 'package:admin_jantasewa/view/railTicketBook/rail_ticket_details_page.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
-import 'package:admin_jantasewa/widgets/custom_snackbar.dart';
-import 'package:admin_jantasewa/widgets/custom_text.dart';
-import 'package:admin_jantasewa/widgets/side_card_design.dart';
-import 'package:admin_jantasewa/widgets/view_details_button.dart';
+import 'package:admin_jantasewa/widgets/custom_bottom_sheet.dart';
+import 'package:admin_jantasewa/widgets/custom_info_card.dart';
+import 'package:admin_jantasewa/widgets/custom_search_bar.dart';
+import 'package:admin_jantasewa/widgets/universal_multi_line_chart.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-// Move controller initialization outside the widget to avoid re-creating it
-final RailTicketController controller = Get.put(
-  RailTicketController(),
-  permanent: true,
-);
+import 'package:fl_chart/fl_chart.dart';
 
 class RailTicketConfirmationPage extends StatelessWidget {
-  const RailTicketConfirmationPage({super.key});
-  // Remove controller initialization from here
-  // final RailTicketController controller = Get.put(RailTicketController());
+  RailTicketConfirmationPage({super.key});
 
-  Color getStatusColor(String status) {
-    switch (status) {
-      case 'Approved':
-        return Colors.green;
-      case 'Pending':
-        return Colors.orange;
-      case 'Rejected':
-        return Colors.red;
-      default:
-        return Colors.grey;
-    }
-  }
-
-  // Add a method to get ticket count by status
-  int getStatusCount(String status) {
-    if (status == "All") {
-      return controller.ticketList.length;
-    }
-    return controller.ticketList.where((t) => t.status == status).length;
-  }
+  /// IMPORTANT:
+  /// If you already put the controller in bindings or higher up, use Get.find().
+  /// Example binding: Get.put(RailTicketController(), permanent: true) at app start.
+  final RailTicketController c = Get.put(
+    RailTicketController(),
+    permanent: true,
+  );
+  // Series colors (match controller statusColor mapping)
+  static const approved = Color(0xFF16A34A);
+  static const pending = Color(0xFFF59E0B);
+  static const rejected = Color(0xFFDC2626);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'Janta Sewa',
-        leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.btnBgColor),
+        title: 'Train Ticket',
+        leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.primary),
         onLeftTap: () => Get.back(),
       ),
-      body: Column(
 
-        children: [
-          SizedBox(height: 8),
-          Padding(
-
-            padding: const EdgeInsets.only(left: 8.0),
-            child: SizedBox(
-              
-              height: 80,
-              //width: double.infinity,
-              child: ListView(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                children: [
-                  buildFilterButton("All"),
-                  SizedBox(width: 8),
-                  buildFilterButton("Pending"),
-                  SizedBox(width: 8),
-                  buildFilterButton("Approved"),
-                  SizedBox(width: 8),
-                  buildFilterButton("Rejected"),
-                ],
-              ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+            // ---------------- Search ----------------
+            CustomSearchBar(
+              controller: c.searchController,
+              hint: 'Search....',
+              onChanged: c.setSearch, // live search
+              onClear: c.clearSearch, // resets
+              // If your CustomSearchBar does not support onSearchPressed, remove the next line:
+              onSearchPressed: () => c.setSearch(c.searchController.text),
             ),
-          ),
-          SizedBox(height: 12),
-          Expanded(
-            child: Obx(
-              () => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: ListView.builder(
-                  itemCount: controller.filteredList.length,
-                  itemBuilder: (context, index) {
-                    final ticket = controller.filteredList[index];
 
-                    return SideCustomCard(
-                      child: Column(
-                        spacing: 6,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(left: 4, right: 4),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.btnBgColor),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: CustomTextWidget(text: ticket.ticketId, fontsize: 12, color: AppColors.btnBgColor), 
-                          ),
+            const SizedBox(height: 12),
 
-                          Row(
-                            children: [
-                              Icon(Icons.perm_identity_outlined, size: 20),
-                                SizedBox(width: 8),
-                              InkWell(
-                                onTap: () {
-                                 //Profile Showing Logic
-                                 CustomSnackbar.showSuccess(title: 'Profile', message: 'Showing profile for user: ${ticket.userId}');
-                                },
-                                child: CustomTextWidget(text: 'ID : ${ticket.userId}', fontsize: 12,color: AppColors.btnBgColor,)),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(Icons.date_range, size: 20),
-                              SizedBox(width: 8),
-                              CustomTextWidget(text: 'Requested Date : ${ticket.requestDate}',fontsize: 12,)
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(Icons.chat, size: 20),
-                              SizedBox(width: 8),
-                              CustomTextWidget(text: 'Message : ${ticket.reason}', fontsize: 12,),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                               Icon(Icons.access_time, size: 20),
-                                SizedBox(width: 8),
-                              CustomTextWidget(text: 'Status :', fontsize: 12,),
-                              SizedBox(width: 6),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 2,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: getStatusColor(
-                                    ticket.status,
-                                  ).withValues(alpha: 0.2),
-                                  // border: Border.all(
-                                  //   color: getStatusColor(ticket.status),
-                                  // ),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: CustomTextWidget(
-                                  text: ticket.status,
-                                  color: getStatusColor(ticket.status),
-                                  fontsize: 10,
-                                   fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Spacer(),
-                             ViewDetailsButton(onTap: (){
-                              Get.to(()=>RailTicketDetailsPage(),arguments: ticket);
-                             })
-                            ],
-                          ),
-                        ],
-                      ),
+            // ---------------- Chart (Obx-scoped locals to avoid GetX warning) ----------------
+            Obx(() {
+              // READ Rx INSIDE and convert to plain locals
+              final List<String> labels = List<String>.from(c.graphLabels);
+              final List<FlSpot> appr = List<FlSpot>.from(c.approvedSpots);
+              final List<FlSpot> pend = List<FlSpot>.from(c.pendingSpots);
+              final List<FlSpot> rej = List<FlSpot>.from(c.rejectedSpots);
+              final rangeVal = c.chartRange.value;
+
+              return UniversalMultiLineChart(
+                title: 'Rail Ticket Confirmation',
+                xLabels: labels,
+                series: [
+                  ChartSeries(name: 'Approved', spots: appr, color: approved),
+                  ChartSeries(name: 'Pending', spots: pend, color: pending),
+                  ChartSeries(name: 'Rejected', spots: rej, color: rejected),
+                ],
+                showLegend: true,
+                showRangeToggle: true,
+                range: rangeVal,
+                onRangeChanged: (r) => c.setChartRange(r),
+                height: 180,
+              );
+            }),
+
+            const SizedBox(height: 8),
+
+            // ---------------- Tickets List ----------------
+            Expanded(
+              child: Obx(() {
+                final list = c.filteredList; // Rx read inside Obx
+                if (list.isEmpty) {
+                  return const Center(child: Text('No tickets found'));
+                }
+                return ListView.builder(
+                  itemCount: list.length,
+                  itemBuilder: (_, i) {
+                    final t = list[i];
+                    return CustomInfoCard(
+                      title: t.ticketId,
+                      rows: [
+                        InfoRowData(
+                          icon: Icons.perm_identity_outlined,
+                          text: 'ID : ${t.userId}',
+                        ),
+                        InfoRowData(
+                          icon: Icons.train,
+                          text: '${t.trainName}  •  #${t.trainNumber}',
+                        ),
+                        InfoRowData(
+                          icon: Icons.swap_horiz,
+                          text: 'Route : ${t.from} → ${t.to}',
+                        ),
+                        InfoRowData(
+                          icon: Icons.date_range,
+                          text: 'Requested : ${t.requestDate}',
+                        ),
+                      ],
+                      description: t.reason,
+                      status: t.status,
+                      statusColor: c.statusColor(t.status),
+                      buttonText: 'View',
+                      onButtonTap: () =>
+                          Get.to(() => RailTicketDetailsPage(), arguments: t),
                     );
                   },
-                ),
-              ),
+                );
+              }),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildFilterButton(String status) {
-    return Obx(() {
-      final isSelected = controller.selectedFilter.value == status;
-      final count = getStatusCount(status);
-      return Container(
-
-        height: 100,
-        width: 100,
-        decoration: BoxDecoration(
-          color: isSelected ? AppColors.btnBgColor : Colors.white,
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(
-            color: isSelected ? Colors.white : AppColors.btnBgColor,
-          ),
+          ],
         ),
-        child: TextButton(
-          onPressed: () {
-            controller.filterTickets(status);
-          },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      ),
+
+      // ---------------- Bottom bar: Sort | Filter ----------------
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          height: 56,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border(top: BorderSide(color: Colors.grey.shade300)),
+          ),
+          child: Row(
             children: [
-              Text(
-                count.toString(),
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: isSelected ? Colors.white : AppColors.textColor,
+              Expanded(
+                child: TextButton.icon(
+                  onPressed: () => openOptionsSheet(context, 'Sort By', [
+                    BottomSheetOption('Newest', () => c.setSort('Newest')),
+                    BottomSheetOption('Oldest', () => c.setSort('Oldest')),
+                  ]),
+                  icon: const Icon(Icons.filter_list),
+                  label: const Text('Sort By'),
                 ),
               ),
-              //SizedBox(height: 8),
-              Text(
-                status,
-                style: TextStyle(
-                  fontSize: 11,
-                  color: isSelected ? Colors.white : Colors.black,
+              const VerticalDivider(width: 1),
+              Expanded(
+                child: TextButton.icon(
+                  onPressed: () => openOptionsSheet(context, 'Filter', [
+                    BottomSheetOption(
+                      'All Requests',
+                      () => c.setStatusFilter('All'),
+                    ),
+                    BottomSheetOption(
+                      'Pending',
+                      () => c.setStatusFilter('Pending'),
+                    ),
+                    BottomSheetOption(
+                      'Approved',
+                      () => c.setStatusFilter('Approved'),
+                    ),
+                    BottomSheetOption(
+                      'Rejected',
+                      () => c.setStatusFilter('Rejected'),
+                    ),
+                  ]),
+                  icon: const Icon(Icons.tune),
+                  label: const Text('Filter'),
                 ),
               ),
             ],
           ),
         ),
-      );
-    });
+      ),
+    );
   }
 }

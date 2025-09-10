@@ -1,11 +1,10 @@
 import 'package:admin_jantasewa/controllers/hospital/hospital_admission_controller.dart';
-import 'package:admin_jantasewa/models/hospital/hospital_admission_model.dart';
 import 'package:admin_jantasewa/view/hospital/hospital_admission_details_page.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
-import 'package:admin_jantasewa/widgets/custom_text.dart';
-import 'package:admin_jantasewa/widgets/side_card_design.dart';
-import 'package:admin_jantasewa/widgets/view_details_button.dart';
+import 'package:admin_jantasewa/widgets/custom_bottom_sheet.dart';
+import 'package:admin_jantasewa/widgets/custom_info_card.dart';
+import 'package:admin_jantasewa/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,207 +16,155 @@ class HospitalMainPage extends StatefulWidget {
 }
 
 class _HospitalMainPageState extends State<HospitalMainPage> {
-  final HospitalAdmissionController controller = Get.put(
+  final HospitalAdmissionController c = Get.put(
     HospitalAdmissionController(),
+    permanent: true,
   );
-
-  Color getStatusColor(String status) {
-    switch (status) {
-      case 'Approved':
-        return Colors.green;
-      case 'Pending':
-        return Colors.orange;
-      case 'Rejected':
-        return Colors.red;
-      default:
-        return Colors.grey;
-    }
-  }
-
-  // Count admissions by status
-  int getStatusCount(String status) {
-    if (status == "All") {
-      return controller.admissionList.length;
-    }
-    return controller.admissionList.where((a) => a.status == status).length;
-  }
+  // static const approved = Color(0xFF16A34A);
+  // static const pending = Color(0xFFF59E0B);
+  // static const rejected = Color(0xFFDC2626);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomTopAppBar(
         title: 'Janta Sewa',
-        leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.btnBgColor),
+        leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.primary),
         onLeftTap: () => Get.back(),
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: SizedBox(
-              height: 80,
-              child: ListView(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                children: [
-                  buildFilterButton("All"),
-                  const SizedBox(width: 8),
-                  buildFilterButton("Pending"),
-                  const SizedBox(width: 8),
-                  buildFilterButton("Approved"),
-                  const SizedBox(width: 8),
-                  buildFilterButton("Rejected"),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Expanded(
-            child: Obx(
-              () => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: ListView.builder(
-                  itemCount: controller.filteredList.length,
-                  itemBuilder: (context, index) {
-                    final HospitalAdmissionModel admission =
-                        controller.filteredList[index];
 
-                    return SideCustomCard(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(left: 4, right: 4),
-                            decoration: BoxDecoration(
-                              color: Color(0xFFC9D8F8),
-                              border: Border.all(color: AppColors.btnBgColor),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Text(
-                              admission.requestId,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: AppColors.textColor,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Row(
-                            children: [
-                              const Icon(Icons.person, size: 20),
-                              const SizedBox(width: 8),
-                              Text(admission.patientName),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              const Icon(Icons.local_hospital, size: 20),
-                              const SizedBox(width: 8),
-                              Expanded(child: Text(admission.hospitalName)),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              const Icon(Icons.medical_information, size: 20),
-                              const SizedBox(width: 8),
-                              Text(admission.diseaseName),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              const Icon(Icons.date_range, size: 20),
-                              const SizedBox(width: 8),
-                              Text('Requested Date : ${admission.requestDate}'),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              const Text('Status :'),
-                              const SizedBox(width: 6),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 4,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: getStatusColor(
-                                    admission.status,
-                                  ).withValues(alpha: 0.2),
-                                  // border: Border.all(
-                                  //   color: getStatusColor(admission.status),
-                                  // ),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: CustomTextWidget(
-                                  text: admission.status,
-                                  color: getStatusColor(admission.status),
-                                  fontsize: 10,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const Spacer(),
-                              ViewDetailsButton(
-                                onTap: () {
-                                  Get.to(
-                                    () => HospitalAdmissionDetailsPage(),
-                                    arguments: admission,
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+            // ---------------- Search ----------------
+            CustomSearchBar(
+              controller: c.searchController,
+              hint: 'Search....',
+              onChanged: c.setSearch, // live search
+              onClear: c.clearSearch, // resets
+              // If your CustomSearchBar does not support onSearchPressed, remove the next line:
+              onSearchPressed: () => c.setSearch(c.searchController.text),
+            ),
+
+            const SizedBox(height: 12),
+
+            // ---------------- Chart (Obx-scoped locals to avoid GetX warning) ----------------
+            // Obx(() {
+            //   // READ Rx INSIDE and convert to plain locals
+            //   final List<String> labels = List<String>.from(c.graphLabels);
+            //   final List<FlSpot> appr = List<FlSpot>.from(c.approvedSpots);
+            //   final List<FlSpot> pend = List<FlSpot>.from(c.pendingSpots);
+            //   final List<FlSpot> rej = List<FlSpot>.from(c.rejectedSpots);
+            //   final rangeVal = c.chartRange.value;
+
+            //   return UniversalMultiLineChart(
+            //     title: 'Rail Ticket Confirmation',
+            //     xLabels: labels,
+            //     series: [
+            //       ChartSeries(name: 'Approved', spots: appr, color: approved),
+            //       ChartSeries(name: 'Pending', spots: pend, color: pending),
+            //       ChartSeries(name: 'Rejected', spots: rej, color: rejected),
+            //     ],
+            //     showLegend: true,
+            //     showRangeToggle: true,
+            //     range: rangeVal,
+            //     onRangeChanged: (r) => c.setChartRange(r),
+            //     height: 180,
+            //   );
+            // }),
+            const SizedBox(height: 8),
+
+            // ---------------- Tickets List ----------------
+            Expanded(
+              child: Obx(() {
+                final list = c.filteredList; // Rx read inside Obx
+                if (list.isEmpty) {
+                  return const Center(child: Text('No tickets found'));
+                }
+                return ListView.builder(
+                  itemCount: list.length,
+                  itemBuilder: (_, i) {
+                    final hostpital = list[i];
+                    return CustomInfoCard(
+                      title: hostpital.requestId,
+                      rows: [
+                        InfoRowData(
+                          icon: Icons.perm_identity_outlined,
+                          text: 'ID : ${hostpital.userId}',
+                        ),
+                        InfoRowData(
+                          icon: Icons.calendar_today,
+                          text: 'Requested Date : ${hostpital.requestDate}',
+                        ),
+                        InfoRowData(icon: Icons.chat, text: hostpital.reason),
+                      ],
+                      description: hostpital.reason,
+                      status: hostpital.status,
+                      statusColor: c.statusColor(hostpital.status),
+                      buttonText: 'View',
+                      onButtonTap: () => Get.to(
+                        () => HospitalAdmissionDetailsPage(),
+                        arguments: hostpital,
                       ),
                     );
                   },
-                ),
-              ),
+                );
+              }),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildFilterButton(String status) {
-    return Obx(() {
-      final isSelected = controller.selectedFilter.value == status;
-      final count = getStatusCount(status);
-      return Container(
-        height: 100,
-        width: 100,
-        decoration: BoxDecoration(
-          color: isSelected ? AppColors.btnBgColor : Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(5),
+          ],
         ),
-        child: TextButton(
-          onPressed: () {
-            controller.filterAdmissions(status);
-          },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      ),
+
+      // ---------------- Bottom bar: Sort | Filter ----------------
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          height: 56,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border(top: BorderSide(color: Colors.grey.shade300)),
+          ),
+          child: Row(
             children: [
-              Text(
-                count.toString(),
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: isSelected ? Colors.white : Colors.black,
+              Expanded(
+                child: TextButton.icon(
+                  onPressed: () => openOptionsSheet(context, 'Sort By', [
+                    BottomSheetOption('Newest', () => c.setSort('Newest')),
+                    BottomSheetOption('Oldest', () => c.setSort('Oldest')),
+                  ]),
+                  icon: const Icon(Icons.filter_list),
+                  label: const Text('Sort By'),
                 ),
               ),
-              Text(
-                status,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: isSelected ? Colors.white : Colors.black,
+              const VerticalDivider(width: 1),
+              Expanded(
+                child: TextButton.icon(
+                  onPressed: () => openOptionsSheet(context, 'Filter', [
+                    BottomSheetOption(
+                      'All Requests',
+                      () => c.setStatusFilter('All'),
+                    ),
+                    BottomSheetOption(
+                      'Pending',
+                      () => c.setStatusFilter('Pending'),
+                    ),
+                    BottomSheetOption(
+                      'Approved',
+                      () => c.setStatusFilter('Approved'),
+                    ),
+                    BottomSheetOption(
+                      'Rejected',
+                      () => c.setStatusFilter('Rejected'),
+                    ),
+                  ]),
+                  icon: const Icon(Icons.tune),
+                  label: const Text('Filter'),
                 ),
               ),
             ],
           ),
         ),
-      );
-    });
+      ),
+    );
   }
 }

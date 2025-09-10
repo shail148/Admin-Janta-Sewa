@@ -3,8 +3,9 @@ import 'package:admin_jantasewa/view/railTicketBook/rail_ticket_forwords_page.da
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:admin_jantasewa/widgets/custom_forword_button.dart';
-import 'package:admin_jantasewa/widgets/custom_snackbar.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
+import 'package:admin_jantasewa/widgets/details_card_upper.dart';
+import 'package:admin_jantasewa/widgets/full_details_card.dart';
 import 'package:admin_jantasewa/widgets/label_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,8 +35,9 @@ class _RailTicketDetailsPageState extends State<RailTicketDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'Train Ticket Details',
-        leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.btnBgColor),
+        title: 'Train Ticket Confirmation',
+        fontsize: 18,
+        leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.primary),
         onLeftTap: () => Get.back(),
       ),
       body: SingleChildScrollView(
@@ -44,100 +46,37 @@ class _RailTicketDetailsPageState extends State<RailTicketDetailsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: EdgeInsets.all(8),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Color(0xFF356CC5),
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(color: Color(0xFFD9D9D9)),
-                ),
-                child: Column(
-                  spacing: 8,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(left: 4, right: 4),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: AppColors.btnBgColor),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: CustomTextWidget(
-                        text: ticket.ticketId,
-                        fontsize: 14,
-                        color: AppColors.btnBgColor,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.perm_identity_outlined,
-                          size: 20,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: 8),
-                        InkWell(
-                          onTap: () {
-                            //Profile Showing Logic
-                            CustomSnackbar.showSuccess(
-                              title: 'Profile',
-                              message:
-                                  'Showing profile for user: ${ticket.userId}',
-                            );
-                          },
-                          child: CustomTextWidget(
-                            text: 'ID : ${ticket.userId}',
-                            fontsize: 14,
-                            color: AppColors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.chat, size: 20, color: Colors.white),
-                        SizedBox(width: 8),
-                        Expanded(
-                          child: CustomTextWidget(
-                            text: 'Message : ${ticket.reason}',
-                            fontsize: 14,
-                            color: AppColors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              DetailsCard(
+                requestDate: ticket.requestDate,
+                idLabel: 'ID',
+                idValue: ticket.ticketId,
+                userLabel: 'User ID',
+                userValue: ticket.userId,
+                reason: ticket.reason,
               ),
               const SizedBox(height: 16),
+
               // Train Details
-              CustomLabelText(
-                text: 'Train Details',
-                color: AppColors.black,
-                fontsize: 16,
-              ),
               const SizedBox(height: 8),
-              Column(
-                spacing: 5,
-                children: [
-                  _buildRow('PNR Number', ticket.pnrNumber),
-                  _buildRow('Journey Date', ticket.journeyDate.toString()),
-                  _buildRow('Train Name', ticket.trainName.toString()),
-                  _buildRow('Train Number', ticket.trainNumber),
-                  _buildRow('From', ticket.from),
-                  _buildRow('To', ticket.to),
-                  _buildRow('Request Date', ticket.requestDate),
-                  _buildRow('User Mobile', ticket.userId),
-                ],
+              FullDetailsCard(
+                title: "Journey Details",
+                details: {
+                  "PNR Number": ticket.pnrNumber,
+                  "Journey Date": ticket.journeyDate.toString(),
+                  "Train Name": ticket.trainName.toString(),
+                  "Train Number": ticket.trainNumber,
+                  "From": ticket.from,
+                  "To": ticket.to,
+                  "Request Date": ticket.requestDate,
+                  "User Mobile": ticket.userId,
+                },
               ),
 
               const SizedBox(height: 16),
               CustomLabelText(
                 text: 'Passenger Details',
                 color: AppColors.black,
-                fontsize: 16,
+                fontsize: 14,
               ),
               const SizedBox(height: 8),
               ...List.generate(ticket.passengerDetails.length, (i) {
@@ -145,9 +84,9 @@ class _RailTicketDetailsPageState extends State<RailTicketDetailsPage> {
                 return Card(
                   elevation: 2,
                   color: Colors.white,
-                  margin: const EdgeInsets.only(bottom: 8),
+                  // margin: const EdgeInsets.only(bottom: 8),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Theme(
                     data: Theme.of(
@@ -156,11 +95,11 @@ class _RailTicketDetailsPageState extends State<RailTicketDetailsPage> {
                     child: ExpansionTile(
                       trailing: Icon(
                         Icons.expand_more,
-                        color: AppColors.btnBgColor,
+                        color: AppColors.primary,
                       ),
                       leading: Icon(
                         Icons.person_outline,
-                        color: AppColors.btnBgColor,
+                        color: AppColors.primary,
                       ),
                       title: CustomTextWidget(text: 'Passenger ${i + 1}'),
                       initiallyExpanded: passengerExpanded[i],
@@ -204,30 +143,15 @@ class _RailTicketDetailsPageState extends State<RailTicketDetailsPage> {
               }),
 
               const SizedBox(height: 24),
-              
             ],
           ),
         ),
-        
       ),
       floatingActionButton: CustomForwardButton(
         onPressed: () {
           Get.to(() => RailTicketForwordsPage(), arguments: ticket);
         },
       ),
-    );
-  }
-
-  // Reusable Row widget for train details
-  Widget _buildRow(String label, String value) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 4,
-          child: CustomLabelText(text: label, color: AppColors.textGrey),
-        ),
-        Expanded(flex: 6, child: CustomTextWidget(text: value, fontsize: 14)),
-      ],
     );
   }
 

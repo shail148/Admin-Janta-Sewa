@@ -39,11 +39,11 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: CustomTopAppBar(
-        leftIcon: Icon(Icons.menu, color: AppColors.btnBgColor, size: 30),
+        leftIcon: Image.asset("assets/icons/menus.png", height: 25),
         onLeftTap: () => _scaffoldKey.currentState?.openDrawer(),
         rightIcon: Icon(
           Icons.notifications,
-          color: AppColors.btnBgColor,
+          color: AppColors.primary,
           size: 30,
         ),
         onRightTap: () {
@@ -53,9 +53,8 @@ class _DashboardPageState extends State<DashboardPage> {
       drawer: CustomDrawer(),
       body: pages[selectedIndex],
 
-      // ✅ Custom Bottom Navigation
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         decoration: const BoxDecoration(
           color: Color(0xFFF4F6FE),
           borderRadius: BorderRadius.only(
@@ -84,7 +83,9 @@ class _DashboardPageState extends State<DashboardPage> {
         duration: const Duration(milliseconds: 250),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.btnBgColor.withOpacity(0.1) : Colors.transparent,
+          color: isSelected
+              ? AppColors.btnBgColor.withOpacity(0.1)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
@@ -92,7 +93,7 @@ class _DashboardPageState extends State<DashboardPage> {
             Icon(
               icon,
               size: 24,
-              color: isSelected ? AppColors.btnBgColor : Colors.blue.shade900,
+              color: isSelected ? AppColors.primary : AppColors.primary,
             ),
             if (isSelected) ...[
               const SizedBox(width: 6),
@@ -101,7 +102,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.btnBgColor,
+                  color: AppColors.primary,
                 ),
               ),
             ],

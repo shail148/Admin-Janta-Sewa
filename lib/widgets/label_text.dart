@@ -4,13 +4,13 @@ class CustomLabelText extends StatelessWidget {
   final String text;
   final double fontsize;
   final Color? color;
-  final bool isRequired; 
+  final bool isRequired;
   const CustomLabelText({
     super.key,
     required this.text,
     this.fontsize = 14,
     this.color,
-    this.isRequired = false, 
+    this.isRequired = false,
   });
 
   @override
@@ -21,7 +21,7 @@ class CustomLabelText extends StatelessWidget {
         style: TextStyle(
           fontSize: fontsize,
           color: color ?? Colors.black54,
-          fontFamily: 'Poppins',
+          fontFamily: 'Inter',
           fontWeight: FontWeight.w600,
         ),
         children: isRequired

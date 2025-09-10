@@ -13,5 +13,6 @@ class LanguageController extends GetxController {
         : const Locale('en', 'US');
     Get.updateLocale(currentLocale.value);
   }
+
   bool get isHindi => currentLocale.value.languageCode == 'hi';
 }

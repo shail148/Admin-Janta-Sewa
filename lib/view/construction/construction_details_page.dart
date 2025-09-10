@@ -1,10 +1,11 @@
-import 'package:admin_jantasewa/models/construction_model/workdemand_model.dart';
+import 'package:admin_jantasewa/models/construction/construction_model.dart';
+import 'package:admin_jantasewa/view/construction/construction_forward_page.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:admin_jantasewa/widgets/custom_forword_button.dart';
-import 'package:admin_jantasewa/widgets/custom_info_row.dart';
-import 'package:admin_jantasewa/widgets/custom_snackbar.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
+import 'package:admin_jantasewa/widgets/details_card_upper.dart';
+import 'package:admin_jantasewa/widgets/full_details_card.dart';
 import 'package:admin_jantasewa/widgets/side_card_design.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,11 +19,12 @@ class ConstructionDetailsPage extends StatefulWidget {
 }
 
 class _ConstructionDetailsPageState extends State<ConstructionDetailsPage> {
-  late WorkDemandModel workitems;
+  late ConstructionWorkModel construction;
+
   @override
   void initState() {
     super.initState();
-    workitems = Get.arguments;
+    construction = Get.arguments; // load ticket from Get.arguments
   }
 
   @override
@@ -30,121 +32,159 @@ class _ConstructionDetailsPageState extends State<ConstructionDetailsPage> {
     return Scaffold(
       appBar: CustomTopAppBar(
         title: 'Construction Details',
-        fontsize: 16,
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.btnBgColor),
         onLeftTap: () => Get.back(),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
+              DetailsCard(
+                requestDate: construction.date,
+                idLabel: 'ID',
+                idValue: construction.workId,
+                userLabel: 'User ID',
+                userValue: construction.userId,
+
+                reason: construction.message,
+              ),
+
+              SizedBox(height: 8),
+              FullDetailsCard(
+                title: "Invitation Details",
+                details: {
+                  "Date": construction.date,
+                  "Work ID": construction.workId,
+                  "User ID": construction.userId,
+                },
+              ),
+              SizedBox(height: 8),
+              if (construction.newWork != null) ...[
+                FullDetailsCard(
+                  title: "New Work Demand Details",
+                  details: {
+                    "Work By": construction.newWork!.workBy,
+                    "Work Detail": construction.newWork!.workDetail,
+                    "Tentative Amount": construction.newWork!.tentativeAmount,
+                    "Remark": construction.newWork!.remark,
+                    "Contact Person":
+                        construction.newWork!.contact.demandedPerson,
+                    "Mobile Number": construction.newWork!.contact.mobileNumber,
+                  },
+                ),
+              ] else if (construction.pending != null) ...[
+                FullDetailsCard(
+                  title: "Pending Work Completion Details",
+                  details: {
+                    "Work By": construction.pending!.workBy,
+                    "Work Detail": construction.pending!.workDetail,
+                    "Actual Amount": construction.pending!.actualAmount,
+
+                    "Demanded Person":
+                        construction.pending!.contact.demandedPerson,
+
+                    "Remark": construction.pending!.remark,
+                  },
+                ),
+              ] else if (construction.beneficiary != null) ...[
+                FullDetailsCard(
+                  title: "Beneficiary Oriented Details",
+                  details: {
+                    "Work By": construction.beneficiary!.workBy,
+                    "Department Name": construction.beneficiary!.departmentName,
+                    "Amount": construction.beneficiary!.amount,
+
+                    "Demanded Person":
+                        construction.beneficiary!.contact.demandedPerson,
+                    "Mobile Number":
+                        construction.beneficiary!.contact.mobileNumber,
+                    "Remark": construction.beneficiary!.remark,
+                  },
+                ),
+              ],
+              SizedBox(height: 8),
+              FullDetailsCard(
+                title: "Location Details",
+                details: {
+                  "Distirict": construction.location.district,
+                  "Block": construction.location.block,
+                  "Village/Ward": construction.location.villageWard,
+                  "Constituency": construction.location.constituency,
+                },
+              ),
+
+              SizedBox(height: 16),
               CustomTextWidget(
-                text: 'New Work Demand Details',
-                fontWeight: FontWeight.bold,
-                fontsize: 14,
-              ),
-              SizedBox(height: 10),
-              CustomInfoRow(label: "Work Name", value: workitems.workName),
-              CustomInfoRow(label: "Work Details", value: workitems.workDetail),
-              CustomInfoRow(
-                label: "Tentative Amount",
-                value: workitems.tentativeAmount,
-              ),
-              CustomInfoRow(label: "Remark", value: workitems.remark),
-              CustomInfoRow(
-                label: "Demanded Person",
-                value: workitems.demandedPerson,
-              ),
-              CustomInfoRow(
-                label: "Mobile Number",
-                value: workitems.demandedPersonMobile,
-              ),
-              SizedBox(height: 10),
-              CustomTextWidget(
-                text: "Location Details",
+                text: 'Upload Documents',
+                fontsize: 16,
                 color: AppColors.black,
-                fontWeight: FontWeight.bold,
-                fontsize: 14,
+                fontWeight: FontWeight.w700,
               ),
-              SizedBox(height: 10),
-              CustomInfoRow(label: "District", value: workitems.district),
-              CustomInfoRow(label: 'Block', value: workitems.block),
-              CustomInfoRow(label: 'Village', value: workitems.villageWard),
-              CustomInfoRow(
-                label: 'Consituency',
-                value: workitems.constituency,
-              ),
-              SizedBox(height: 10),
-              CustomTextWidget(
-                text: 'Uploaded Documents',
-                color: AppColors.black,
-                fontWeight: FontWeight.bold,
-                fontsize: 14,
-              ),
-              SizedBox(height: 10),
+              SizedBox(height: 8),
               Column(
-                children: workitems.uploadedFiles.isNotEmpty
-                    ? workitems.uploadedFiles
-                          .map(
-                            (e) => SideCustomCard(
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.file_present,
-                                    color: AppColors.btnBgColor,
+                children: construction.uploadedDocuments.isNotEmpty
+                    ? construction.uploadedDocuments.map((doc) {
+                        bool isPdf = doc.fileName.toLowerCase().endsWith(
+                          '.pdf',
+                        );
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 0.0),
+                          child: SideCustomCard(
+                            child: Row(
+                              children: [
+                                Icon(
+                                  isPdf
+                                      ? Icons.picture_as_pdf
+                                      : Icons.insert_drive_file,
+                                  color: isPdf
+                                      ? Colors.red
+                                      : AppColors.btnBgColor,
+                                ),
+                                SizedBox(width: 8),
+                                Expanded(
+                                  child: CustomTextWidget(
+                                    text: "${doc.fileName} (${doc.fileSize})",
+                                    fontsize: 14,
+                                    color: AppColors.black,
                                   ),
-                                  const SizedBox(width: 8),
-                                  Expanded(
-                                    child: CustomTextWidget(
-                                      text: e,
-                                      fontsize: 16,
-                                      color: AppColors.black,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Icon(
+                                ),
+                                SizedBox(width: 8),
+                                IconButton(
+                                  icon: Icon(
                                     Icons.download,
                                     color: AppColors.btnBgColor,
                                   ),
-                                ],
-                              ),
+                                  onPressed: () {
+                                    // Implement download functionality here
+                                    //print("Download ${doc.fileName}");
+                                  },
+                                ),
+                              ],
                             ),
-                          )
-                          .toList()
+                          ),
+                        );
+                      }).toList()
                     : [
                         SideCustomCard(
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.file_present,
-                                color: AppColors.btnBgColor,
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: CustomTextWidget(
-                                  text: 'No document uploaded',
-                                  fontsize: 14,
-                                  color: AppColors.black,
-                                ),
-                              ),
-                            ],
+                          child: CustomTextWidget(
+                            text: 'No document uploaded',
+                            fontsize: 14,
+                            color: AppColors.black,
                           ),
                         ),
                       ],
               ),
+
+              SizedBox(height: 8),
             ],
           ),
         ),
       ),
       floatingActionButton: CustomForwardButton(
         onPressed: () {
-          //This is the Forword Button Methods :
-          CustomSnackbar.showSuccess(
-            title: 'Success',
-            message: "Forword Button is Pressed",
-          );
+          Get.to(() => ConstructionForwardPage());
         },
       ),
     );

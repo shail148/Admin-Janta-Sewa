@@ -1,9 +1,9 @@
 import 'package:admin_jantasewa/components/home/application_chart.dart';
 import 'package:admin_jantasewa/components/home/request_carousel_slider.dart';
 import 'package:admin_jantasewa/components/service_card.dart';
-import 'package:admin_jantasewa/view/construction/workdemand_main_page.dart';
+import 'package:admin_jantasewa/view/construction/construction_all_request_page.dart';
 import 'package:admin_jantasewa/view/hospital/hospital_main_page.dart';
-import 'package:admin_jantasewa/view/parliamentVisit/parliament_visit_page.dart';
+import 'package:admin_jantasewa/view/parliamentVisit/parliament_visit_allrequest_page.dart';
 import 'package:admin_jantasewa/view/railTicketBook/rail_ticket_confirmation.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                   icon: Icons.account_balance,
                   title: "Parliament Visit",
                   onTap: () {
-                    Get.to(() => ParliamentVisitPage());
+                    Get.to(() => ParliamentVisitAllrequestPage());
                   },
                 ),
                 ServiceCard(
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                   icon: Icons.construction,
                   title: "Construction Work",
                   onTap: () {
-                    Get.to(() => WorkDemandMainPage());
+                    Get.to(() => ConstructionAllRequestPage());
                   },
                 ),
               ],

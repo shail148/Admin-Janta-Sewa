@@ -11,7 +11,6 @@ import 'package:admin_jantasewa/widgets/text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -125,15 +124,12 @@ class _LoginPageState extends State<LoginPage> {
                         () => CustomTextFormField(
                           hintText: 'enter_password'.tr,
                           controller: passwordController,
-                          obscureText: !passwordCtrl
-                              .isPasswordVisible
-                              .value, 
+                          obscureText: !passwordCtrl.isPasswordVisible.value,
                           suffixIcon: passwordCtrl.isPasswordVisible.value
                               ? Icons.visibility
                               : Icons.visibility_off,
                           onSuffixTap: () {
-                            passwordCtrl
-                                .toggleVisibility(); 
+                            passwordCtrl.toggleVisibility();
                           },
                           validator: (value) => FormValidator.validateRequired(
                             value,
@@ -147,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                           GestureDetector(
                             onTap: () {
                               //Forgot Password Logic Here
-                            //  Get.to(() => ResetPassword());
+                              //  Get.to(() => ResetPassword());
                             },
                             child: CustomTextWidget(
                               text: 'forgot_password'.tr,
@@ -174,12 +170,16 @@ class _LoginPageState extends State<LoginPage> {
 
                             if (email == 'admin@gmail.com' &&
                                 password == 'admin') {
-                                  CustomSnackbar.showSuccess(title: 'Login', message: 'Successful');
+                              CustomSnackbar.showSuccess(
+                                title: 'Login',
+                                message: 'Successful',
+                              );
                               Get.offAll(() => DashboardPage());
-
                             } else {
-                              CustomSnackbar.showError(title: "Login Failed", message: "Invalid email or password",);
-                            
+                              CustomSnackbar.showError(
+                                title: "Login Failed",
+                                message: "Invalid email or password",
+                              );
                             }
                           }
                         },

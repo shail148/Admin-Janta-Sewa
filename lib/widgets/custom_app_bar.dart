@@ -7,14 +7,14 @@ class CustomTopAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onRightTap;
   final Widget? leftIcon;
   final Widget? rightIcon;
-  final String? title ;
+  final String? title;
   final double? fontsize;
 
   const CustomTopAppBar({
     super.key,
     this.onLeftTap,
     this.onRightTap,
-    this.leftIcon ,
+    this.leftIcon,
     this.rightIcon,
     this.title,
     this.fontsize,
@@ -42,13 +42,14 @@ class CustomTopAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       // backgroundColor: Colors.white,
       title: CustomTextWidget(
-        text: title ??'Janta Sewa',
-        color: AppColors.textColor,
-        fontWeight: FontWeight.bold,
-        fontsize:fontsize?? 24,
+        text: title ?? 'Janta Sewa',
+        color: AppColors.primary,
+        fontWeight: FontWeight.w700,
+        fontsize: fontsize ?? 20,
       ),
     );
   }
+
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

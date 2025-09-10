@@ -27,58 +27,60 @@ class _NotificationAppbarPageState extends State<NotificationAppbarPage> {
         onLeftTap: () => Get.back(),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, ),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Obx(() {
           return ListView.separated(
             itemCount: controller.notifications.length,
             separatorBuilder: (context, index) => const SizedBox(height: 4),
             itemBuilder: (context, index) {
               var item = controller.notifications[index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        spreadRadius: 1,
-                        blurRadius: 4,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
+              return Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey.shade300),
                   ),
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Title
-                      CustomTextWidget(
-                        text: item['title'],
-                        fontWeight: FontWeight.bold,
-                      ),
-                
-                      const SizedBox(height: 4),
-                
-                      // Message
-                      CustomTextWidget(text: item['message'], fontsize: 12,textAlign: TextAlign.start,),
-                
-                      const SizedBox(height: 6),
-                
-                      // Date
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          controller.formatDate(item['date']),
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.grey.shade600,
-                          ),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     color: Colors.grey,
+                  //     spreadRadius: 1,
+                  //     blurRadius: 4,
+                  //     offset: const Offset(0, 2),
+                  //   ),
+                  // ],
+                ),
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Title
+                    CustomTextWidget(
+                      text: item['title'],
+                      fontWeight: FontWeight.bold,
+                    ),
+
+                    const SizedBox(height: 4),
+
+                    // Message
+                    CustomTextWidget(
+                      text: item['message'],
+                      fontsize: 12,
+                      textAlign: TextAlign.start,
+                    ),
+
+                    // Date
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        controller.formatDate(item['date']),
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Colors.grey.shade600,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               );
             },

@@ -1,0 +1,154 @@
+[
+  {
+    "date": "2025-09-21",
+    "workId": "CTW0001",
+    "userId": "ID4532568553",
+    "title": "Construction Work",
+    "message": "We request approval for immediate repair of the damaged road which is causing difficulties for daily commuters",
+    "stage": "newDemand",
+    "status": "Approved",
+    "location": {
+      "district": "Bhilai",
+      "block": "Bhilai",
+      "villageWard": "Phurera",
+      "constituency": "65-Bhilai Nagar"
+    },
+    "newWork": {
+      "workBy": "Suresh",
+      "workDetail": "Road Repair",
+      "tentativeAmount": "₹100000",
+      "remark": "Verified site condition, request approved for further processing.",
+      "contact": {
+        "demandedPerson": "Rakesh",
+        "mobileNumber": "+91-8659325763"
+      }
+    },
+    "attachments": [],
+    "uploadedDocuments": [
+      {
+        "fileName": "road_repair_doc.pdf",
+        "fileSize": "1.2MB"
+      }
+    ]
+  },
+  {
+    "date": "2025-09-22",
+    "workId": "CTW0002",
+    "userId": "ID4539992221",
+    "title": "Construction Work",
+    "message": "Drain cleaning required before monsoon showers.",
+    "stage": "pendingCompletion",
+    "status": "Pending",
+    "location": {
+      "district": "Bhilai",
+      "block": "Bhilai",
+      "villageWard": "Ward-12",
+      "constituency": "65-Bhilai Nagar"
+    },
+    "pending": {
+      "workBy": "Sunil",
+      "workDetail": "Drain Desilting",
+      "actualAmount": "₹45000",
+      "remark": "Work order issued, awaiting contractor availability.",
+      "contact": {
+        "demandedPerson": "Naresh",
+        "mobileNumber": "+91-8899123456"
+      }
+    },
+    "attachments": [
+      "photo_1.png"
+    ],
+    "uploadedDocuments": []
+  },
+  {
+    "date": "2025-09-18",
+    "workId": "CTW0003",
+    "userId": "ID1200345333",
+    "title": "Construction Work",
+    "message": "Streetlight installation for internal lane.",
+    "stage": "beneficiaryOriented",
+    "status": "Pending",
+    "location": {
+      "district": "Bhilai",
+      "block": "Hudco",
+      "villageWard": "Ward-02",
+      "constituency": "65-Bhilai Nagar"
+    },
+    "beneficiary": {
+      "workBy": "Mahesh",
+      "departmentName": "Electricity",
+      "amount": "₹80000",
+      "remark": "Survey complete; material indented.",
+      "contact": {
+        "demandedPerson": "Prakash",
+        "mobileNumber": "+91-9000001122"
+      }
+    },
+    "attachments": [],
+    "uploadedDocuments": [
+      {
+        "fileName": "streetlight_survey.pdf",
+        "fileSize": "800KB"
+      }
+    ]
+  },
+  {
+    "date": "2025-09-17",
+    "workId": "CTW0004",
+    "userId": "ID777700111",
+    "title": "Construction Work",
+    "message": "Patch work on main market road.",
+    "stage": "newDemand",
+    "status": "Rejected",
+    "location": {
+      "district": "Bhilai",
+      "block": "Bhilai",
+      "villageWard": "Ward-05",
+      "constituency": "65-Bhilai Nagar"
+    },
+    "newWork": {
+      "workBy": "Suresh",
+      "workDetail": "Patch Work",
+      "tentativeAmount": "₹60000",
+      "remark": "Insufficient documents.",
+      "contact": {
+        "demandedPerson": "Arun",
+        "mobileNumber": "+91-7890011223"
+      }
+    },
+    "attachments": [],
+    "uploadedDocuments": []
+  },
+  {
+    "date": "2025-09-15",
+    "workId": "CTW0005",
+    "userId": "ID765432112",
+    "title": "Construction Work",
+    "message": "Culvert slab damaged near school.",
+    "stage": "pendingCompletion",
+    "status": "Approved",
+    "location": {
+      "district": "Bhilai",
+      "block": "Bhilai",
+      "villageWard": "Ward-09",
+      "constituency": "65-Bhilai Nagar"
+    },
+    "pending": {
+      "workBy": "Ajay",
+      "workDetail": "Culvert Repair",
+      "actualAmount": "₹150000",
+      "remark": "Work in progress.",
+      "contact": {
+        "demandedPerson": "Mukesh",
+        "mobileNumber": "+91-9988776655"
+      }
+    },
+    "attachments": [],
+    "uploadedDocuments": [
+      {
+        "fileName": "culvert_damage_report.pdf",
+        "fileSize": "2MB"
+      }
+    ]
+  }
+]

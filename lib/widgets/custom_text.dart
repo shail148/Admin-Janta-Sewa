@@ -7,13 +7,13 @@ class CustomTextWidget extends StatelessWidget {
   final Color color;
   final TextAlign? textAlign;
   final FontWeight? fontWeight;
-  const CustomTextWidget( {
+  const CustomTextWidget({
     super.key,
     required this.text,
     this.fontsize = 14,
     this.color = Colors.black,
     this.fontWeight,
-    this.textAlign, 
+    this.textAlign,
   });
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CustomTextWidget extends StatelessWidget {
       style: TextStyle(
         fontSize: fontsize,
         color: color,
-        fontFamily: 'Poppins',
+        fontFamily: 'Inter',
         fontWeight: fontWeight,
       ),
     );

@@ -1,0 +1,83 @@
+[
+    {
+        "date": "2025-09-21",
+        "complaintId": "CL0001",
+        "userId": "ID4532568553",
+        "title": "Complaint Letter",
+        "message": "Government employee is repeatedly delaying service requests.",
+        "status": "Approved",
+        "governmentEmployee": {
+            "applicantName": "Suman",
+            "mobileNumber": "+91-9000001122",
+            "complaintType": "Delay in Service",
+            "departmentName": "Revenue",
+            "briefDetail": "Service request for land records delayed multiple times."
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "delay_evidence.png",
+                "fileSize": "2MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-22",
+        "complaintId": "CL0002",
+        "userId": "ID4539992221",
+        "title": "Complaint Letter",
+        "message": "Politician not addressing local issues despite repeated requests.",
+        "status": "Pending",
+        "politician": {
+            "applicantName": "Ravi",
+            "mobileNumber": "+91-8899123456",
+            "politicianName": "MLA Jayward Meena",
+            "briefDetail": "No action taken for road repair despite several complaints."
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "road_issue.png",
+                "fileSize": "2MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-23",
+        "complaintId": "CL0003",
+        "userId": "ID1200345333",
+        "title": "Complaint Letter",
+        "message": "National/State work not completed as per schedule.",
+        "status": "Rejected",
+        "nationalStateWork": {
+            "applicantName": "Priya",
+            "mobileNumber": "+91-9988776655",
+            "departmentName": "PWD",
+            "briefDetail": "Bridge construction delayed, causing inconvenience."
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "bridge_delay.png",
+                "fileSize": "2MB"
+            }
+        ]
+    },
+    {
+        "date": "2025-09-24",
+        "complaintId": "CL0004",
+        "userId": "ID777700111",
+        "title": "Complaint Letter",
+        "message": "MP office did not respond to grievance application.",
+        "status": "Pending",
+        "mpOffice": {
+            "applicantName": "Swara",
+            "mobileNumber": "+91-9012345678",
+            "officeType": "MP Office",
+            "briefDetail": "No response to application for water supply issue."
+        },
+        "uploadedDocuments": [
+            {
+                "fileName": "application.png",
+                "fileSize": "2MB"
+            }
+        ]
+    }
+]
