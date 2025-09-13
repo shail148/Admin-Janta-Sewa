@@ -40,7 +40,7 @@ class CustomInfoCard extends StatelessWidget {
       ),
 
       child: Padding(
-        padding: const EdgeInsets.only(top: 0, left: 8, right: 8, bottom: 8),
+        padding: const EdgeInsets.only(top: 0, left: 5, right: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -57,7 +57,7 @@ class CustomInfoCard extends StatelessWidget {
               ),
               color: Colors.white,
               child: Padding(
-                padding: const EdgeInsets.only(top: 8, left: 12, bottom: 8),
+                padding: const EdgeInsets.only(top: 5, left: 12, bottom: 8),
                 child: Column(
                   spacing: 0,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +85,7 @@ class CustomInfoCard extends StatelessWidget {
 
                     ...rows.map(
                       (r) => Padding(
-                        padding: const EdgeInsets.only(bottom: 6, right: 8),
+                        padding: const EdgeInsets.only(bottom: 8, right: 8),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -136,10 +136,9 @@ class CustomInfoCard extends StatelessWidget {
             ),
 
             Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
               child: Row(
                 children: [
-                  const SizedBox(width: 4),
                   const Icon(Icons.access_time, size: 20),
                   const SizedBox(width: 8),
                   const Text('Status :', style: TextStyle(fontSize: 12)),
@@ -187,7 +186,6 @@ class CustomInfoCard extends StatelessWidget {
                       ),
                       child: Row(
                         // mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 4,
                         children: [
                           Text(
                             buttonText,

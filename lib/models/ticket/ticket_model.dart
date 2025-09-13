@@ -21,12 +21,7 @@ class PassengerDetail {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'age': age,
-      'gender': gender,
-      'mobile': mobile,
-    };
+    return {'name': name, 'age': age, 'gender': gender, 'mobile': mobile};
   }
 }
 

@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Shri Vijay Baghel",
+        "title": "Parliamentary Secretary, Government of Chhattisgarh",
+        "partyName": "Bharatiya Janata Party",
+        "quote": "Leadership is not about power, it's about purpose — serving every citizen with commitment and care.",
+        "fromYear": 2005,
+        "toYear": 2008,
+        "imagePath": "https://randomuser.me/api/portraits/men/11.jpg",
+        "filePath": null
+    },
+    {
+        "name": "Shri Vijay Baghel",
+        "title": "Member, Chhattisgarh Legislative Assembly",
+        "partyName": "Bharatiya Janata Party",
+        "quote": "Service to the people is the highest calling.",
+        "fromYear": 2008,
+        "toYear": 2013,
+        "imagePath": "https://randomuser.me/api/portraits/men/12.jpg",
+        "filePath": null
+    },
+    {
+        "name": "Shri Vijay Baghel",
+        "title": "Chairman, Municipal Council, Bhilai, Charoda, Chhattisgarh",
+        "partyName": "Bharatiya Janata Party",
+        "quote": "Progress is achieved through unity and dedication.",
+        "fromYear": 2013,
+        "toYear": 2018,
+        "imagePath": "https://randomuser.me/api/portraits/men/13.jpg",
+        "filePath": null
+    },
+    {
+        "name": "Shri Vijay Baghel",
+        "title": "Member, Standing Committee on Water Resources",
+        "partyName": "Bharatiya Janata Party",
+        "quote": "Commitment to sustainable development for all.",
+        "fromYear": 2018,
+        "toYear": 2023,
+        "imagePath": "https://randomuser.me/api/portraits/men/14.jpg",
+        "filePath": null
+    }
+]

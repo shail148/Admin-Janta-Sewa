@@ -1,8 +1,9 @@
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
-import 'package:admin_jantasewa/widgets/custom_button.dart';
-import 'package:admin_jantasewa/widgets/custom_snackbar.dart';
+
+import 'package:admin_jantasewa/models/user_model.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
+import 'package:admin_jantasewa/widgets/label_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 //Details Screen of the Users
@@ -11,10 +12,10 @@ class UserDetailScreen extends StatelessWidget {
   const UserDetailScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final user = Get.arguments as Map<String, dynamic>;
+    final user = Get.arguments as UserModel;
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'User Details',
+        title: 'Janta Sewa',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.btnBgColor),
         onLeftTap: () {
           Get.back();
@@ -22,52 +23,133 @@ class UserDetailScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Container(
-            height: 500,
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: AppColors.galleryBdColors,
-            ),
-            width: double.infinity,
-            child: Column(
-              spacing: 5,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(child: CircleAvatar(radius: 50)),
-                Divider(),
-                CustomTextWidget(
-                  text: 'User Information : ',
-                  color: AppColors.black,
-                  fontsize: 14,
-                  fontWeight: FontWeight.bold,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            spacing: 4,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: NetworkImage(user.profileImageUrl),
                 ),
-                SizedBox(height: 10),
-                CustomTextWidget(text: "Name: ${user['name']}"),
-                CustomTextWidget(text: "Email: ${user['email']}"),
-                CustomTextWidget(text: "Mobile: ${user['mobile']}"),
-                CustomTextWidget(text: "City: ${user['city']}"),
-                CustomTextWidget(text: "State: ${user['state']}"),
-                CustomTextWidget(text: "Pincode: ${user['pincode']}"),
-                CustomTextWidget(text: "DOB: ${user['dob']}"),
-                SizedBox(height: 30),
-                Center(
-                  child: CustomButton(
-                    text: 'Delete User',
-                    textSize: 12,
-                    onPressed: () {
-                      CustomSnackbar.showSuccess(
-                        title: 'Deleted',
-                        message: '${user['name']} profile is Deleted',
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
+              ),
+              CustomTextWidget(
+                text: user.userId,
+                fontWeight: FontWeight.bold,
+                fontsize: 16,
+              ),
+              CustomTextWidget(text: user.email),
+              SizedBox(height: 8),
+              DetailsCard(
+                title: "Personal Details",
+                details: {
+                  "Full Name:": user.name,
+                  "Date of Birth:": user.dob,
+                  "Gender:": user.gender,
+                  "Nationality": user.nationality,
+                  "Phone Number": user.phone,
+                  "Email": user.email,
+                },
+              ),
+              DetailsCard(
+                title: "Location Details",
+                details: {
+                  "Address:": user.address,
+                  "State:": user.state,
+                  "District:": user.district,
+                  "Vidhansabha": user.vidhansabha,
+                  "City/Village": user.cityVillage,
+                  "Ward Number": user.wardNumber,
+                  "Pin Code": user.pincode,
+                },
+              ),
+              DetailsCard(
+                title: "Account Details",
+                details: {
+                  "Account Created:": user.accountCreated,
+                  "Last Login:": user.lastLogin,
+                  "Status:": user.status,
+                },
+              ),
+              SizedBox(height: 8),
+            ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class DetailsCard extends StatelessWidget {
+  final String title;
+  final Map<String, String> details;
+
+  const DetailsCard({super.key, required this.title, required this.details});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 0,
+      color: const Color(0xffFCFCFC),
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(width: 1, color: Color(0x80D9D9D9)),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// Title
+            CustomLabelText(text: title, color: AppColors.black, fontsize: 14),
+            Divider(thickness: 1, color: Colors.grey.shade300),
+
+            /// Dynamic Rows
+            ...details.entries.map(
+              (entry) => _buildRow(entry.key, entry.value),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Reusable Row for details
+  Widget _buildRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Label (left, top-aligned)
+          Expanded(
+            flex: 2,
+            child: Align(
+
+              child: Text(
+                label,
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          // Value (right, top-aligned, wraps below label if long)
+          Expanded(
+            flex: 3,
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                value,
+                textAlign: TextAlign.left,
+                style: const TextStyle(color: Colors.black, fontSize: 14),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

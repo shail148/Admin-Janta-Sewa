@@ -46,8 +46,8 @@ class CustomServiceCard extends StatelessWidget {
           border: Border.all(color: Colors.grey.shade300, width: 1),
           boxShadow: [
             BoxShadow(
-              color: const Color.fromARGB(255, 180, 180, 180),
-              blurRadius: 4,
+              color: const Color.fromARGB(255, 240, 237, 237),
+              blurRadius: 2,
               offset: const Offset(1, 1),
             ),
           ],

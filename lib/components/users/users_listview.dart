@@ -1,68 +1,95 @@
-import 'package:admin_jantasewa/data/users_data.dart';
+import 'package:admin_jantasewa/controllers/user_controller.dart';
+import 'package:admin_jantasewa/models/user_model.dart';
 import 'package:admin_jantasewa/view/users/user_detail_screen.dart';
+import 'package:admin_jantasewa/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:get/get.dart';
+
 class UserListView extends StatelessWidget {
   const UserListView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final c = Get.put(UserController(), permanent: true);
     final double screenHeight = MediaQuery.of(context).size.height;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomTextWidget(
-          text: 'User List:',
-          fontWeight: FontWeight.bold,
-          color: AppColors.textColor,
+        CustomSearchBar(
+          controller: c.searchController,
+          hint: 'Search....',
+          onChanged: c.setSearch, // live search
+          onClear: c.clearSearch, // resets
+          // If your CustomSearchBar does not support onSearchPressed, remove the next line:
+          onSearchPressed: () => c.setSearch(c.searchController.text),
         ),
-        const SizedBox(height: 10),
-        SizedBox(
-          height: screenHeight * 0.85,
-          child: ListView.builder(
-            itemCount: userList.length,
-            itemBuilder: (context, index) {
-              final item = userList[index];
-              return InkWell(
-                onTap: (){
-                  Get.to(()=>UserDetailScreen(),arguments: item);
-                },
-                child: Card(
-                  
-                  color: AppColors.galleryBdColors,
-                  margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomTextWidget(
-                          text: "Name: ${item['name']}",
-                          color: AppColors.black,
-                          fontsize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        const SizedBox(height: 4),
-                        CustomTextWidget(
-                          text: "Email: ${item['email']}",
-                          color: AppColors.textGrey,
-                          fontsize: 12,
-                        ),
-                        const SizedBox(height: 4),
-                        CustomTextWidget(
-                          text: "Phone: ${item['mobile']}",
-                          color: AppColors.textGrey,
-                          fontsize: 12,
-                        ),
-                      ],
+        SizedBox(height: 8),
+        Obx(
+          () => SizedBox(
+            height: screenHeight * 0.8,
+            child: ListView.builder(
+              itemCount: c.filteredList.length,
+              itemBuilder: (context, index) {
+                final UserModel user = c.filteredList[index];
+                return GestureDetector(
+                  onTap: () {
+                    Get.to(() => UserDetailScreen(), arguments: user);
+                  },
+                  child: Card(
+                    elevation: 0,
+                    color: AppColors.white,
+                    //add border
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: AppColors.textColor.withAlpha(50),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 24,
+                            backgroundImage: NetworkImage(user.profileImageUrl),
+                          ),
+                          SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomTextWidget(
+                                  text: "${user.name}",
+                                  color: AppColors.black,
+                                  fontsize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                SizedBox(height: 2),
+                                CustomTextWidget(
+                                  text: "${user.userId}",
+                                  color: AppColors.textGrey,
+                                  fontsize: 12,
+                                ),
+                                SizedBox(height: 2),
+                                CustomTextWidget(
+                                  text: "Phone: ${user.phone}",
+                                  color: AppColors.textGrey,
+                                  fontsize: 12,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ],

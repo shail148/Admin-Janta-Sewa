@@ -14,9 +14,9 @@ class UsersPage extends StatefulWidget {
 class _UsersPageState extends State<UsersPage> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'User List',
+        title: 'Janta Sewa',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.btnBgColor),
         onLeftTap: () {
           Get.back();
@@ -24,17 +24,15 @@ class _UsersPageState extends State<UsersPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [    
+            children: [
               //list view of the User Details
-                UserListView(),
-                SizedBox(height: 10,)
+              UserListView(),
             ],
           ),
         ),
-        
       ),
     );
   }

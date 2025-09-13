@@ -1,6 +1,6 @@
 import 'package:admin_jantasewa/view/auth/login_page.dart';
-import 'package:admin_jantasewa/view/complains/complain_request_page.dart';
-import 'package:admin_jantasewa/view/letters/letters_request_page.dart';
+import 'package:admin_jantasewa/view/ourJourney/ourjourney_history_page.dart';
+import 'package:admin_jantasewa/view/suggestionLetter/suggestion_allrequest_page.dart';
 import 'package:admin_jantasewa/view/users/users_page.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
@@ -23,7 +23,7 @@ class CustomDrawer extends StatelessWidget {
               decoration: const BoxDecoration(color: AppColors.primary),
               child: SizedBox.expand(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     CircleAvatar(radius: 30, backgroundColor: Colors.white),
@@ -49,47 +49,40 @@ class CustomDrawer extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 children: [
                   _drawerItem(Icons.home, 'home'.tr, onTap: () {}),
+
                   // _drawerItem(
                   //   Icons.dashboard,
                   //   'Dashboard',
                   //   onTap: () => Get.to(() => const ServicesHomeScreen()),
                   // ),
-                  _drawerItem(Icons.event, 'Application'.tr, onTap: () {}),
-                  _drawerItem(
-                    Icons.report,
-                    'Complain'.tr,
-                    onTap: () {
-                      Get.to(() => ComplainRequestPage());
-                    },
-                  ),
                   _drawerItem(
                     Icons.description,
                     'Letters'.tr,
                     onTap: () {
-                      Get.to(() => LettersRequestPage());
+                      Get.to(() => SuggestionLetterAllRequestPage());
                     },
                   ),
                   _drawerItem(
                     Icons.campaign,
-                    'Speech'.tr,
+                    'Our Journey'.tr,
                     onTap: () {
-                      //Get.to(()=>LettersRequestPage());
+                      Get.to(() => OurjourneyHistoryPage());
                     },
                   ),
 
                   _drawerItem(
-                    Icons.supervised_user_circle_outlined,
-                    'Users'.tr,
+                    Icons.person,
+                    'All Users'.tr,
                     onTap: () {
                       Get.to(() => UsersPage());
                     },
                   ),
-                  _drawerItem(Icons.report, 'Reports'.tr, onTap: () {}),
                   _drawerItem(
-                    Icons.mail_outline,
-                    'Invitation'.tr,
+                    Icons.contact_mail_outlined,
+                    'Contact'.tr,
                     onTap: () {},
                   ),
+
                   _drawerItem(Icons.settings, 'Settings'.tr, onTap: () {}),
                   _drawerItem(
                     Icons.logout,
