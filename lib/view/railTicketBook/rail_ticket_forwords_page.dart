@@ -41,7 +41,7 @@ class _RailTicketForwordsPageState extends State<RailTicketForwordsPage> {
         onMessageChanged: (val) => setState(() => message = val),
         onCancel: () => Navigator.pop(context),
         onSend: () {
-          print("Message Sent: $message");
+         // print("Message Sent: $message");
         },
       ),
     );

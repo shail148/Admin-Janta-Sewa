@@ -63,14 +63,14 @@ class UserListView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomTextWidget(
-                                  text: "${user.name}",
+                                  text: user.name,
                                   color: AppColors.black,
                                   fontsize: 14,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 SizedBox(height: 2),
                                 CustomTextWidget(
-                                  text: "${user.userId}",
+                                  text: user.userId,
                                   color: AppColors.textGrey,
                                   fontsize: 12,
                                 ),

@@ -50,7 +50,7 @@ class _HospitalForwordingPageState extends State<HospitalForwordingPage> {
             setState(() => _messageController.text = val),
         onCancel: () => Navigator.pop(context),
         onSend: () {
-          print("Message Sent: ${_messageController.text}");
+         // print("Message Sent: ${_messageController.text}");
         },
       ),
     );

@@ -1,4 +1,6 @@
 import 'package:admin_jantasewa/view/auth/login_page.dart';
+import 'package:admin_jantasewa/view/drawerPages/contact/contact_page.dart';
+import 'package:admin_jantasewa/view/ourJourney/janta_sewa_media_screen.dart';
 import 'package:admin_jantasewa/view/ourJourney/ourjourney_history_page.dart';
 import 'package:admin_jantasewa/view/suggestionLetter/suggestion_allrequest_page.dart';
 import 'package:admin_jantasewa/view/users/users_page.dart';
@@ -69,6 +71,13 @@ class CustomDrawer extends StatelessWidget {
                       Get.to(() => OurjourneyHistoryPage());
                     },
                   ),
+                  _drawerItem(
+                    Icons.event_note,
+                    'News'.tr,
+                    onTap: () {
+                      Get.to(() => JantaSewaMediaScreen());
+                    },
+                  ),
 
                   _drawerItem(
                     Icons.person,
@@ -80,7 +89,9 @@ class CustomDrawer extends StatelessWidget {
                   _drawerItem(
                     Icons.contact_mail_outlined,
                     'Contact'.tr,
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => ContactPage());
+                    },
                   ),
 
                   _drawerItem(Icons.settings, 'Settings'.tr, onTap: () {}),

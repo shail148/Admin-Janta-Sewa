@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:admin_jantasewa/controllers/railTicket/rail_ticket_controller.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -211,6 +213,7 @@ class UniversalMultiLineChart extends StatelessWidget {
                               end: Alignment.bottomCenter,
                               colors: [
                                 s.color.withOpacity(.22),
+
                                 s.color.withOpacity(.04),
                               ],
                             ),

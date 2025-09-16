@@ -180,12 +180,13 @@ class ConstructionWorkController extends GetxController {
           if (dt.year == first.year && dt.month == first.month) {
             final idx = dt.day - 1;
             if (idx >= 0 && idx < days) {
-              if (t.status == 'Approved')
+              if (t.status == 'Approved') {
                 a[idx]++;
-              else if (t.status == 'Pending')
+              } else if (t.status == 'Pending') {
                 p[idx]++;
-              else if (t.status == 'Rejected')
+              } else if (t.status == 'Rejected') {
                 r[idx]++;
+              }
             }
           }
         }
@@ -226,12 +227,13 @@ class ConstructionWorkController extends GetxController {
           final dt = _parseDate(t.date);
           if (dt.year == now.year) {
             final idx = dt.month - 1;
-            if (t.status == 'Approved')
+            if (t.status == 'Approved') {
               a[idx]++;
-            else if (t.status == 'Pending')
+            } else if (t.status == 'Pending') {
               p[idx]++;
-            else if (t.status == 'Rejected')
+            } else if (t.status == 'Rejected') {
               r[idx]++;
+            }
           }
         }
 

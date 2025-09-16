@@ -10,8 +10,7 @@ import '../../controllers/ourJourney/our_journey_controller.dart';
 import '../../models/ourJourney/our_journey_model.dart';
 
 class CreateOurjourneyPage extends StatefulWidget {
-  /// When adding:  isEdit=false, journey=null, editIndex=null
-  /// When editing: isEdit=true,  journey=<item>, editIndex=<index>
+  
   const CreateOurjourneyPage({
     super.key,
     this.journey,

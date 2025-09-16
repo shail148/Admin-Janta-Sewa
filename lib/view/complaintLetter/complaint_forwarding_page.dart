@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ComplaintForwardingPage extends StatelessWidget {
+  const ComplaintForwardingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final ComplaintLetterModel complaint = Get.arguments;
