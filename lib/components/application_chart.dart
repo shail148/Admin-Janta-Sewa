@@ -1,4 +1,3 @@
-
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/indicator.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -35,13 +34,12 @@ class PieChart2State extends State {
                           return;
                         }
                         touchedIndex = pieTouchResponse
-                            .touchedSection!.touchedSectionIndex;
+                            .touchedSection!
+                            .touchedSectionIndex;
                       });
                     },
                   ),
-                  borderData: FlBorderData(
-                    show: false,
-                  ),
+                  borderData: FlBorderData(show: false),
                   sectionsSpace: 0,
                   centerSpaceRadius: 40,
                   sections: showingSections(),
@@ -53,43 +51,21 @@ class PieChart2State extends State {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Indicator(
-                color: Colors.red,
-                text: 'Rejected',
-                isSquare: true,
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              Indicator(
-                color: Colors.yellow,
-                text: 'Pending',
-                isSquare: true,
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              Indicator(
-                color: Colors.green,
-                text: 'Success',
-                isSquare: true,
-              ),
-              const SizedBox(
-                height: 4,
-              ),
+              Indicator(color: Colors.red, text: 'Rejected', isSquare: true),
+              const SizedBox(height: 4),
+              Indicator(color: Colors.yellow, text: 'Pending', isSquare: true),
+              const SizedBox(height: 4),
+              Indicator(color: Colors.green, text: 'Success', isSquare: true),
+              const SizedBox(height: 4),
               // Indicator(
               //   color: AppColors.contentColorGreen,
               //   text: 'Fourth',
               //   isSquare: true,
               // ),
-              const SizedBox(
-                height: 18,
-              ),
+              const SizedBox(height: 18),
             ],
           ),
-          const SizedBox(
-            width: 28,
-          ),
+          const SizedBox(width: 28),
         ],
       ),
     );
