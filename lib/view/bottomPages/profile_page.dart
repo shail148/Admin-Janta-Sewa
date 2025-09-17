@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 class ProfileScreen extends StatelessWidget {
   final isEditing = false.obs;
+  final bool startEditing; //added so that from setting in drawer navigate to profile screen in editing mode
   final fullName = TextEditingController(text: "Admin");
   final mobileNumber = TextEditingController(text: "9876545678");
   final whatsappNumber = TextEditingController(text: "9876543210");
@@ -27,7 +28,12 @@ class ProfileScreen extends StatelessWidget {
   final pincode = TextEditingController(text: "201301");
 
 final ImagePickerController imagePickerController = Get.put(ImagePickerController());
-  ProfileScreen({super.key});
+  
+  //ProfileScreen({super.key});
+
+  ProfileScreen({super.key, this.startEditing = false}) {
+    isEditing.value = startEditing; // set initial state
+  }
 
   void _showImageSourceOptions(BuildContext context) {
     showModalBottomSheet(

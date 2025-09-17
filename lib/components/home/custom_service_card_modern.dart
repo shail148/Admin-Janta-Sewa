@@ -1,6 +1,95 @@
 import 'package:flutter/material.dart';
 
 class CustomServiceCard extends StatelessWidget {
+  final String text;
+  final String imagePath;
+  final VoidCallback onTap;
+  final double? width;
+  final double? height;
+  final Color backgroundColor;
+  final Color borderColor;
+  final double imageBoxFactor; // default 0.45
+
+  const CustomServiceCard({
+    super.key,
+    required this.text,
+    required this.imagePath,
+    required this.onTap,
+    this.width,
+    this.height,
+    this.backgroundColor = Colors.white,
+    this.borderColor = const Color(0xFFEEEEEE),
+    this.imageBoxFactor = 0.45,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    final cardWidth = width ?? screenWidth * 0.60;
+    final cardHeight = height ?? screenHeight * 0.14;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        clipBehavior: Clip.antiAlias,
+        width: cardWidth,
+        height: cardHeight,
+        decoration: BoxDecoration(
+          color: backgroundColor.withOpacity(0.90),
+          border: Border.all(color: borderColor),
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              spreadRadius: 1,
+              blurRadius: 4,
+              offset: const Offset(2, 3),
+            ),
+          ],
+        ),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10, top: 8),
+              child: Text(
+                text,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                  height: 1.2,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: SizedBox(
+                width: cardWidth * imageBoxFactor,
+                height: cardHeight * imageBoxFactor,
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.contain,
+                  alignment: Alignment.bottomRight,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+/* import 'package:flutter/material.dart';
+
+class CustomServiceCard extends StatelessWidget {
   final String title;
   final double? height;
   final double? width;
@@ -100,3 +189,6 @@ class CustomServiceCard extends StatelessWidget {
     );
   }
 }
+
+
+ */

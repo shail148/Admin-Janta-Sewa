@@ -1,5 +1,6 @@
 import 'package:admin_jantasewa/view/auth/login_page.dart';
 import 'package:admin_jantasewa/view/drawerPages/contact/contact_page.dart';
+import 'package:admin_jantasewa/view/drawerPages/settings/settings_page.dart';
 import 'package:admin_jantasewa/view/ourJourney/janta_sewa_media_screen.dart';
 import 'package:admin_jantasewa/view/ourJourney/ourjourney_history_page.dart';
 import 'package:admin_jantasewa/view/suggestionLetter/suggestion_allrequest_page.dart';
@@ -102,7 +103,14 @@ class CustomDrawer extends StatelessWidget {
                     },
                   ),
 
-                  _drawerItem(Icons.settings, 'Settings'.tr, onTap: () {}),
+                  _drawerItem(
+                  Icons.settings, 
+                  'Settings'.tr, 
+                  onTap: () {
+                            Get.to(() => SettingsPage());
+                  }
+                  ),
+
                   _drawerItem(
                     Icons.logout,
                     'logout'.tr,

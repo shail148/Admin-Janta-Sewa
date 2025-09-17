@@ -52,6 +52,8 @@ dependencies:
   image_cropper: ^9.1.0
   flutter_image_compress: ^2.1.0
   flutter_svg: ^2.2.0
+  flutter_screenutil: ^5.9.3
+  flutter_switch: ^0.3.2
   
 
 
