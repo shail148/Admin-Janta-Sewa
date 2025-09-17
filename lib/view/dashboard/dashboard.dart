@@ -17,14 +17,36 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  int selectedIndex = 0;
+    int selectedIndex = 0;
+    bool startEditing = false; //for open in editing mode on profile screen in nav bar
+    late List<Widget> pages;
 
-  final List<Widget> pages = [
+
+  /* final List<Widget> pages = [
     NewHomePage(),
     SendNotificationDashboard(),
     Requestpage(),
     ProfileScreen(),
+  ]; */
+
+  @override
+  void initState() {
+    super.initState();
+    final args = Get.arguments;
+    if (args is Map) {
+      if (args['index'] != null) selectedIndex = args['index'];
+      startEditing = args['edit'] == true;
+    }
+    
+    pages = [
+    NewHomePage(),
+    SendNotificationDashboard(),
+    Requestpage(),
+    ProfileScreen(startEditing: startEditing),
+
   ];
+
+  }
 
   void onItemTapped(int index) {
     setState(() {
@@ -65,7 +87,7 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            buildNavItem(Icons.home_outlined, "Dashboard", 0),
+            buildNavItem(Icons.home_outlined, "Home", 0),
             buildNavItem(Icons.dashboard_customize_outlined, "Dashboard", 1),
             buildNavItem(Icons.history, "Request", 2),
             buildNavItem(Icons.person_outline, "Profile", 3),
