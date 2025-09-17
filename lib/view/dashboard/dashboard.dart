@@ -65,7 +65,7 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            buildNavItem(Icons.home_outlined, "Home", 0),
+            buildNavItem(Icons.home_outlined, "Dashboard", 0),
             buildNavItem(Icons.dashboard_customize_outlined, "Dashboard", 1),
             buildNavItem(Icons.history, "Request", 2),
             buildNavItem(Icons.person_outline, "Profile", 3),
