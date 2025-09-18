@@ -258,6 +258,9 @@ class NotchedCardClipper extends CustomClipper<Path> {
     const notchHeight = 24.0;
     const notchRadius = 20.0;
 
+
+
+
     final path = Path();
 
     // Start at top-left with rounded corner

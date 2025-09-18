@@ -1,71 +1,82 @@
 import 'package:flutter/material.dart';
 
 class CustomServiceCard extends StatelessWidget {
-  final String text;
+  final String title;
+  final double? height;
+  final double? width;
   final String imagePath;
   final VoidCallback onTap;
-  final double? width;
-  final double? height;
+  final double imageBoxFactor;
   final Color backgroundColor;
   final Color borderColor;
-  final double imageBoxFactor; // default 0.45
 
   const CustomServiceCard({
     super.key,
-    required this.text,
+    required this.title,
     required this.imagePath,
     required this.onTap,
-    this.width,
     this.height,
+    this.width,
+    this.imageBoxFactor = 0.45,
     this.backgroundColor = Colors.white,
     this.borderColor = const Color(0xFFEEEEEE),
-    this.imageBoxFactor = 0.45,
   });
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
 
-    final cardWidth = width ?? screenWidth * 0.60;
-    final cardHeight = height ?? screenHeight * 0.14;
+    // keep default width similar to original admin card so two cards fit in a row
+   final double cardWidth = width ?? (screenWidth / 2.4);
+   // final cardWidth = width ?? screenWidth * 0.41;
+    
+    // use a sensible default height (can be overridden)
+    final double cardHeight = height ?? (screenHeight * 0.10);
+
+    final double imgSize = (cardHeight < cardWidth ? cardHeight : cardWidth) * 0.8;
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        clipBehavior: Clip.antiAlias,
-        width: cardWidth,
         height: cardHeight,
+        width: cardWidth,
+        clipBehavior: Clip.antiAlias,
+        margin: const EdgeInsets.symmetric(horizontal: 6),
         decoration: BoxDecoration(
-          color: backgroundColor.withOpacity(0.90),
-          border: Border.all(color: borderColor),
+          color: backgroundColor.withOpacity(0.95),
           borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: borderColor, width: 1),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.05),
-              spreadRadius: 1,
               blurRadius: 4,
               offset: const Offset(2, 3),
             ),
           ],
         ),
         child: Stack(
-          clipBehavior: Clip.none,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10, top: 8),
+            // top-left title
+            Positioned(
+              left: 10,
+              top: 8,
+              right: imgSize * 0.4,
               child: Text(
-                text,
+                title,
                 style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
-                  height: 1.2,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black87,
+                  height: 1.15,
                 ),
                 maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+                overflow: TextOverflow.visible,
+                softWrap: false,                   // prevents line break
               ),
             ),
+
+            // bottom-right image
             Positioned(
               bottom: 0,
               right: 0,

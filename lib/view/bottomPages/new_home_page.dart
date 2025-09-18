@@ -1,19 +1,18 @@
-import "package:admin_jantasewa/components/home/custom_service_card_modern.dart";
-import "package:admin_jantasewa/components/home/request_carousel_slider.dart";
-import "package:admin_jantasewa/view/budgetDemand/budget_all_request_page.dart";
-import "package:admin_jantasewa/view/complaintLetter/complaint_letter_allrequest_page.dart";
-import "package:admin_jantasewa/view/construction/construction_all_request_page.dart";
-import "package:admin_jantasewa/view/hospital/hospital_main_page.dart";
-import "package:admin_jantasewa/view/invitation/invitation_all_request_page.dart";
-import "package:admin_jantasewa/view/parliamentVisit/parliament_visit_allrequest_page.dart";
-import "package:admin_jantasewa/view/railTicketBook/rail_ticket_confirmation.dart";
-import "package:admin_jantasewa/view/recommendation/recommendation_all_request_page.dart";
-import "package:admin_jantasewa/view/suggestionLetter/suggestion_allrequest_page.dart";
-import "package:admin_jantasewa/widgets/custom_text.dart";
-import "package:flutter/material.dart";
-import "package:get/get.dart";
-import "package:flutter_screenutil/flutter_screenutil.dart";
-
+import 'package:admin_jantasewa/components/home/custom_service_card_modern.dart';
+import 'package:admin_jantasewa/components/home/request_carousel_slider.dart';
+import 'package:admin_jantasewa/controllers/railTicket/rail_ticket_controller.dart';
+import 'package:admin_jantasewa/view/budgetDemand/budget_all_request_page.dart';
+import 'package:admin_jantasewa/view/complaintLetter/complaint_letter_allrequest_page.dart';
+import 'package:admin_jantasewa/view/construction/construction_all_request_page.dart';
+import 'package:admin_jantasewa/view/hospital/hospital_main_page.dart';
+import 'package:admin_jantasewa/view/invitation/invitation_all_request_page.dart';
+import 'package:admin_jantasewa/view/parliamentVisit/parliament_visit_allrequest_page.dart';
+import 'package:admin_jantasewa/view/railTicketBook/rail_ticket_confirmation.dart';
+import 'package:admin_jantasewa/view/recommendation/recommendation_all_request_page.dart';
+import 'package:admin_jantasewa/view/suggestionLetter/suggestion_allrequest_page.dart';
+import 'package:admin_jantasewa/widgets/custom_text.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NewHomePage extends StatefulWidget {
   const NewHomePage({super.key});
@@ -23,185 +22,164 @@ class NewHomePage extends StatefulWidget {
 }
 
 class _NewHomePageState extends State<NewHomePage> {
+  //final RailTicketController c = Get.put(RailTicketController(),permanent: true);
+
+  final RailTicketController controller = Get.find<RailTicketController>(); // Get.put() now in app binding
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // keep RequestCarousel
               RequestCarousel(),
-              SizedBox(height: 16.h),
+              const SizedBox(height: 16),
 
               // Services
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomTextWidget(
-                      text: 'Services',
-                      fontsize: 14.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    SizedBox(height: 8.h),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: CustomServiceCard(
-                              text: "Train Ticket Confirmation",
-                              imagePath: "assets/icons/railticket.png",
-                              onTap: () => Get.to(() => RailTicketConfirmationPage()),
-                            ),
-                          ),
-                          SizedBox(width: 15.w),
-                          Expanded(
-                            child: CustomServiceCard(
-                              text: "Hospital Admission",
-                              imagePath: "assets/icons/hospitalservice.png",
-                              onTap: () => Get.to(() => HospitalMainPage()),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+              CustomTextWidget(
+                text: 'Services',
+                fontWeight: FontWeight.bold,
+                fontsize: 14,
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  CustomServiceCard(
+                    title: "Rail Ticket\nConfirmation",
+                    //imagePath: "assets/icons/railticket.png",
+                      imagePath: 'assets/images/train.png',
+
+                    onTap: () {
+                      Get.to(() => RailTicketConfirmationPage());
+                    },
+                  ),
+                  const SizedBox(width: 12),
+                  CustomServiceCard(
+                    title: "Hospital\nAdmission",
+                   // imagePath: "assets/icons/hospitalservice.png",
+                   imagePath: 'assets/images/hospital.png',
+                    onTap: () {
+                      Get.to(() => HospitalMainPage());
+                    },
+                  ),
+                ],
               ),
 
-              SizedBox(height: 16.h),
+              const SizedBox(height: 16),
 
               // Department
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomTextWidget(
-                      text: 'Department',
-                      fontsize: 14.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    SizedBox(height: 8.h),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: CustomServiceCard(
-                              text: "Budget Demand",
-                              imagePath: "assets/icons/budget.png",
-                              onTap: () => Get.to(() => BudgetAllRequestPage()),
-                            ),
-                          ),
-                          SizedBox(width: 15.w),
-                          Expanded(
-                            child: CustomServiceCard(
-                              text: "Construction Work",
-                              imagePath: "assets/icons/construction.jpg",
-                              onTap: () => Get.to(() => ConstructionAllRequestPage()),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+              CustomTextWidget(
+                text: 'Department',
+                fontWeight: FontWeight.bold,
+                fontsize: 14,
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  CustomServiceCard(
+                    title: "Budget\nDemand",
+                    //imagePath: "assets/icons/budget.png",
+                    imagePath: 'assets/images/budget.png',
+                    onTap: () {
+                      Get.to(() => BudgetAllRequestPage());
+                    },
+                  ),
+                  const SizedBox(width: 12),
+                  CustomServiceCard(
+                    title: "Construction\nWork",
+                    //imagePath: "assets/icons/construction.jpg",
+                    imagePath: 'assets/images/construction.png',
+                    onTap: () {
+                      Get.to(() => ConstructionAllRequestPage());
+                    },
+                  ),
+                ],
               ),
 
-              SizedBox(height: 16.h),
+              const SizedBox(height: 16),
 
               // Letters
-              Expanded(
-                flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomTextWidget(
-                      text: 'Letters',
-                      fontsize: 14.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    SizedBox(height: 8.h),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: CustomServiceCard(
-                              height: 300.h,
-                              text: "Recommendation Letter",
-                              imagePath: "assets/icons/letter.jpg",
-                              onTap: () => Get.to(() => RecommendationAllRequestPage()),
-                            ),
-                          ),
-                          SizedBox(width: 15.w),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: CustomServiceCard(
-                                    text: "Complaint Letter",
-                                    imagePath: "assets/icons/complainletter.jpg",
-                                    onTap: () => Get.to(() => ComplaintLetterAllRequestPage()),
-                                  ),
-                                ),
-                                SizedBox(height: 15.h),
-                                Expanded(
-                                  child: CustomServiceCard(
-                                    text: "Suggestion Letter",
-                                    imagePath: "assets/icons/suggestionletter.jpg",
-                                    onTap: () => Get.to(() => SuggestionLetterAllRequestPage()),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+              CustomTextWidget(
+                text: 'Letters',
+                fontWeight: FontWeight.bold,
+                fontsize: 14,
+              ),
+              const SizedBox(height: 10),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomServiceCard(
+                    title: "Recommendation \nLetter",
+                    height: 190,
+                    //imagePath: "assets/icons/letter.jpg",
+                    imagePath: 'assets/images/recommendation.png',
+                    onTap: () {
+                      Get.to(() => RecommendationAllRequestPage());
+                    },
+                  ),
+                  const SizedBox(width: 12),
+                  // stacked two small cards
+                  Column(
+                    children: [
+                      CustomServiceCard(
+                        title: "Complaint\nLetter",
+                        //imagePath: "assets/icons/complainletter.jpg",
+                        imagePath: 'assets/images/complaint.png',
+                        onTap: () {
+                          Get.to(() => ComplaintLetterAllRequestPage());
+                        },
                       ),
-                    ),
-                  ],
-                ),
+                      const SizedBox(height: 10),
+                      CustomServiceCard(
+                        title: "Suggestion\nLetter",
+                        //imagePath: "assets/icons/suggestionletter.jpg",
+                        imagePath: 'assets/images/suggestion.png',
+                        onTap: () {
+                          Get.to(() => SuggestionLetterAllRequestPage());
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
 
-              SizedBox(height: 16.h),
+              const SizedBox(height: 16),
 
               // Requests
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomTextWidget(
-                      text: 'Requests',
-                      fontsize: 14.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    SizedBox(height: 8.h),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: CustomServiceCard(
-                              text: "Parliament Visit",
-                              imagePath: "assets/icons/parliament.png",
-                              imageBoxFactor: 0.5,
-                              onTap: () => Get.to(() => ParliamentVisitAllrequestPage()),
-                            ),
-                          ),
-                          SizedBox(width: 15.w),
-                          Expanded(
-                            child: CustomServiceCard(
-                              text: "Invitation",
-                              imagePath: "assets/icons/invitation.jpg",
-                              onTap: () => Get.to(() => InvitationAllRequestPage()),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+              CustomTextWidget(
+                text: 'Requests',
+                fontWeight: FontWeight.bold,
+                fontsize: 14,
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  CustomServiceCard(
+                    title: "Parliament\nVisit",
+                    //imagePath: "assets/icons/parliament.png",
+                    imagePath: 'assets/images/parliament.png',
+                    imageBoxFactor: 0.5,
+                    onTap: () {
+                      Get.to(() => ParliamentVisitAllrequestPage());
+                    },
+                  ),
+                  const SizedBox(width: 12),
+                  CustomServiceCard(
+                    title: "Invitation",
+                    //imagePath: "assets/icons/invitation.jpg",
+                    imagePath: 'assets/images/invitation.png',
+                    onTap: () {
+                      Get.to(() => InvitationAllRequestPage());
+                    },
+                  ),
+                ],
               ),
 
-              SizedBox(height: 16.h),
+              const SizedBox(height: 16),
             ],
           ),
         ),

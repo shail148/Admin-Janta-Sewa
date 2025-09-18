@@ -77,11 +77,18 @@ class _DashboardPageState extends State<DashboardPage> {
 
       bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
           color: Color(0xFFF4F6FE),
-          borderRadius: BorderRadius.only(
+          /* borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24),
             topRight: Radius.circular(24),
+          ), */
+          //borderRadius: BorderRadius.circular(8.0)
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(0),
+            topRight: Radius.circular(0),
+            bottomLeft: Radius.circular(0),
+            bottomRight: Radius.circular(0),
           ),
         ),
         child: Row(
@@ -108,13 +115,16 @@ class _DashboardPageState extends State<DashboardPage> {
           color: isSelected
               ? AppColors.btnBgColor.withOpacity(0.1)
               : Colors.transparent,
-          borderRadius: BorderRadius.circular(20),
+          //borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(12),
+
         ),
         child: Row(
           children: [
             Icon(
               icon,
-              size: 24,
+              //size: 24,
+              size: 30,
               color: isSelected ? AppColors.primary : AppColors.primary,
             ),
             if (isSelected) ...[
@@ -123,6 +133,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 label,
                 style: TextStyle(
                   fontSize: 14,
+                  fontFamily: 'Inter',
                   fontWeight: FontWeight.w600,
                   color: AppColors.primary,
                 ),

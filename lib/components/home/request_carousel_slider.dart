@@ -36,6 +36,8 @@ class RequestCard extends StatelessWidget {
       height: screenHeight / 7,
      // margin: const EdgeInsets.symmetric(horizontal: 6),
       padding: const EdgeInsets.all(16),
+      //padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 0),
+
       decoration: BoxDecoration(
         border: Border.all(color: Colors.blue.shade100),
         borderRadius: BorderRadius.circular(12),
