@@ -1,3 +1,4 @@
+import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomServiceCard extends StatelessWidget {
@@ -17,7 +18,7 @@ class CustomServiceCard extends StatelessWidget {
     required this.onTap,
     this.height,
     this.width,
-    this.imageBoxFactor = 0.45,
+    this.imageBoxFactor = 0.6,
     this.backgroundColor = Colors.white,
     this.borderColor = const Color(0xFFEEEEEE),
   });
@@ -32,7 +33,7 @@ class CustomServiceCard extends StatelessWidget {
    // final cardWidth = width ?? screenWidth * 0.41;
     
     // use a sensible default height (can be overridden)
-    final double cardHeight = height ?? (screenHeight * 0.11);
+    final double cardHeight = height ?? (screenHeight * 0.10);
 
     final double imgSize = (cardHeight < cardWidth ? cardHeight : cardWidth) * 0.8;
 
@@ -65,10 +66,11 @@ class CustomServiceCard extends StatelessWidget {
               child: Text(
                 title,
                 style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                  height: 1.15,
+                  fontFamily: "Inter",
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.black,
+                  height: 1.2,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.visible,
