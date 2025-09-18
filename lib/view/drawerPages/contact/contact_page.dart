@@ -1,6 +1,7 @@
 import 'package:admin_jantasewa/controllers/contact_page_controller.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
+import 'package:admin_jantasewa/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'edit_contact_page.dart';
@@ -13,7 +14,7 @@ class ContactPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: CustomTopAppBar(
+      appBar: CustomTopAppBar(
         title: 'Edit Contact',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.btnBgColor),
         onLeftTap: () => Get.back(),
@@ -38,21 +39,24 @@ class ContactPage extends StatelessWidget {
               const Text("Follow us on"),
               const SizedBox(height: 8),
               Row(
-                children: const [
-                  Icon(Icons.chat_bubble, color: Colors.green),
-                  SizedBox(width: 10),
-                  Icon(Icons.camera_alt, color: Colors.purple),
-                  SizedBox(width: 10),
-                  Icon(Icons.alternate_email, color: Colors.blue),
-                  SizedBox(width: 10),
-                  Icon(Icons.facebook, color: Colors.blueAccent),
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Image.asset("assets/images/whatsapp.png", height: 40),
+                  Image.asset("assets/images/twitter.png", height: 65),
+                  Image.asset("assets/images/facebook.png", height: 40),
+                  Image.asset("assets/images/instagram.png", height: 40),
                 ],
               ),
               const Spacer(),
-              ElevatedButton(
-              
-                onPressed: () => Get.to(() => EditContactPage()),
-                child: const Text("Edit Contact"),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: CustomButton(
+                  text: "Edit Contact",
+                  textSize: 16,
+                  onPressed: () {
+                    Get.to(() => EditContactPage());
+                  },
+                ),
               ),
             ],
           ),

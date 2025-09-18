@@ -30,14 +30,24 @@ class _OurjourneyHistoryPageState extends State<OurjourneyHistoryPage> {
         title: const Text('Delete entry?'),
         content: const Text('This will remove the journey from the list.'),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancel')),
-          FilledButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Delete')),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Delete'),
+          ),
         ],
       ),
     );
     if (ok == true) {
       controller.deleteJourney(index);
-      Get.snackbar('Deleted', 'Journey removed.', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Deleted',
+        'Journey removed.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 
@@ -57,13 +67,21 @@ class _OurjourneyHistoryPageState extends State<OurjourneyHistoryPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Our Journey', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                const Text(
+                  'Our Journey',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     alignment: Alignment.center,
                     backgroundColor: AppColors.primary,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 5,
+                    ),
                   ),
                   onPressed: () {
                     // ADD: open create page in add mode
@@ -73,7 +91,10 @@ class _OurjourneyHistoryPageState extends State<OurjourneyHistoryPage> {
                     children: [
                       Icon(Icons.add, color: Colors.white, size: 12),
                       SizedBox(width: 6),
-                      Text("Add", style: TextStyle(color: Colors.white, fontSize: 12)),
+                      Text(
+                        "Add",
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
                     ],
                   ),
                 ),
@@ -92,7 +113,11 @@ class _OurjourneyHistoryPageState extends State<OurjourneyHistoryPage> {
                     child: ListView(
                       children: const [
                         SizedBox(height: 160),
-                        Center(child: Text('No journeys found. Pull down to refresh or tap Add.')),
+                        Center(
+                          child: Text(
+                            'No journeys found. Pull down to refresh or tap Add.',
+                          ),
+                        ),
                       ],
                     ),
                   );
@@ -116,7 +141,10 @@ class _OurjourneyHistoryPageState extends State<OurjourneyHistoryPage> {
                           elevation: 0,
                           color: AppColors.white,
                           shape: RoundedRectangleBorder(
-                            side: BorderSide(color: AppColors.textColor.withAlpha(50), width: 1),
+                            side: BorderSide(
+                              color: AppColors.textColor.withAlpha(50),
+                              width: 1,
+                            ),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Padding(
@@ -130,7 +158,9 @@ class _OurjourneyHistoryPageState extends State<OurjourneyHistoryPage> {
                                   height: 100,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(15),
-                                    child: _JourneyThumb(path: journey.imagePath),
+                                    child: _JourneyThumb(
+                                      path: journey.imagePath,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(width: 12),
@@ -138,7 +168,8 @@ class _OurjourneyHistoryPageState extends State<OurjourneyHistoryPage> {
                                 // Text & menu
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: [
@@ -155,35 +186,60 @@ class _OurjourneyHistoryPageState extends State<OurjourneyHistoryPage> {
                                           // Three-dot menu
                                           GestureDetector(
                                             onTapDown: (TapDownDetails details) async {
-                                              final selected = await showMenu<String>(
-                                                context: context,
-                                                position: RelativeRect.fromLTRB(
-                                                  details.globalPosition.dx,
-                                                  details.globalPosition.dy,
-                                                  0,
-                                                  0,
-                                                ),
-                                                items: const [
-                                                  PopupMenuItem(value: 'view', child: Text('View')),
-                                                  PopupMenuItem(value: 'edit', child: Text('Edit')),
-                                                  PopupMenuItem(value: 'delete', child: Text('Delete')),
-                                                ],
-                                              );
+                                              final selected =
+                                                  await showMenu<String>(
+                                                    context: context,
+                                                    position:
+                                                        RelativeRect.fromLTRB(
+                                                          details
+                                                              .globalPosition
+                                                              .dx,
+                                                          details
+                                                              .globalPosition
+                                                              .dy,
+                                                          0,
+                                                          0,
+                                                        ),
+                                                    items: const [
+                                                      PopupMenuItem(
+                                                        value: 'view',
+                                                        child: Text('View'),
+                                                      ),
+                                                      PopupMenuItem(
+                                                        value: 'edit',
+                                                        child: Text('Edit'),
+                                                      ),
+                                                      PopupMenuItem(
+                                                        value: 'delete',
+                                                        child: Text('Delete'),
+                                                      ),
+                                                    ],
+                                                  );
 
                                               if (selected == 'view') {
-                                                Get.to(() => ViewOurjourneyPage(journey: journey));
+                                                Get.to(
+                                                  () => ViewOurjourneyPage(
+                                                    journey: journey,
+                                                  ),
+                                                );
                                               } else if (selected == 'edit') {
                                                 // EDIT: pass journey (and index if your page supports it)
-                                                Get.to(() => CreateOurjourneyPage(
-                                                      journey: journey,
-                                                      isEdit: true,
-                                                      editIndex: index, // <-- remove if your page doesn't take it
-                                                    ));
+                                                Get.to(
+                                                  () => CreateOurjourneyPage(
+                                                    journey: journey,
+                                                    isEdit: true,
+                                                    editIndex:
+                                                        index, // <-- remove if your page doesn't take it
+                                                  ),
+                                                );
                                               } else if (selected == 'delete') {
                                                 await _confirmDelete(index);
                                               }
                                             },
-                                            child: const Icon(Icons.more_vert, size: 18),
+                                            child: const Icon(
+                                              Icons.more_vert,
+                                              size: 18,
+                                            ),
                                           ),
                                           const SizedBox(width: 8),
                                         ],

@@ -4,7 +4,7 @@ import 'package:admin_jantasewa/view/drawerPages/settings/settings_page.dart';
 import 'package:admin_jantasewa/view/ourJourney/janta_sewa_media_screen.dart';
 import 'package:admin_jantasewa/view/ourJourney/ourjourney_history_page.dart';
 import 'package:admin_jantasewa/view/suggestionLetter/suggestion_allrequest_page.dart';
-import 'package:admin_jantasewa/view/users/create_autorized_user.dart';
+import 'package:admin_jantasewa/view/users/authorized_user_list_page.dart';
 import 'package:admin_jantasewa/view/users/users_page.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
@@ -92,7 +92,7 @@ class CustomDrawer extends StatelessWidget {
                     Icons.person,
                     'Authorized Users'.tr,
                     onTap: () {
-                      Get.to(() => CreateAuthorizedUserPage());
+                      Get.to(() => AuthorizedUserListPage());
                     },
                   ),
                   _drawerItem(
@@ -104,11 +104,11 @@ class CustomDrawer extends StatelessWidget {
                   ),
 
                   _drawerItem(
-                  Icons.settings, 
-                  'Settings'.tr, 
-                  onTap: () {
-                            Get.to(() => SettingsPage());
-                  }
+                    Icons.settings,
+                    'Settings'.tr,
+                    onTap: () {
+                      Get.to(() => SettingsPage());
+                    },
                   ),
 
                   _drawerItem(
