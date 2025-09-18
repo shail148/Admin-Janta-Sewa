@@ -94,6 +94,10 @@ flutter:
     - assets/images/suggestion.png
     - assets/images/parliament.png
     - assets/images/invitation.png
+    - assets/images/mail_request.png
+    - assets/images/verified.png
+    - assets/images/hourglass_bottom.png
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
