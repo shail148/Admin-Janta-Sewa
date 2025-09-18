@@ -114,7 +114,7 @@ class _NewHomePageState extends State<NewHomePage> {
                 children: [
                   CustomServiceCard(
                     title: "Recommendation \nLetter",
-                    height: 190,
+                    height: 210,
                     //imagePath: "assets/icons/letter.jpg",
                     imagePath: 'assets/images/recommendation.png',
                     onTap: () {

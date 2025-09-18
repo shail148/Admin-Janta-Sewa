@@ -32,7 +32,7 @@ class CustomServiceCard extends StatelessWidget {
    // final cardWidth = width ?? screenWidth * 0.41;
     
     // use a sensible default height (can be overridden)
-    final double cardHeight = height ?? (screenHeight * 0.10);
+    final double cardHeight = height ?? (screenHeight * 0.11);
 
     final double imgSize = (cardHeight < cardWidth ? cardHeight : cardWidth) * 0.8;
 
