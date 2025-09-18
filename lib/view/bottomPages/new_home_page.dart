@@ -25,7 +25,8 @@ class NewHomePage extends StatefulWidget {
 class _NewHomePageState extends State<NewHomePage> {
   //final RailTicketController c = Get.put(RailTicketController(),permanent: true);
 
-  final RailTicketController controller = Get.find<RailTicketController>(); // Get.put() now in app binding
+  final RailTicketController controller =
+      Get.find<RailTicketController>(); // Get.put() now in app binding
 
   @override
   Widget build(BuildContext context) {
@@ -49,21 +50,22 @@ class _NewHomePageState extends State<NewHomePage> {
               ),
               const SizedBox(height: 10),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomServiceCard(
                     title: "Rail Ticket\nConfirmation",
                     //imagePath: "assets/icons/railticket.png",
-                      imagePath: 'assets/images/train.png',
+                    imagePath: 'assets/images/train.png',
 
                     onTap: () {
                       Get.to(() => RailTicketConfirmationPage());
                     },
                   ),
-                  const SizedBox(width: 12),
+
                   CustomServiceCard(
                     title: "Hospital\nAdmission",
-                   // imagePath: "assets/icons/hospitalservice.png",
-                   imagePath: 'assets/images/hospital.png',
+                    // imagePath: "assets/icons/hospitalservice.png",
+                    imagePath: 'assets/images/hospital.png',
                     onTap: () {
                       Get.to(() => HospitalMainPage());
                     },
@@ -90,7 +92,7 @@ class _NewHomePageState extends State<NewHomePage> {
                       Get.to(() => BudgetAllRequestPage());
                     },
                   ),
-                  const SizedBox(width: 12),
+
                   CustomServiceCard(
                     title: "Construction\nWork",
                     //imagePath: "assets/icons/construction.jpg",
@@ -123,7 +125,7 @@ class _NewHomePageState extends State<NewHomePage> {
                       Get.to(() => RecommendationAllRequestPage());
                     },
                   ),
-                  const SizedBox(width: 12),
+
                   // stacked two small cards
                   Column(
                     children: [
@@ -169,7 +171,7 @@ class _NewHomePageState extends State<NewHomePage> {
                       Get.to(() => ParliamentVisitAllrequestPage());
                     },
                   ),
-                  const SizedBox(width: 12),
+
                   CustomServiceCard(
                     title: "Invitation",
                     //imagePath: "assets/icons/invitation.jpg",

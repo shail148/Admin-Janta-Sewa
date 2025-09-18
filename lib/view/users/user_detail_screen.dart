@@ -1,13 +1,13 @@
+import 'package:admin_jantasewa/models/user_model.dart';
 import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
-
-import 'package:admin_jantasewa/models/user_model.dart';
+import 'package:admin_jantasewa/widgets/custom_delete_dialog_box.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:admin_jantasewa/widgets/label_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-//Details Screen of the Users
 
+//Details Screen of the Users
 class UserDetailScreen extends StatelessWidget {
   const UserDetailScreen({super.key});
   @override
@@ -17,6 +17,27 @@ class UserDetailScreen extends StatelessWidget {
       appBar: CustomTopAppBar(
         title: 'Janta Sewa',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.btnBgColor),
+        rightIcon: CustomPopupMenu(
+          onSelected: (value) {
+            if (value == "Edit") {
+              print("Edit tapped");
+            } else if (value == "Inactive") {
+              print("Marked as inactive");
+            } else if (value == "Delete") {
+              // print("Deleted");
+              DeleteDialog.show(
+                onConfirm: () {
+                  // 👇 delete action yaha likho
+                  print("Record Deleted!");
+                },
+                onCancel: () {
+                  print("Cancel pressed");
+                },
+              );
+            }
+          },
+        ),
+
         onLeftTap: () {
           Get.back();
         },
@@ -126,7 +147,6 @@ class DetailsCard extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Align(
-
               child: Text(
                 label,
                 style: const TextStyle(
@@ -151,6 +171,26 @@ class DetailsCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class CustomPopupMenu extends StatelessWidget {
+  final Function(String) onSelected;
+
+  const CustomPopupMenu({super.key, required this.onSelected});
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<String>(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      onSelected: onSelected,
+      itemBuilder: (context) => const [
+        PopupMenuItem(value: "Edit", child: Text("Edit")),
+        PopupMenuItem(value: "Inactive", child: Text("In active")),
+        PopupMenuItem(value: "Delete", child: Text("Delete")),
+      ],
+      child: const Icon(Icons.more_vert, color: AppColors.primary),
     );
   }
 }

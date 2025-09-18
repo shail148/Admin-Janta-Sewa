@@ -29,13 +29,14 @@ class CustomServiceCard extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
 
     // keep default width similar to original admin card so two cards fit in a row
-   final double cardWidth = width ?? (screenWidth / 2.4);
-   // final cardWidth = width ?? screenWidth * 0.41;
-    
+    final double cardWidth = width ?? (screenWidth / 2.4);
+    // final cardWidth = width ?? screenWidth * 0.41;
+
     // use a sensible default height (can be overridden)
     final double cardHeight = height ?? (screenHeight * 0.10);
 
-    final double imgSize = (cardHeight < cardWidth ? cardHeight : cardWidth) * 0.8;
+    final double imgSize =
+        (cardHeight < cardWidth ? cardHeight : cardWidth) * 0.8;
 
     return GestureDetector(
       onTap: onTap,
@@ -74,7 +75,7 @@ class CustomServiceCard extends StatelessWidget {
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.visible,
-                softWrap: false,                   // prevents line break
+                softWrap: false, // prevents line break
               ),
             ),
 
