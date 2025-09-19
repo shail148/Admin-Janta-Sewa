@@ -1,4 +1,3 @@
-import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -100,7 +99,7 @@ class RequestCard extends StatelessWidget {
           //margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16),
           ),
           child: Stack(
             

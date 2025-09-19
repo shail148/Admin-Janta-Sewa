@@ -12,6 +12,7 @@ import 'package:admin_jantasewa/view/recommendation/recommendation_all_request_p
 import 'package:admin_jantasewa/view/suggestionLetter/suggestion_allrequest_page.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class NewHomePage extends StatefulWidget {
@@ -48,9 +49,10 @@ class _NewHomePageState extends State<NewHomePage> {
               ),
               const SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomServiceCard(
+                     width: 160.w,
                     title: "Rail Ticket\nConfirmation",
                     //imagePath: "assets/icons/railticket.png",
                     imagePath: 'assets/images/train.png',
@@ -59,9 +61,10 @@ class _NewHomePageState extends State<NewHomePage> {
                       Get.to(() => RailTicketConfirmationPage());
                     },
                   ),
-                  SizedBox(width: 10),
-
+                 // SizedBox(width: 10),
+                  SizedBox(width: 8.w),
                   CustomServiceCard(
+                     width: 160.w,
                     title: "Hospital\nAdmission",
                     // imagePath: "assets/icons/hospitalservice.png",
                     imagePath: 'assets/images/hospital.png',
@@ -84,6 +87,9 @@ class _NewHomePageState extends State<NewHomePage> {
               Row(
                 children: [
                   CustomServiceCard(
+                     width: 160.w,
+                    
+                    height: 75.h,
                     title: "Budget\nDemand",
                     //imagePath: "assets/icons/budget.png",
                     imagePath: 'assets/images/budget.png',
@@ -91,9 +97,11 @@ class _NewHomePageState extends State<NewHomePage> {
                       Get.to(() => BudgetAllRequestPage());
                     },
                   ),
-                  SizedBox(width: 12),
+                  SizedBox(width: 8.w),
 
                   CustomServiceCard(
+                    width: 160.w,
+                    height: 75.h,
                     title: "Construction\nWork",
                     //imagePath: "assets/icons/construction.jpg",
                     imagePath: 'assets/images/construction.png',
@@ -118,21 +126,24 @@ class _NewHomePageState extends State<NewHomePage> {
                 children: [
                   //one large recommendation card
                   CustomServiceCard(
+                    width: 160.w,
                     title: "Recommendation \nLetter",
-                    height: 193,
+                     height: 158.h,
                     //imagePath: "assets/icons/letter.jpg",
                     imagePath: 'assets/images/recommendation.png',
                     onTap: () {
                       Get.to(() => RecommendationAllRequestPage());
                     },
                   ),
-
-                  SizedBox(width: 12),
+                  SizedBox(width: 8.w),
+                  //SizedBox(width: 12),
 
                   // stacked two small cards
                   Column(
                     children: [
                       CustomServiceCard(
+                        width: 160.w,
+                    height: 75.h,
                         title: "Complaint\nLetter",
                         //imagePath: "assets/icons/complainletter.jpg",
                         imagePath: 'assets/images/complaint.png',
@@ -140,8 +151,10 @@ class _NewHomePageState extends State<NewHomePage> {
                           Get.to(() => ComplaintLetterAllRequestPage());
                         },
                       ),
-                      const SizedBox(height: 10),
+                       SizedBox(height: 8.h),
                       CustomServiceCard(
+                        width: 160.w,
+                    height: 75.h,
                         title: "Suggestion\nLetter",
                         //imagePath: "assets/icons/suggestionletter.jpg",
                         imagePath: 'assets/images/suggestion.png',
@@ -158,6 +171,7 @@ class _NewHomePageState extends State<NewHomePage> {
 
               // Requests
               CustomTextWidget(
+
                 text: 'Requests',
                 fontWeight: FontWeight.bold,
                 fontsize: 14,
@@ -166,6 +180,8 @@ class _NewHomePageState extends State<NewHomePage> {
               Row(
                 children: [
                   CustomServiceCard(
+                    width: 160.w,
+                    height: 75.h,
                     title: "Parliament\nVisit",
                     //imagePath: "assets/icons/parliament.png",
                     imagePath: 'assets/images/parliament.png',
@@ -175,9 +191,11 @@ class _NewHomePageState extends State<NewHomePage> {
                     },
                   ),
 
-                  SizedBox(width: 12),
-
+                //  SizedBox(width: 12),
+                    SizedBox(width: 8.w),
                   CustomServiceCard(
+                    width: 160.w,
+                    height: 75.h,
                     title: "Invitation",
                     //imagePath: "assets/icons/invitation.jpg",
                     imagePath: 'assets/images/invitation.png',

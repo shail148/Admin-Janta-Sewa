@@ -1,5 +1,6 @@
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomServiceCard extends StatelessWidget {
   final String title;
@@ -44,7 +45,7 @@ class CustomServiceCard extends StatelessWidget {
         height: cardHeight,
         width: cardWidth,
         clipBehavior: Clip.antiAlias,
-        margin: const EdgeInsets.symmetric(horizontal: 6),
+        //margin: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
           color: backgroundColor.withOpacity(0.95),
           borderRadius: BorderRadius.circular(8),

@@ -41,7 +41,7 @@ class _DashboardPageState extends State<DashboardPage> {
     pages = [
     NewHomePage(),
     SendNotificationDashboard(),
-    Requestpage(),
+    RequestPage(),
     ProfileScreen(startEditing: startEditing),
 
   ];
@@ -96,7 +96,7 @@ class _DashboardPageState extends State<DashboardPage> {
           children: [
             buildNavItem(Icons.home_outlined, "Home", 0),
             buildNavItem(Icons.dashboard_customize_outlined, "Dashboard", 1),
-            buildNavItem(Icons.history, "Request", 2),
+            buildNavItem(Icons.history, "History", 2),
             buildNavItem(Icons.person_outline, "Profile", 3),
           ],
         ),
@@ -107,7 +107,15 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget buildNavItem(IconData icon, String label, int index) {
     bool isSelected = selectedIndex == index;
     return GestureDetector(
-      onTap: () => onItemTapped(index),
+      //onTap: () => onItemTapped(index),
+      onTap: () {
+      if (index == 2) {
+        //  Push full-screen history page instead of changing index
+        Get.to(() => const RequestPage());
+      } else {
+        onItemTapped(index);
+      }
+    },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

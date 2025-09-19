@@ -1,54 +1,99 @@
+// Update the asset paths to match where you placed images in /assets/images/
+// Make sure these images are declared in pubspec.yaml under flutter->assets.
 
-const List<Map<String,dynamic>>requestedServices=
-[
+const List<Map<String, dynamic>> requestedServices = [
   {
     "title": "Rail Ticket Confirmation",
-    "message": "Request for ticket confirmation on 12th August to Delhi.",
-    "date": "2025-07-28"
-  },
-  {
-    "title": "Parliament Visit Request",
-    "message": "I want to schedule a parliament visit for my students on 5th September.",
-    "date": "2025-07-29"
-  },
-  {
-    "title": "Construction Work Approval",
-    "message": "Need approval for road construction work near Block A.",
-    "date": "2025-07-30"
+    "id": "TKT0002",
+    "status": "Approved",
+    "date": "10-05-2025",
+    "image": "assets/images/train.png",
+    "msg": "Request approved. Your ticket is confirmed for travel."
   },
   {
     "title": "Hospital Admission Help",
-    "message": "Urgent support needed for admission in AIIMS hospital.",
-    "date": "2025-07-30"
+    "id": "HID0002",
+    "status": "Approved",
+    "date": "10-05-2025",
+    "image": "assets/images/hospital.png",
+    "msg": "Hospital admission has been successfully approved."
+  },
+  {
+    "title": "Rail Ticket Confirmation",
+    "id": "TKT0003",
+    "status": "Rejected",
+    "date": "10-05-2025",
+    "image": "assets/images/train.png",
+    "msg":
+        "Request rejected since no valid reason for emergency travel was provided.Please contact concerned authority."
+  },
+  {
+    "title": "Construction Work Approval",
+    "id": "CW0002",
+    "status": "Rejected",
+    "date": "11-05-2025",
+    "image": "assets/images/construction.png",
+    "msg":
+        "Request rejected due to incomplete documentation for construction permit.Please contact concerned authority."
   },
   {
     "title": "Recommendation Letter",
-    "message": "Please issue a recommendation letter for my job application.",
-    "date": "2025-07-31"
-  },
-  {
-    "title": "Complaint Letter",
-    "message": "Want to file a complaint regarding irregular water supply.",
-    "date": "2025-08-01"
-  },
-  {
-    "title": "Suggestion Letter",
-    "message": "I have a suggestion to improve cleanliness in our area.",
-    "date": "2025-08-01"
+    "id": "RI0002",
+    "status": "Pending",
+    "date": "10-05-2025",
+    "image": "assets/images/recommendation.png",
+    "msg": "Your recommendation request is under review.Please wait for some time."
   },
   {
     "title": "Budget Demand Request",
-    "message": "Requesting fund allocation for community center renovation.",
-    "date": "2025-08-01"
+    "id": "BD0002",
+    "status": "In Process",
+    "date": "15-05-2025",
+    "image": "assets/images/budget.png",
+    "msg": "Budget demand request is being processed by the finance team.Please wait for some time."
   },
   {
-    "title": "Contact Request",
-    "message": "Please provide the contact details of the ward officer.",
-    "date": "2025-08-01"
+    "title": "Complaint Letter",
+    "id": "CL0002",
+    "status": "In Process",
+    "date": "20-05-2025",
+    "image": "assets/images/complaint.png",
+    "msg": "Your complaint letter is being examined.Please wait for some time."
+  },
+  
+  {
+    "title": "Construction Work Approval",
+    "id": "CW0009",
+    "status": "Rejected",
+    "date": "07-05-2025",
+    "image": "assets/images/construction.png",
+    "msg":
+        "Request rejected due to incomplete documentation for construction permit.Please contact concerned authority."
   },
   {
-    "title": "Invitation Letter",
-    "message": "Need an invitation letter for Independence Day celebration.",
-    "date": "2025-08-01"
-  }
+    "title": "Recommendation Letter",
+    "id": "RI0007",
+    "status": "Pending",
+    "date": "26-05-2025",
+    "image": "assets/images/recommendation.png",
+    "msg": "Your recommendation request is under review.Please wait for some time."
+  },
+  {
+    "title": "Budget Demand Request",
+    "id": "BD0006",
+    "status": "In Process",
+    "date": "16-05-2025",
+    "image": "assets/images/budget.png",
+    "msg": "Budget demand request is being processed by the finance team.Please wait for some time."
+  },
+  {
+    "title": "Complaint Letter",
+    "id": "CL0003",
+    "status": "In Process",
+    "date": "29-05-2025",
+    "image": "assets/images/complaint.png",
+    "msg": "Your complaint letter is being examined.Please wait for some time."
+  },
 ];
+
+
