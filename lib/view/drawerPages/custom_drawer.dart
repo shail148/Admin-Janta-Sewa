@@ -6,7 +6,7 @@ import 'package:admin_jantasewa/view/ourJourney/ourjourney_history_page.dart';
 import 'package:admin_jantasewa/view/suggestionLetter/suggestion_allrequest_page.dart';
 import 'package:admin_jantasewa/view/users/authorized_user_list_page.dart';
 import 'package:admin_jantasewa/view/users/users_page.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

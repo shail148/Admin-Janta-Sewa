@@ -1,5 +1,5 @@
 import 'package:admin_jantasewa/controllers/image_picker_controller.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:admin_jantasewa/widgets/date_picker.dart';

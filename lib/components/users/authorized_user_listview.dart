@@ -2,7 +2,7 @@ import 'package:admin_jantasewa/controllers/user_controller.dart';
 import 'package:admin_jantasewa/models/user_model.dart';
 import 'package:admin_jantasewa/view/users/create_autorized_user.dart';
 import 'package:admin_jantasewa/view/users/user_detail_screen.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
 import 'package:admin_jantasewa/widgets/custom_search_bar.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';

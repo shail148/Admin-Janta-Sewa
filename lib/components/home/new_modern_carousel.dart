@@ -1,4 +1,4 @@
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -90,17 +90,20 @@ class RequestCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: SizedBox(
-        width: double.infinity, // increase width
-        height: 200, //  increase height
+      //child: SizedBox(
+       // width: double.infinity, // increase width
+       // height: 200, //  increase height
+       
         child: Card(
           elevation: 0, // no shadow color fill
           color: Colors.transparent, // transparent surface
-          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          //margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
           child: Stack(
+            
             clipBehavior: Clip.none,
             children: [
               ClipPath(
@@ -109,10 +112,10 @@ class RequestCard extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: bgColor,
-                    // border: Border.all(
-                    //   color: AppColors.textGrey, // light grey border
-                    //   width: 1, // thickness
-                    // ), 
+                      /* border: Border.all(
+                       color: AppColors.textGrey, // light grey border
+                       width: 1, // thickness
+                     ), */  
 
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -200,7 +203,7 @@ class RequestCard extends StatelessWidget {
             ],
           ),
         ),
-      ),
+     // ),
     );
   }
 }
@@ -252,7 +255,7 @@ class _NewModernCarouselState extends State<NewModernCarousel> {
     return Column(
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width,
+         // width: MediaQuery.of(context).size.width,
           child: CarouselSlider(
             items: cards,
             // carouselController: _controller,

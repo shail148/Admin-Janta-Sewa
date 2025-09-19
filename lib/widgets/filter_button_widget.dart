@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 
 class FilterButtonWidget extends StatelessWidget {
   final String label;

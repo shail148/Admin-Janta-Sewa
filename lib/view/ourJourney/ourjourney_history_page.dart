@@ -4,7 +4,7 @@ import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/ourJourney/our_journey_controller.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 
 class OurjourneyHistoryPage extends StatefulWidget {

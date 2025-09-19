@@ -3,7 +3,7 @@ import 'package:admin_jantasewa/controllers/settings/setting_controller.dart';
 import 'package:admin_jantasewa/view/about_janta_sewa/privacy_policy_page.dart';
 import 'package:admin_jantasewa/view/about_janta_sewa/terms_of_use_page.dart';
 import 'package:admin_jantasewa/view/drawerPages/settings/report_issue_page.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:admin_jantasewa/widgets/setting_widget.dart';
 import 'package:flutter/material.dart';

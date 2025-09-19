@@ -1,6 +1,5 @@
 import 'package:admin_jantasewa/components/home/custom_service_card_modern.dart';
 import 'package:admin_jantasewa/components/home/new_modern_carousel.dart';
-import 'package:admin_jantasewa/components/home/request_carousel_slider.dart';
 import 'package:admin_jantasewa/controllers/railTicket/rail_ticket_controller.dart';
 import 'package:admin_jantasewa/view/budgetDemand/budget_all_request_page.dart';
 import 'package:admin_jantasewa/view/complaintLetter/complaint_letter_allrequest_page.dart';
@@ -25,8 +24,7 @@ class NewHomePage extends StatefulWidget {
 class _NewHomePageState extends State<NewHomePage> {
   //final RailTicketController c = Get.put(RailTicketController(),permanent: true);
 
-  final RailTicketController controller =
-      Get.find<RailTicketController>(); // Get.put() now in app binding
+  final RailTicketController controller = Get.find<RailTicketController>(); // Get.put() now in app binding
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +59,7 @@ class _NewHomePageState extends State<NewHomePage> {
                       Get.to(() => RailTicketConfirmationPage());
                     },
                   ),
+                  SizedBox(width: 10),
 
                   CustomServiceCard(
                     title: "Hospital\nAdmission",
@@ -92,6 +91,7 @@ class _NewHomePageState extends State<NewHomePage> {
                       Get.to(() => BudgetAllRequestPage());
                     },
                   ),
+                  SizedBox(width: 12),
 
                   CustomServiceCard(
                     title: "Construction\nWork",
@@ -116,6 +116,7 @@ class _NewHomePageState extends State<NewHomePage> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  //one large recommendation card
                   CustomServiceCard(
                     title: "Recommendation \nLetter",
                     height: 193,
@@ -125,6 +126,8 @@ class _NewHomePageState extends State<NewHomePage> {
                       Get.to(() => RecommendationAllRequestPage());
                     },
                   ),
+
+                  SizedBox(width: 12),
 
                   // stacked two small cards
                   Column(
@@ -171,6 +174,8 @@ class _NewHomePageState extends State<NewHomePage> {
                       Get.to(() => ParliamentVisitAllrequestPage());
                     },
                   ),
+
+                  SizedBox(width: 12),
 
                   CustomServiceCard(
                     title: "Invitation",

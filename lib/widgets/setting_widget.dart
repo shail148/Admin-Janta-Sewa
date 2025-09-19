@@ -1,7 +1,7 @@
 import 'package:admin_jantasewa/controllers/language/language_controller.dart';
 import 'package:admin_jantasewa/controllers/settings/setting_controller.dart';
 import 'package:admin_jantasewa/view/dashboard/dashboard.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';

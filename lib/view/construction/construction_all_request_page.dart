@@ -1,6 +1,6 @@
 import 'package:admin_jantasewa/controllers/construction/construction_controller.dart';
 import 'package:admin_jantasewa/view/construction/construction_details_page.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:admin_jantasewa/widgets/custom_bottom_sheet.dart';
 import 'package:admin_jantasewa/widgets/custom_info_card.dart';

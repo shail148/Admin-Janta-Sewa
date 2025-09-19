@@ -3,7 +3,7 @@ import 'package:admin_jantasewa/models/user_model.dart';
 import 'package:admin_jantasewa/view/users/user_detail_screen.dart';
 import 'package:admin_jantasewa/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:get/get.dart';
 
