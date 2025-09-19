@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:admin_jantasewa/components/custom_dropdown.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
 import 'package:admin_jantasewa/widgets/custom_snackbar.dart';

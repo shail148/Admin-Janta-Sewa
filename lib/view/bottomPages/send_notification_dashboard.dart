@@ -1,6 +1,6 @@
 import 'package:admin_jantasewa/controllers/notifications/send_notification_history.dart';
 import 'package:admin_jantasewa/view/notification/send_notification_page.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

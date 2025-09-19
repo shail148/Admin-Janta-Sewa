@@ -1,5 +1,5 @@
 import 'package:admin_jantasewa/components/users/users_listview.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:flutter/material.dart';

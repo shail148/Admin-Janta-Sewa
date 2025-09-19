@@ -1,4 +1,563 @@
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+
+/// --- Notched top-right clipper with deeper cut ---
+class NotchedCardClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    const cornerRadius = 22.0;
+    const notchRadius = 28.0;
+    const notchWidth = 55.0; // horizontal cut depth
+    const notchHeight = 50.0; // vertical cut depth
+
+    final path = Path();
+
+    // top-left rounded corner
+    path.moveTo(0, cornerRadius);
+    path.quadraticBezierTo(0, 0, cornerRadius, 0);
+
+    // top edge to notch start
+    path.lineTo(size.width - notchWidth - notchRadius, 0);
+    path.quadraticBezierTo(
+      size.width - notchWidth,
+      0,
+      size.width - notchWidth,
+      notchRadius,
+    );
+
+    // inside notch
+    path.lineTo(size.width - notchWidth, notchHeight - notchRadius);
+    path.quadraticBezierTo(
+      size.width - notchWidth,
+      notchHeight,
+      size.width - notchWidth + notchRadius,
+      notchHeight,
+    );
+
+    // across to right edge
+    path.lineTo(size.width - cornerRadius, notchHeight);
+    path.quadraticBezierTo(
+      size.width,
+      notchHeight,
+      size.width,
+      notchHeight + cornerRadius,
+    );
+
+    // right, bottom edges
+    path.lineTo(size.width, size.height - cornerRadius);
+    path.quadraticBezierTo(
+      size.width,
+      size.height,
+      size.width - cornerRadius,
+      size.height,
+    );
+    path.lineTo(cornerRadius, size.height);
+    path.quadraticBezierTo(0, size.height, 0, size.height - cornerRadius);
+
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+}
+
+/// --- Card used inside the carousel ---
+class RequestCard extends StatelessWidget {
+  final String title;
+  final int count;
+  final double percentage;
+  final bool isPositive;
+  final Color bgColor;
+  final Color accentColor;
+  final String imageAsset;
+  final VoidCallback? onTap;
+
+  const RequestCard({
+    super.key,
+    required this.title,
+    required this.count,
+    required this.percentage,
+    required this.isPositive,
+    required this.bgColor,
+    required this.accentColor,
+    required this.imageAsset,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      //child: SizedBox(
+       // width: double.infinity, // increase width
+       // height: 200, //  increase height
+       
+        child: Card(
+          elevation: 0, // no shadow color fill
+          color: Colors.transparent, // transparent surface
+          //margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Stack(
+            
+            clipBehavior: Clip.none,
+            children: [
+              ClipPath(
+                clipper: NotchedCardClipper(),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: bgColor,
+                      /* border: Border.all(
+                       color: AppColors.textGrey, // light grey border
+                       width: 1, // thickness
+                     ), */  
+
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    children: [
+                      // left content
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              title,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              '$count',
+                              style: const TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const Spacer(),
+                            Row(
+                              children: [
+                                Icon(
+                                  isPositive
+                                      ? Icons.arrow_upward
+                                      : Icons.arrow_downward,
+                                  size: 14,
+                                  color: isPositive
+                                      ? Colors.green
+                                      : Colors.redAccent,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  '${percentage.abs()}%',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: isPositive
+                                        ? Colors.green
+                                        : Colors.redAccent,
+                                  ),
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  'This month',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey.shade600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 90,
+                        width: 90,
+                        child: Image.asset(imageAsset, fit: BoxFit.contain),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // arrow button neatly in the notch
+              Positioned(
+                top: 2,
+                right: 5,
+                child: CircleAvatar(
+                  radius: 22,
+                  backgroundColor: accentColor, // ← use the card’s accentColor
+                  child: Icon(
+                    Icons.arrow_outward,
+                    color: Colors.white,
+                    size: 26,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+     // ),
+    );
+  }
+}
+
+/// --- Carousel using the RequestCard ---
+class NewModernCarousel extends StatefulWidget {
+  const NewModernCarousel({super.key});
+  @override
+  State<NewModernCarousel> createState() => _NewModernCarouselState();
+}
+
+class _NewModernCarouselState extends State<NewModernCarousel> {
+  //final CarouselController _controller = CarouselController();
+
+  int _current = 0;
+
+  late final List<Widget> cards = [
+    RequestCard(
+      title: 'New request',
+      count: 250,
+      percentage: 20,
+      isPositive: true,
+      bgColor: const Color(0xFFE8F0FF),
+      accentColor: const Color(0xFF4A6CF7), // blue arrow
+      imageAsset: 'assets/images/mail_request.png',
+    ),
+    RequestCard(
+      title: 'Approved request',
+      count: 250,
+      percentage: 20,
+      isPositive: true,
+      bgColor: const Color(0xFFE8F8F1),
+      accentColor: const Color(0xFF20A86B), // green arrow
+      imageAsset: 'assets/images/verified.png',
+    ),
+    RequestCard(
+      title: 'Pending request',
+      count: 250,
+      percentage: 20,
+      isPositive: false,
+      bgColor: const Color(0xFFFFF3E5),
+      accentColor: const Color(0xFFD19B06), // yellow/orange arrow
+      imageAsset: 'assets/images/hourglass_bottom.png',
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+         // width: MediaQuery.of(context).size.width,
+          child: CarouselSlider(
+            items: cards,
+            // carouselController: _controller,
+            options: CarouselOptions(
+              //height: 220,    // increase  up from 170 to 240 now
+              aspectRatio: 2 / 1,
+              viewportFraction: 1.0,
+              enlargeCenterPage: true,
+              onPageChanged: (i, _) => setState(() => _current = i),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: cards.asMap().entries.map((e) {
+            return GestureDetector(
+              //onTap: () => _controller.animateToPage(e.key),
+              child: Container(
+                width: _current == e.key ? 12 : 8,
+                height: 8,
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                decoration: BoxDecoration(
+                  color: _current == e.key
+                      ? Colors.blueAccent
+                      : Colors.grey.shade400,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+}
+
+
+/* import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+
+/// Custom clipper to create a curve cut on the top-right corner
+/// Makes a circular notch in the top-right corner
+class TopRightNotchClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    const double notchRadius = 28; // notch size
+    const double borderRadius = 16;
+
+    final path = Path();
+
+    // top-left rounded corner
+    path.moveTo(0, borderRadius);
+    path.quadraticBezierTo(0, 0, borderRadius, 0);
+
+    // straight line until the notch starts
+    path.lineTo(size.width - notchRadius, 0);
+
+    // skip the notch (cut-out circle)
+    path.arcTo(
+      Rect.fromCircle(
+        center: Offset(size.width - notchRadius, notchRadius),
+        radius: notchRadius,
+      ),
+      -1.57, // start from top
+      1.57,  // sweep down (cut-out)
+      false,
+    );
+
+    // continue along right edge
+    path.lineTo(size.width, size.height - borderRadius);
+    path.quadraticBezierTo(
+        size.width, size.height, size.width - borderRadius, size.height);
+
+    // bottom edge and back
+    path.lineTo(borderRadius, size.height);
+    path.quadraticBezierTo(0, size.height, 0, size.height - borderRadius);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+}
+
+
+class RequestCard extends StatelessWidget {
+  final String title;
+  final int count;
+  final double percentage;
+  final bool isPositive;
+  final Color bgColor;
+  final Color accentColor;
+  final String imageAsset; // big image on the right
+  final VoidCallback? onTap;
+
+  const RequestCard({
+    super.key,
+    required this.title,
+    required this.count,
+    required this.percentage,
+    required this.isPositive,
+    required this.bgColor,
+    required this.accentColor,
+    required this.imageAsset,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 3,
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Stack(
+          children: [
+            ClipPath(
+              clipper: TopRightNotchClipper(),
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: bgColor,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Row(
+                  children: [
+                    // left content
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            '$count',
+                            style: const TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const Spacer(),
+                          Row(
+                            children: [
+                              Icon(
+                                isPositive
+                                    ? Icons.arrow_upward
+                                    : Icons.arrow_downward,
+                                size: 14,
+                                color: isPositive
+                                    ? Colors.green
+                                    : Colors.redAccent,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                '${percentage.abs()}%',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: isPositive
+                                      ? Colors.green
+                                      : Colors.redAccent,
+                                ),
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                'This month',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey.shade600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    // big right image
+                    SizedBox(
+                      height: 90,
+                      width: 90,
+                      child: Image.asset(
+                        imageAsset,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // arrow button sitting neatly in the cut area
+            Positioned(
+              top: 6,
+              right: 6,
+              child: CircleAvatar(
+                radius: 16,
+                backgroundColor: accentColor,
+                child: const Icon(
+                  Icons.arrow_outward,
+                  color: Colors.white,
+                  size: 18,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class NewModernCarousel extends StatefulWidget {
+  const NewModernCarousel({super.key});
+  @override
+  State<NewModernCarousel> createState() => _NewModernCarouselState();
+}
+
+class _NewModernCarouselState extends State<NewModernCarousel> {
+  final CarouselController _controller = CarouselController();
+  
+  int _current = 0;
+
+  late final List<Widget> cards = [
+    RequestCard(
+      title: 'New request',
+      count: 250,
+      percentage: 20,
+      isPositive: true,
+      bgColor: const Color(0xFFE8F0FF),
+      accentColor: const Color(0xFF4A6CF7),
+      imageAsset: 'assets/images/mail_request.png', 
+    ),
+    RequestCard(
+      title: 'Approved request',
+      count: 250,
+      percentage: 20,
+      isPositive: true,
+      bgColor: const Color(0xFFE8F8F1),
+      accentColor: const Color(0xFF20A86B),
+      imageAsset: 'assets/images/verified.png',
+    ),
+    RequestCard(
+      title: 'Pending request',
+      count: 250,
+      percentage: 20,
+      isPositive: false,
+      bgColor: const Color(0xFFFFF3E5),
+      accentColor: const Color(0xFFD19B06),
+      imageAsset: 'assets/images/hourglass_bottom.png',
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CarouselSlider(
+          items: cards,
+          //carouselController: _controller,
+          options: CarouselOptions(
+            height: 170,
+            viewportFraction: 0.9,
+            enlargeCenterPage: true,
+            onPageChanged: (i, _) => setState(() => _current = i),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: cards.asMap().entries.map((e) {
+            return GestureDetector(
+              //onTap: () => _controller.animateToPage(e.key),
+              child: Container(
+                width: _current == e.key ? 12 : 8,
+                height: 8,
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                decoration: BoxDecoration(
+                  color: _current == e.key
+                      ? Colors.blueAccent
+                      : Colors.grey.shade400,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+}
+
+ */
+
+//old code shailendra
+/* import 'package:admin_jantasewa/widgets/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -318,3 +877,4 @@ class NotchedCardClipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
+ */

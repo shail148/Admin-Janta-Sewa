@@ -1,6 +1,6 @@
 import 'package:admin_jantasewa/data/complain_data.dart';
 import 'package:admin_jantasewa/view/complains/complain_details_screen.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

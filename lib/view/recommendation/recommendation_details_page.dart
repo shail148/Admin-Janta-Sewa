@@ -1,6 +1,6 @@
 import 'package:admin_jantasewa/models/recommendation/recommendation_model.dart';
 import 'package:admin_jantasewa/view/recommendation/recommendation_forwarding_page.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:admin_jantasewa/widgets/custom_forword_button.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';

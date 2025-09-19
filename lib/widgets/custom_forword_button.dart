@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CustomForwardButton extends StatelessWidget {

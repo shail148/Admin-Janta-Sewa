@@ -1,6 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class InfoRowData {

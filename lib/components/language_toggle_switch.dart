@@ -1,7 +1,7 @@
 // ignore: file_names
 // lib/components/language_toggle_switch.dart
 import 'package:admin_jantasewa/controllers/language/language_controller.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

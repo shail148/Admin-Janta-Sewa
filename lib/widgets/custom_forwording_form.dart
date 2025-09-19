@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:admin_jantasewa/widgets/custom_drop_down.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
 import 'package:admin_jantasewa/widgets/label_text.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 
 class CustomForwardingForm extends StatefulWidget {
   final List<String> forwardPersonList;

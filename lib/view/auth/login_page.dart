@@ -1,7 +1,7 @@
 import 'package:admin_jantasewa/utils/form_validator.dart';
 import 'package:admin_jantasewa/view/auth/registeration/admin_register.dart';
 import 'package:admin_jantasewa/view/dashboard/dashboard.dart';
-import 'package:admin_jantasewa/widgets/colors.dart';
+import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
 import 'package:admin_jantasewa/widgets/custom_snackbar.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
