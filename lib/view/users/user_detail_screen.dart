@@ -20,18 +20,18 @@ class UserDetailScreen extends StatelessWidget {
         rightIcon: CustomPopupMenu(
           onSelected: (value) {
             if (value == "Edit") {
-              print("Edit tapped");
+              // print("Edit tapped");
             } else if (value == "Inactive") {
-              print("Marked as inactive");
+              // print("Marked as inactive");
             } else if (value == "Delete") {
               // print("Deleted");
               DeleteDialog.show(
                 onConfirm: () {
                   // 👇 delete action yaha likho
-                  print("Record Deleted!");
+                  // print("Record Deleted!");
                 },
                 onCancel: () {
-                  print("Cancel pressed");
+                  // print("Cancel pressed");
                 },
               );
             }

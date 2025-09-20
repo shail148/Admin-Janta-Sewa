@@ -56,12 +56,12 @@ class _CreateAuthorizedUserPageState extends State<CreateAuthorizedUserPage> {
   }
 
   void _submitForm() {
-    print("Name: ${nameController.text}");
-    print("Mobile: ${mobileController.text}");
-    print("Email: ${emailController.text}");
-    print("Gender: ${genderController.text}");
-    print("Address: ${addressController.text}");
-    print("Org Type: $orgType");
+    // print("Name: ${nameController.text}");
+    // print("Mobile: ${mobileController.text}");
+    // print("Email: ${emailController.text}");
+    // print("Gender: ${genderController.text}");
+    // print("Address: ${addressController.text}");
+    // print("Org Type: $orgType");
     // yaha API call / backend submit karna hai
   }
 
