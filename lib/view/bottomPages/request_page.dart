@@ -18,8 +18,16 @@ class RequestPage extends StatelessWidget {
       appBar: CustomTopAppBar(
         title: 'Requests History',
         leftIcon: const Icon(Icons.arrow_back_ios),
-        onLeftTap: Get.back,
-      ),
+        //onLeftTap: Get.back,
+        //for proper handling of back button in web ,chrome 
+        onLeftTap: () {
+       if (Get.previousRoute.isNotEmpty) {
+        Get.back();
+      } else {
+        Get.toNamed('/dashboard'); // fallback route
+      }
+       }
+        ),
 
       // Show the list from GetX controller
       body: RequestServicesDataListScreen(),

@@ -32,14 +32,14 @@ class _NewHomePageState extends State<NewHomePage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding:  EdgeInsets.symmetric(horizontal: 16.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // keep RequestCarousel
               //RequestCarousel(),
               NewModernCarousel(),
-              const SizedBox(height: 16),
+               SizedBox(height: 16.h),
 
               // Services
               CustomTextWidget(
@@ -47,7 +47,7 @@ class _NewHomePageState extends State<NewHomePage> {
                 fontWeight: FontWeight.bold,
                 fontsize: 14,
               ),
-              const SizedBox(height: 10),
+               SizedBox(height: 10.h),
               Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -87,8 +87,7 @@ class _NewHomePageState extends State<NewHomePage> {
               Row(
                 children: [
                   CustomServiceCard(
-                     width: 160.w,
-                    
+                     width: 160.w,  
                     height: 75.h,
                     title: "Budget\nDemand",
                     //imagePath: "assets/icons/budget.png",
@@ -192,7 +191,7 @@ class _NewHomePageState extends State<NewHomePage> {
                   ),
 
                 //  SizedBox(width: 12),
-                    SizedBox(width: 8.w),
+                  SizedBox(width: 8.w),
                   CustomServiceCard(
                     width: 160.w,
                     height: 75.h,
@@ -218,21 +217,23 @@ class _NewHomePageState extends State<NewHomePage> {
 
 
 
-/* import "package:admin_jantasewa/components/home/custom_service_card_modern.dart";
-import "package:admin_jantasewa/components/home/request_carousel_slider.dart";
-import "package:admin_jantasewa/controllers/railTicket/rail_ticket_controller.dart";
-import "package:admin_jantasewa/view/budgetDemand/budget_all_request_page.dart";
-import "package:admin_jantasewa/view/complaintLetter/complaint_letter_allrequest_page.dart";
-import "package:admin_jantasewa/view/construction/construction_all_request_page.dart";
-import "package:admin_jantasewa/view/hospital/hospital_main_page.dart";
-import "package:admin_jantasewa/view/invitation/invitation_all_request_page.dart";
-import "package:admin_jantasewa/view/parliamentVisit/parliament_visit_allrequest_page.dart";
-import "package:admin_jantasewa/view/railTicketBook/rail_ticket_confirmation.dart";
-import "package:admin_jantasewa/view/recommendation/recommendation_all_request_page.dart";
-import "package:admin_jantasewa/view/suggestionLetter/suggestion_allrequest_page.dart";
-import "package:admin_jantasewa/widgets/custom_text.dart";
-import "package:flutter/material.dart";
-import "package:get/get.dart";
+ /*
+import 'package:admin_jantasewa/components/home/custom_service_card_modern.dart';
+import 'package:admin_jantasewa/components/home/new_modern_carousel.dart';
+import 'package:admin_jantasewa/controllers/railTicket/rail_ticket_controller.dart';
+import 'package:admin_jantasewa/view/budgetDemand/budget_all_request_page.dart';
+import 'package:admin_jantasewa/view/complaintLetter/complaint_letter_allrequest_page.dart';
+import 'package:admin_jantasewa/view/construction/construction_all_request_page.dart';
+import 'package:admin_jantasewa/view/hospital/hospital_main_page.dart';
+import 'package:admin_jantasewa/view/invitation/invitation_all_request_page.dart';
+import 'package:admin_jantasewa/view/parliamentVisit/parliament_visit_allrequest_page.dart';
+import 'package:admin_jantasewa/view/railTicketBook/rail_ticket_confirmation.dart';
+import 'package:admin_jantasewa/view/recommendation/recommendation_all_request_page.dart';
+import 'package:admin_jantasewa/view/suggestionLetter/suggestion_allrequest_page.dart';
+import 'package:admin_jantasewa/widgets/custom_text.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class NewHomePage extends StatefulWidget {
   const NewHomePage({super.key});
@@ -242,191 +243,144 @@ class NewHomePage extends StatefulWidget {
 }
 
 class _NewHomePageState extends State<NewHomePage> {
-  // static const approved = Color(0xFF16A34A);
-  // static const pending = Color(0xFFF59E0B);
-  // static const rejected = Color(0xFFDC2626);
-  final RailTicketController c = Get.put(
-    RailTicketController(),
-    permanent: true,
-  );
+  final RailTicketController controller = Get.find<RailTicketController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16.w), // use .w for width
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //NewModernCarousel(),
-              RequestCarousel(),
-              const SizedBox(height: 16),
+              // RequestCarousel(), // keep if needed
+              NewModernCarousel(),
+              SizedBox(height: 16.h),
 
-              //ApplicationOverviewChart(),
-              //Chart Intergrate from the unitversal chart
-              // with controller data of the rail ticket
-              // Series colors (match controller statusColor mapping)
-              // Obx(() {
-              //   // READ Rx INSIDE and convert to plain locals
-              //   final List<String> labels = List<String>.from(c.graphLabels);
-              //   final List<FlSpot> appr = List<FlSpot>.from(c.approvedSpots);
-              //   final List<FlSpot> pend = List<FlSpot>.from(c.pendingSpots);
-              //   final List<FlSpot> rej = List<FlSpot>.from(c.rejectedSpots);
-              //   final rangeVal = c.chartRange.value;
-
-              //   return UniversalMultiLineChart(
-              //     title: 'Application Overview',
-              //     xLabels: labels,
-              //     series: [
-              //       ChartSeries(name: 'Approved', spots: appr, color: approved),
-              //       ChartSeries(name: 'Pending', spots: pend, color: pending),
-              //       ChartSeries(name: 'Rejected', spots: rej, color: rejected),
-              //     ],
-              //     showLegend: true,
-              //     showRangeToggle: true,
-              //     range: rangeVal,
-              //     onRangeChanged: (r) => c.setChartRange(r),
-              //     height: 180,
-              //   );
-              // }),
-              const SizedBox(height: 16),
-
+              /// Services
               CustomTextWidget(
                 text: 'Services',
                 fontWeight: FontWeight.bold,
-                fontsize: 14,
+                fontsize: 14.sp, // scale font
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10.h),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CustomServiceCard(
-                    title: "Train Ticket\nConfirmation",
-
-                    imagePath: "assets/icons/railticket.png",
-                    onTap: () {
-                      Get.to(() => RailTicketConfirmationPage());
-                    },
+                    width: 160.w,
+                    title: "Rail Ticket\nConfirmation",
+                    imagePath: 'assets/images/train.png',
+                    onTap: () => Get.to(() =>  RailTicketConfirmationPage()),
                   ),
+                  SizedBox(width: 8.w),
                   CustomServiceCard(
+                    width: 160.w,
                     title: "Hospital\nAdmission",
-
-                    imagePath: "assets/icons/hospitalservice.png",
-                    onTap: () {
-                      Get.to(() => HospitalMainPage());
-                    },
+                    imagePath: 'assets/images/hospital.png',
+                    onTap: () => Get.to(() => const HospitalMainPage()),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
+
+              /// Department
               CustomTextWidget(
                 text: 'Department',
                 fontWeight: FontWeight.bold,
-                fontsize: 14,
+                fontsize: 14.sp,
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10.h),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CustomServiceCard(
+                    width: 160.w,
+                    height: 75.h,
                     title: "Budget\nDemand",
-
-                    imagePath: "assets/icons/budget.png",
-                    onTap: () {
-                      Get.to(() => BudgetAllRequestPage());
-                    },
+                    imagePath: 'assets/images/budget.png',
+                    onTap: () => Get.to(() => const BudgetAllRequestPage()),
                   ),
+                  SizedBox(width: 8.w),
                   CustomServiceCard(
+                    width: 160.w,
+                    height: 75.h,
                     title: "Construction\nWork",
-
-                    imagePath: "assets/icons/construction.jpg",
-                    onTap: () {
-                      Get.to(() => ConstructionAllRequestPage());
-                    },
+                    imagePath: 'assets/images/construction.png',
+                    onTap: () => Get.to(() => const ConstructionAllRequestPage()),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
+
+              /// Letters
               CustomTextWidget(
                 text: 'Letters',
                 fontWeight: FontWeight.bold,
-                fontsize: 14,
+                fontsize: 14.sp,
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10.h),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  CustomServiceCard(
+                    width: 160.w,
+                    height: 158.h,
+                    title: "Recommendation \nLetter",
+                    imagePath: 'assets/images/recommendation.png',
+                    onTap: () => Get.to(() => const RecommendationAllRequestPage()),
+                  ),
+                  SizedBox(width: 8.w),
                   Column(
                     children: [
                       CustomServiceCard(
-                        title: "Recommendation\nLetter",
-                        height: 210,
-                        imagePath: "assets/icons/letter.jpg",
-                        onTap: () {
-                          Get.to(() => RecommendationAllRequestPage());
-                        },
+                        width: 160.w,
+                        height: 75.h,
+                        title: "Complaint\nLetter",
+                        imagePath: 'assets/images/complaint.png',
+                        onTap: () => Get.to(() => const ComplaintLetterAllRequestPage()),
                       ),
-                    ],
-                  ),
-                  Column(
-                    spacing: 10,
-                    children: [
-                      Row(
-                        children: [
-                          CustomServiceCard(
-                            title: "Complaint\nLetter",
-
-                            imagePath: "assets/icons/complainletter.jpg",
-                            onTap: () {
-                              Get.to(() => ComplaintLetterAllRequestPage());
-                            },
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          CustomServiceCard(
-                            title: "Suggestion\nLetter",
-
-                            imagePath: "assets/icons/suggestionletter.jpg",
-                            onTap: () {
-                              Get.to(() => SuggestionLetterAllRequestPage());
-                            },
-                          ),
-                        ],
+                      SizedBox(height: 8.h),
+                      CustomServiceCard(
+                        width: 160.w,
+                        height: 75.h,
+                        title: "Suggestion\nLetter",
+                        imagePath: 'assets/images/suggestion.png',
+                        onTap: () => Get.to(() => const SuggestionLetterAllRequestPage()),
                       ),
                     ],
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
+
+              /// Requests
               CustomTextWidget(
                 text: 'Requests',
                 fontWeight: FontWeight.bold,
-                fontsize: 14,
+                fontsize: 14.sp,
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10.h),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CustomServiceCard(
+                    width: 160.w,
+                    height: 75.h,
                     title: "Parliament\nVisit",
-
-                    imagePath: "assets/icons/parliament.png",
-                    onTap: () {
-                      Get.to(() => ParliamentVisitAllrequestPage());
-                    },
+                    imagePath: 'assets/images/parliament.png',
+                    imageBoxFactor: 0.65,
+                    onTap: () => Get.to(() => const ParliamentVisitAllrequestPage()),
                   ),
+                  SizedBox(width: 8.w),
                   CustomServiceCard(
+                    width: 160.w,
+                    height: 75.h,
                     title: "Invitation",
-
-                    imagePath: "assets/icons/invitation.jpg",
-                    onTap: () {
-                      Get.to(() => InvitationAllRequestPage());
-                    },
+                    imagePath: 'assets/images/invitation.png',
+                    onTap: () => Get.to(() => const InvitationAllRequestPage()),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
             ],
           ),
         ),
@@ -434,7 +388,6 @@ class _NewHomePageState extends State<NewHomePage> {
     );
   }
 }
-
 
 
  */

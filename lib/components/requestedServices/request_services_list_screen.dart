@@ -4,11 +4,12 @@ import 'package:get/get.dart';
 import 'package:admin_jantasewa/controllers/requestService/request_service_controller.dart';
 import 'package:admin_jantasewa/widgets/custom_search_bar.dart';
 
-class RequestServicesDataListScreen extends StatelessWidget {
+/* class RequestServicesDataListScreen extends StatelessWidget {
   RequestServicesDataListScreen({super.key});
 
-  final RequestServicesController controller =
-      Get.find<RequestServicesController>();
+  final RequestServicesController controller =Get.find<RequestServicesController>();
+
+       
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,45 @@ class RequestServicesDataListScreen extends StatelessWidget {
         ],
       ),
     );
+  } */
+
+ class RequestServicesDataListScreen extends StatelessWidget {
+  RequestServicesDataListScreen({super.key});
+
+  final RequestServicesController controller =
+      Get.find<RequestServicesController>();
+
+  // keep a single TextEditingController
+  final TextEditingController searchCtrl = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      searchCtrl.text = controller.searchQuery.value;
+      searchCtrl.selection = TextSelection.collapsed(
+          offset: searchCtrl.text.length); // keep cursor at end if needed
+
+      return ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        children: [
+          CustomSearchBar(
+            controller: searchCtrl,
+            hint: 'Search...',
+            onChanged: controller.updateSearch,
+            onClear: () {
+              searchCtrl.clear();
+              controller.updateSearch('');
+            },
+            onSearchPressed: () => Get.snackbar('Search', 'Searching..'),
+          ),
+          const SizedBox(height: 12),
+          for (int i = 0; i < controller.filtered.length; i++)
+            _buildServiceCard(controller.filtered[i], i),
+        ],
+      );
+    });
   }
+
 
   Widget _buildServiceCard(Map<String, dynamic> item, int index) {
     final bool isExpanded = controller.expandedIndexes.contains(index);
