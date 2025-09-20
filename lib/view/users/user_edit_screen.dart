@@ -36,8 +36,9 @@ class _UserEditScreenState extends State<UserEditScreen> {
   late TextEditingController wardNumber;
   late TextEditingController pincode;
 
-  final ImagePickerController imagePickerController =
-      Get.put(ImagePickerController());
+  final ImagePickerController imagePickerController = Get.put(
+    ImagePickerController(),
+  );
 
   @override
   void initState() {
@@ -48,8 +49,8 @@ class _UserEditScreenState extends State<UserEditScreen> {
     whatsappNumber = TextEditingController(text: widget.user.phone);
     email = TextEditingController(text: widget.user.email);
     dob = TextEditingController(text: widget.user.dob);
-    bloodGroup = TextEditingController(text: widget.user.gender); 
-    aadharNumber = TextEditingController(text: widget.user.nationality); 
+    bloodGroup = TextEditingController(text: widget.user.gender);
+    aadharNumber = TextEditingController(text: widget.user.nationality);
     address = TextEditingController(text: widget.user.address);
     stateCtrl = TextEditingController(text: widget.user.state);
     district = TextEditingController(text: widget.user.district);
@@ -87,7 +88,7 @@ class _UserEditScreenState extends State<UserEditScreen> {
         title: 'Edit User',
         leftIcon: Icon(Icons.arrow_back_ios),
         onLeftTap: Get.back,
-        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -108,13 +109,17 @@ class _UserEditScreenState extends State<UserEditScreen> {
                         backgroundImage: selectedImage != null
                             ? FileImage(selectedImage)
                             : (widget.user.profileImageUrl.isNotEmpty
-                                ? NetworkImage(widget.user.profileImageUrl)
-                                    as ImageProvider
-                                : null),
-                        child: selectedImage == null &&
+                                  ? NetworkImage(widget.user.profileImageUrl)
+                                        as ImageProvider
+                                  : null),
+                        child:
+                            selectedImage == null &&
                                 widget.user.profileImageUrl.isEmpty
-                            ? Icon(Icons.person,
-                                size: 50, color: AppColors.btnBgColor)
+                            ? Icon(
+                                Icons.person,
+                                size: 50,
+                                color: AppColors.btnBgColor,
+                              )
                             : null,
                       );
                     }),
@@ -129,8 +134,11 @@ class _UserEditScreenState extends State<UserEditScreen> {
                             shape: BoxShape.circle,
                             color: AppColors.btnBgColor,
                           ),
-                          child: const Icon(Icons.camera_alt,
-                              color: AppColors.white, size: 20),
+                          child: const Icon(
+                            Icons.camera_alt,
+                            color: AppColors.white,
+                            size: 20,
+                          ),
                         ),
                       ),
                     ),
@@ -140,11 +148,23 @@ class _UserEditScreenState extends State<UserEditScreen> {
               const SizedBox(height: 20),
               _buildField("Full Name", fullName, "Enter Full Name"),
               _buildField("Mobile Number", mobileNumber, "Enter Mobile Number"),
-              _buildField("WhatsApp Number", whatsappNumber, "Enter WhatsApp Number"),
+              _buildField(
+                "WhatsApp Number",
+                whatsappNumber,
+                "Enter WhatsApp Number",
+              ),
               _buildField("Email", email, "Enter Email Address"),
               _buildField("Date of Birth", dob, "Enter Date of Birth"),
-              _buildField("Gender/Blood Group", bloodGroup, "Enter Gender or Blood Group"),
-              _buildField("Aadhar/Nationality", aadharNumber, "Enter Aadhar or Nationality"),
+              _buildField(
+                "Gender/Blood Group",
+                bloodGroup,
+                "Enter Gender or Blood Group",
+              ),
+              _buildField(
+                "Aadhar/Nationality",
+                aadharNumber,
+                "Enter Aadhar or Nationality",
+              ),
               _buildField("Address", address, "Enter Address"),
               _buildField("State", stateCtrl, "Enter State"),
               _buildField("District", district, "Enter District"),
@@ -156,13 +176,13 @@ class _UserEditScreenState extends State<UserEditScreen> {
 
               const SizedBox(height: 20),
               CustomButton(
-                      text: 'Save'.tr,
-                      onPressed: _saveProfile,
-                      textSize: 14,
-                      backgroundColor: AppColors.btnBgColor,
-                      height: 52,
-                      width: double.infinity,
-                  ),
+                text: 'Save'.tr,
+                onPressed: _saveProfile,
+                textSize: 14,
+                backgroundColor: AppColors.btnBgColor,
+                height: 52,
+                width: double.infinity,
+              ),
             ],
           ),
         ),
@@ -170,12 +190,20 @@ class _UserEditScreenState extends State<UserEditScreen> {
     );
   }
 
-  Widget _buildField(String label, TextEditingController controller,  String hintText) {
+  Widget _buildField(
+    String label,
+    TextEditingController controller,
+    String hintText,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomLabelText(text: label),
-        CustomTextFormField(controller: controller, enabled: true, hintText: hintText),
+        CustomTextFormField(
+          controller: controller,
+          enabled: true,
+          hintText: hintText,
+        ),
         const SizedBox(height: 10),
       ],
     );
@@ -185,7 +213,8 @@ class _UserEditScreenState extends State<UserEditScreen> {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
       builder: (context) => Wrap(
         children: [
           ListTile(
@@ -246,7 +275,11 @@ class _UserEditScreenState extends State<UserEditScreen> {
 
     // Save updatedUser to backend or local storage
 
-    Get.snackbar("Success", "Profile updated",
-        backgroundColor: Colors.green, colorText: Colors.white);
+    Get.snackbar(
+      "Success",
+      "Profile updated",
+      backgroundColor: Colors.green,
+      colorText: Colors.white,
+    );
   }
 }

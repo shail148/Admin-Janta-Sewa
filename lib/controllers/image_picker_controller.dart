@@ -18,20 +18,27 @@ class ImagePickerController extends GetxController {
         if (croppedFile != null) {
           selectedImage.value = croppedFile;
         } else {
-          CustomSnackbar.showError(title: 'Cancelled', message: 'Image cropping cancelled.');
+          CustomSnackbar.showError(
+            title: 'Cancelled',
+            message: 'Image cropping cancelled.',
+          );
         }
       }
     } catch (e) {
-      CustomSnackbar.showError(title: 'Error', message: "Failed to pick image: $e");
+      CustomSnackbar.showError(
+        title: 'Error',
+        message: "Failed to pick image: $e",
+      );
       if (kDebugMode) {
         print('Image pick error: $e');
       }
     }
   }
+
   Future<File?> _cropImage(File imageFile) async {
     final cropped = await ImageCropper().cropImage(
       sourcePath: imageFile.path,
-      
+
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: 'Crop Image',
@@ -42,12 +49,10 @@ class ImagePickerController extends GetxController {
           aspectRatioPresets: [
             CropAspectRatioPreset.original,
             CropAspectRatioPreset.square,
-            CropAspectRatioPreset.ratio4x3
-          ]
+            CropAspectRatioPreset.ratio4x3,
+          ],
         ),
-        IOSUiSettings(
-          title: 'Crop Image',
-        )
+        IOSUiSettings(title: 'Crop Image'),
       ],
     );
 
