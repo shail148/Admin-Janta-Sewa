@@ -1,9 +1,8 @@
-import 'package:admin_jantasewa/routes/app_routes.dart';
+import 'package:admin_jantasewa/view/bottomPages/forwarded_history_page.dart';
 import 'package:admin_jantasewa/view/bottomPages/new_home_page.dart';
 import 'package:admin_jantasewa/view/bottomPages/send_notification_dashboard.dart';
 import 'package:admin_jantasewa/view/drawerPages/custom_drawer.dart';
 import 'package:admin_jantasewa/view/bottomPages/profile_page.dart';
-import 'package:admin_jantasewa/view/bottomPages/request_page.dart';
 import 'package:admin_jantasewa/view/notification/notification_appbar.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
@@ -18,7 +17,7 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  int selectedIndex = 0;
+  int selectedIndex = 1;
   bool startEditing =
       false; //for open in editing mode on profile screen in nav bar
   late List<Widget> pages;
@@ -40,9 +39,9 @@ class _DashboardPageState extends State<DashboardPage> {
     }
 
     pages = [
-      NewHomePage(),
       SendNotificationDashboard(),
-      RequestPage(),
+      NewHomePage(),
+      ForwardedHistoryPage(),
       ProfileScreen(startEditing: startEditing),
     ];
   }
@@ -93,7 +92,7 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            buildNavItem(Icons.home_outlined, "Home", 0),
+            // buildNavItem(Icons.home_outlined, "Home", 0),
             buildNavItem(Icons.dashboard_customize_outlined, "Dashboard", 1),
             buildNavItem(Icons.history, "History", 2),
             buildNavItem(Icons.person_outline, "Profile", 3),
@@ -106,16 +105,16 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget buildNavItem(IconData icon, String label, int index) {
     bool isSelected = selectedIndex == index;
     return GestureDetector(
-      //onTap: () => onItemTapped(index),
-      onTap: () {
-        if (index == 2) {
-          if (Get.currentRoute != AppRoutes.requestPage) {
-            Get.toNamed(AppRoutes.requestPage);
-          }
-        } else {
-          onItemTapped(index);
-        }
-      },
+      onTap: () => onItemTapped(index),
+      // onTap: () {
+      //   if (index == 2) {
+      //     if (Get.currentRoute != AppRoutes.requestPage) {
+      //       Get.toNamed(AppRoutes.requestPage);
+      //     }
+      //   } else {
+      //     onItemTapped(index);
+      //   }
+      // },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

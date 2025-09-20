@@ -14,7 +14,7 @@ class SendNotificationPage extends StatefulWidget {
   const SendNotificationPage({super.key});
 
   @override
-   _SendNotificationPageState createState() => _SendNotificationPageState();
+  _SendNotificationPageState createState() => _SendNotificationPageState();
 }
 
 class _SendNotificationPageState extends State<SendNotificationPage> {
@@ -142,7 +142,7 @@ class _SendNotificationPageState extends State<SendNotificationPage> {
                             _selectedScheduleTime = val;
                             _scheduledDateTime = null; // reset
                           });
-                        }, 
+                        },
                       ),
                     ],
                   ),
@@ -186,7 +186,9 @@ class _SendNotificationPageState extends State<SendNotificationPage> {
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 14, horizontal: 12),
+                        vertical: 14,
+                        horizontal: 12,
+                      ),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey.shade300),
                         borderRadius: BorderRadius.circular(8),
@@ -250,7 +252,7 @@ class _SendNotificationPageState extends State<SendNotificationPage> {
                         message: 'Notification sent successfully',
                       );
                     }
-                  //  Get.back();
+                    //  Get.back();
                   },
                 ),
               ],

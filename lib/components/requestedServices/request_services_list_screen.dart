@@ -37,7 +37,7 @@ import 'package:admin_jantasewa/widgets/custom_search_bar.dart';
     );
   } */
 
- class RequestServicesDataListScreen extends StatelessWidget {
+class RequestServicesDataListScreen extends StatelessWidget {
   RequestServicesDataListScreen({super.key});
 
   final RequestServicesController controller =
@@ -51,7 +51,8 @@ import 'package:admin_jantasewa/widgets/custom_search_bar.dart';
     return Obx(() {
       searchCtrl.text = controller.searchQuery.value;
       searchCtrl.selection = TextSelection.collapsed(
-          offset: searchCtrl.text.length); // keep cursor at end if needed
+        offset: searchCtrl.text.length,
+      ); // keep cursor at end if needed
 
       return ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -73,7 +74,6 @@ import 'package:admin_jantasewa/widgets/custom_search_bar.dart';
       );
     });
   }
-
 
   Widget _buildServiceCard(Map<String, dynamic> item, int index) {
     final bool isExpanded = controller.expandedIndexes.contains(index);
@@ -146,7 +146,9 @@ import 'package:admin_jantasewa/widgets/custom_search_bar.dart';
                 width: double.infinity,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: _messageBgColor(item['status']), // light background behind msg text
+                  color: _messageBgColor(
+                    item['status'],
+                  ), // light background behind msg text
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
@@ -217,20 +219,19 @@ import 'package:admin_jantasewa/widgets/custom_search_bar.dart';
   }
 
   Color _messageBgColor(String status) {
-  switch (status) {
-    case 'Approved':
-      return Colors.green.shade50;
-    case 'Rejected':
-      return Colors.red.shade50;
-    case 'Pending':
-      return Colors.orange.shade50;
-    case 'In Process':
-      return Colors.blue.shade50;
-    default:
-      return Colors.grey.shade100;
+    switch (status) {
+      case 'Approved':
+        return Colors.green.shade50;
+      case 'Rejected':
+        return Colors.red.shade50;
+      case 'Pending':
+        return Colors.orange.shade50;
+      case 'In Process':
+        return Colors.blue.shade50;
+      default:
+        return Colors.grey.shade100;
+    }
   }
-}
-
 }
 
 

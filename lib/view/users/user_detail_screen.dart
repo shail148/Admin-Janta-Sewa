@@ -22,8 +22,8 @@ class UserDetailScreen extends StatelessWidget {
         rightIcon: CustomPopupMenu(
           onSelected: (value) {
             if (value == "Edit") {
-               // Navigate to the UserEditScreen and pass the user data
-           Get.to(() => UserEditScreen(user: user));
+              // Navigate to the UserEditScreen and pass the user data
+              Get.to(() => UserEditScreen(user: user));
             } else if (value == "Inactive") {
               if (kDebugMode) {
                 print("Marked as inactive");
