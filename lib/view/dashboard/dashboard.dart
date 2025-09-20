@@ -1,3 +1,4 @@
+import 'package:admin_jantasewa/routes/app_routes.dart';
 import 'package:admin_jantasewa/view/bottomPages/new_home_page.dart';
 import 'package:admin_jantasewa/view/bottomPages/send_notification_dashboard.dart';
 import 'package:admin_jantasewa/view/drawerPages/custom_drawer.dart';
@@ -17,10 +18,10 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-    int selectedIndex = 0;
-    bool startEditing = false; //for open in editing mode on profile screen in nav bar
-    late List<Widget> pages;
-
+  int selectedIndex = 0;
+  bool startEditing =
+      false; //for open in editing mode on profile screen in nav bar
+  late List<Widget> pages;
 
   /* final List<Widget> pages = [
     NewHomePage(),
@@ -37,15 +38,13 @@ class _DashboardPageState extends State<DashboardPage> {
       if (args['index'] != null) selectedIndex = args['index'];
       startEditing = args['edit'] == true;
     }
-    
+
     pages = [
-    NewHomePage(),
-    SendNotificationDashboard(),
-    RequestPage(),
-    ProfileScreen(startEditing: startEditing),
-
-  ];
-
+      NewHomePage(),
+      SendNotificationDashboard(),
+      RequestPage(),
+      ProfileScreen(startEditing: startEditing),
+    ];
   }
 
   void onItemTapped(int index) {
@@ -77,7 +76,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
       bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
           color: Color(0xFFF4F6FE),
           /* borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24),
@@ -109,13 +108,14 @@ class _DashboardPageState extends State<DashboardPage> {
     return GestureDetector(
       //onTap: () => onItemTapped(index),
       onTap: () {
-      if (index == 2) {
-        //  Push full-screen history page instead of changing index
-        Get.to(() => const RequestPage());
-      } else {
-        onItemTapped(index);
-      }
-    },
+        if (index == 2) {
+          if (Get.currentRoute != AppRoutes.requestPage) {
+            Get.toNamed(AppRoutes.requestPage);
+          }
+        } else {
+          onItemTapped(index);
+        }
+      },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -125,7 +125,6 @@ class _DashboardPageState extends State<DashboardPage> {
               : Colors.transparent,
           //borderRadius: BorderRadius.circular(20),
           borderRadius: BorderRadius.circular(12),
-
         ),
         child: Row(
           children: [

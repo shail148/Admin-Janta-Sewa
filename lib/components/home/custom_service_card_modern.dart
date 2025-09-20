@@ -1,6 +1,5 @@
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomServiceCard extends StatelessWidget {
   final String title;
@@ -102,7 +101,9 @@ class CustomServiceCard extends StatelessWidget {
 }
 
 
-/* import 'package:flutter/material.dart';
+/* import 'package:admin_jantasewa/constants/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomServiceCard extends StatelessWidget {
   final String title;
@@ -110,26 +111,31 @@ class CustomServiceCard extends StatelessWidget {
   final double? width;
   final String imagePath;
   final VoidCallback onTap;
+  final double imageBoxFactor;
+  final Color backgroundColor;
+  final Color borderColor;
 
   const CustomServiceCard({
     super.key,
     required this.title,
-    this.height,
-    this.width,
     required this.imagePath,
     required this.onTap,
+    this.height,
+    this.width,
+    this.imageBoxFactor = 0.6,
+    this.backgroundColor = Colors.white,
+    this.borderColor = const Color(0xFFEEEEEE),
   });
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
+    // Default width: two cards fit in a row
+    final double cardWidth = width ?? 160.w;
 
-    // Card dimensions
-    final double cardWidth = width ?? (screenWidth / 2.4);
-    final double cardHeight = height ?? 100;
+    // Default height
+    final double cardHeight = height ?? 75.h;
 
-    final double imgSize =
-        (cardHeight < cardWidth ? cardHeight : cardWidth) * 0.8;
+    final double imgSize = (cardHeight < cardWidth ? cardHeight : cardWidth) * 0.8;
 
     return GestureDetector(
       onTap: onTap,
@@ -137,73 +143,59 @@ class CustomServiceCard extends StatelessWidget {
         height: cardHeight,
         width: cardWidth,
         clipBehavior: Clip.antiAlias,
-        margin: const EdgeInsets.symmetric(horizontal: 6),
         decoration: BoxDecoration(
-          // image: DecorationImage(
-          //   alignment: Alignment.bottomRight,
-          //   image: AssetImage(imagePath),
-          //   scale: 30,
-          //   fit: BoxFit.contain,
-          // ),
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey.shade300, width: 1),
+          color: backgroundColor.withOpacity(0.95),
+          borderRadius: BorderRadius.circular(8.r), // responsive radius
+          border: Border.all(color: borderColor, width: 1.w),
           boxShadow: [
             BoxShadow(
-              color: const Color.fromARGB(255, 240, 237, 237),
-              blurRadius: 2,
-              offset: const Offset(1, 1),
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 4.r,
+              offset: Offset(2.w, 3.h),
             ),
           ],
         ),
         child: Stack(
           children: [
-            const Positioned(top: 5, left: 5, child: SizedBox.shrink()),
+            // Top-left title
             Positioned(
-              top: 5,
-              left: 5,
+              left: 10.w,
+              top: 8.h,
               right: imgSize * 0.4,
               child: Text(
                 title,
-                //maxLines: 2,
-                //overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 12.sp, // scaled font size
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.black,
+                  height: 1.2.h,
                 ),
+                maxLines: 2,
+                overflow: TextOverflow.visible,
+                softWrap: false,
               ),
             ),
+
+            // Bottom-right image
             Positioned(
-              bottom: -9,
-              right: -9,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(20),
-                ),
+              bottom: 0,
+              right: 0,
+              child: SizedBox(
+                width: cardWidth * imageBoxFactor,
+                height: cardHeight * imageBoxFactor,
                 child: Image.asset(
                   imagePath,
-                  height: imgSize,
-                  width: imgSize,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
+                  alignment: Alignment.bottomRight,
                 ),
               ),
             ),
-            // Positioned(
-            //   bottom: 0,
-            //   right: 0,
-            //   child: Image.asset(
-            //     imagePath,
-            //     height: imgSize,
-            //     width: imgSize,
-            //     fit: BoxFit.contain,
-            //   ),
-            // ),
+          
           ],
         ),
       ),
     );
   }
 }
-
-
  */
