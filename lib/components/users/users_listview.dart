@@ -12,7 +12,10 @@ class UserListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = Get.put(UserController(), permanent: true);
+   // final c = Get.put(UserController(), permanent: true);
+
+    final  c = Get.find<UserController>(); // from app_binding.dart in binding folder
+
     final double screenHeight = MediaQuery.of(context).size.height;
 
     return Column(

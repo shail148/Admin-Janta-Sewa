@@ -19,7 +19,10 @@ class AuthorizedUserListview extends StatefulWidget {
 class _AuthorizedUserListviewState extends State<AuthorizedUserListview> {
   @override
   Widget build(BuildContext context) {
-    final c = Get.put(UserController(), permanent: true);
+
+    //final c = Get.put(UserController(), permanent: true);
+      final c =Get.find<UserController>();  // get.put in app_binding.dart
+
     final double screenHeight = MediaQuery.of(context).size.height;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
