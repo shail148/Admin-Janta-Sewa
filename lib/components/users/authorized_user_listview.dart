@@ -1,5 +1,7 @@
-import 'package:admin_jantasewa/controllers/user_controller.dart';
-import 'package:admin_jantasewa/models/user_model.dart';
+import 'package:admin_jantasewa/controllers/auth/authorized_user_controller1.dart';
+import 'package:admin_jantasewa/controllers/auth/authorized_user_controller.dart';
+import 'package:admin_jantasewa/models/authorized_user_model.dart';
+import 'package:admin_jantasewa/view/users/authorized_user_detail_screen.dart';
 import 'package:admin_jantasewa/view/users/create_autorized_user.dart';
 import 'package:admin_jantasewa/view/users/user_detail_screen.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
@@ -21,19 +23,20 @@ class _AuthorizedUserListviewState extends State<AuthorizedUserListview> {
   Widget build(BuildContext context) {
 
     //final c = Get.put(UserController(), permanent: true);
-      final c =Get.find<UserController>();  // get.put in app_binding.dart
+      //final c =Get.find<UserController>();  // get.put in app_binding.dart
+      final controller =Get.find<AuthorizedUserController>();
 
     final double screenHeight = MediaQuery.of(context).size.height;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomSearchBar(
-          controller: c.searchController,
+          controller: controller.searchController,
           hint: 'Search....',
-          onChanged: c.setSearch, // live search
-          onClear: c.clearSearch, // resets
+          onChanged: controller.setSearch, // live search
+          onClear: controller.clearSearch, // resets
           // If your CustomSearchBar does not support onSearchPressed, remove the next line:
-          onSearchPressed: () => c.setSearch(c.searchController.text),
+          onSearchPressed: () => controller.setSearch(controller.searchController.text),
         ),
         SizedBox(height: 8),
         Row(
@@ -60,12 +63,12 @@ class _AuthorizedUserListviewState extends State<AuthorizedUserListview> {
           () => SizedBox(
             height: screenHeight * 0.74,
             child: ListView.builder(
-              itemCount: c.filteredList.length,
+              itemCount: controller.filteredList.length,
               itemBuilder: (context, index) {
-                final UserModel user = c.filteredList[index];
+                final AuthorizedUserModel authorizedUserModel = controller.filteredList[index];
                 return GestureDetector(
                   onTap: () {
-                    Get.to(() => UserDetailScreen(), arguments: user);
+                    Get.to(() => AuthorizedUserDetailScreen(), arguments: authorizedUserModel);
                   },
                   child: Card(
                     elevation: 0,
@@ -84,7 +87,7 @@ class _AuthorizedUserListviewState extends State<AuthorizedUserListview> {
                         children: [
                           CircleAvatar(
                             radius: 24,
-                            backgroundImage: NetworkImage(user.profileImageUrl),
+                            backgroundImage: NetworkImage(authorizedUserModel.profileImageUrl),
                           ),
                           SizedBox(width: 12),
                           Expanded(
@@ -92,20 +95,20 @@ class _AuthorizedUserListviewState extends State<AuthorizedUserListview> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomTextWidget(
-                                  text: user.name,
+                                  text: authorizedUserModel.name,
                                   color: AppColors.black,
                                   fontsize: 14,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 SizedBox(height: 2),
                                 CustomTextWidget(
-                                  text: user.userId,
+                                  text: authorizedUserModel.userId,
                                   color: AppColors.textGrey,
                                   fontsize: 12,
                                 ),
                                 SizedBox(height: 2),
                                 CustomTextWidget(
-                                  text: "Phone: ${user.phone}",
+                                  text: "Phone: ${authorizedUserModel.phone}",
                                   color: AppColors.textGrey,
                                   fontsize: 12,
                                 ),
