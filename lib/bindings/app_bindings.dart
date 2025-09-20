@@ -3,6 +3,7 @@ import 'package:admin_jantasewa/controllers/railTicket/rail_ticket_controller.da
 import 'package:admin_jantasewa/controllers/requestService/request_service_controller.dart';
 import 'package:admin_jantasewa/controllers/settings/report_issue_controller.dart';
 import 'package:admin_jantasewa/controllers/settings/setting_controller.dart';
+import 'package:admin_jantasewa/controllers/user_controller.dart';
 import 'package:get/get.dart';
 
 
@@ -21,6 +22,8 @@ class AppBinding extends Bindings {
     Get.put<RailTicketController>(RailTicketController(), permanent: true);
 
     Get.put<RequestServicesController>(RequestServicesController(), permanent: true);
+
+    Get.put<UserController>(UserController(), permanent: true);
 
 
 

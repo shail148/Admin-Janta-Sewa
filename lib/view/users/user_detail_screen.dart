@@ -1,9 +1,11 @@
 import 'package:admin_jantasewa/models/user_model.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
+import 'package:admin_jantasewa/view/users/user_edit_screen.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:admin_jantasewa/widgets/custom_delete_dialog_box.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:admin_jantasewa/widgets/label_text.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,18 +22,25 @@ class UserDetailScreen extends StatelessWidget {
         rightIcon: CustomPopupMenu(
           onSelected: (value) {
             if (value == "Edit") {
-              print("Edit tapped");
+               // Navigate to the UserEditScreen and pass the user data
+           Get.to(() => UserEditScreen(user: user));
             } else if (value == "Inactive") {
-              print("Marked as inactive");
+              if (kDebugMode) {
+                print("Marked as inactive");
+              }
             } else if (value == "Delete") {
               // print("Deleted");
               DeleteDialog.show(
                 onConfirm: () {
-                  // 👇 delete action yaha likho
-                  print("Record Deleted!");
+                  //  delete action write here
+                  if (kDebugMode) {
+                    print("Record Deleted!");
+                  }
                 },
                 onCancel: () {
-                  print("Cancel pressed");
+                  if (kDebugMode) {
+                    print("Cancel pressed");
+                  }
                 },
               );
             }
