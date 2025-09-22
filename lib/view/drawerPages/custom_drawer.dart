@@ -1,6 +1,7 @@
 import 'package:admin_jantasewa/view/auth/login_page.dart';
 import 'package:admin_jantasewa/view/drawerPages/contact/contact_page.dart';
 import 'package:admin_jantasewa/view/drawerPages/settings/settings_page.dart';
+import 'package:admin_jantasewa/view/newsSections/janta_sewa_media.dart';
 import 'package:admin_jantasewa/view/notification/send_notification_page.dart';
 import 'package:admin_jantasewa/view/ourJourney/janta_sewa_media_screen.dart';
 import 'package:admin_jantasewa/view/ourJourney/ourjourney_history_page.dart';
@@ -85,6 +86,13 @@ class CustomDrawer extends StatelessWidget {
                     'News'.tr,
                     onTap: () {
                       Get.to(() => JantaSewaMediaScreen());
+                    },
+                  ),
+                  _drawerItem(
+                    Icons.event_note,
+                    'Media'.tr,
+                    onTap: () {
+                      Get.to(() => JantaSewaMedia());
                     },
                   ),
                   _drawerItem(

@@ -249,6 +249,7 @@ class _UserEditScreenState extends State<UserEditScreen> {
 
   void _saveProfile() {
     // Update UserModel with new data
+    // ignore: unused_local_variable
     final updatedUser = UserModel(
       userId: widget.user.userId,
       name: fullName.text,

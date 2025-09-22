@@ -1,54 +1,73 @@
 // ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
 import 'package:admin_jantasewa/constants/colors.dart';
+import 'package:admin_jantasewa/controllers/media_upload_controller.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:get/get.dart';
 
 class CustomFileUpload extends StatefulWidget {
+  final RxList<PickedFile>? targetFiles; // optional
+  final String title;
+  final String subtitle;
+
+  const CustomFileUpload({
+    super.key,
+    this.targetFiles,
+    this.title = "Upload Your Files",
+    this.subtitle = "All file types allowed",
+  });
+
   @override
   _CustomFileUploadState createState() => _CustomFileUploadState();
 }
 
 class _CustomFileUploadState extends State<CustomFileUpload> {
-  List<PlatformFile> uploadedFiles = [];
+  RxList<PickedFile> _internalFiles = <PickedFile>[].obs;
 
-  void pickFile() async {
+  RxList<PickedFile> get _files =>
+      widget.targetFiles ?? _internalFiles; // ✅ fallback if null
+
+  Future<void> pickFile() async {
     final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'png', 'pdf'],
+      type: FileType.any, // allow all file types
+      allowMultiple: true,
     );
 
     if (result != null && result.files.isNotEmpty) {
-      setState(() {
-        uploadedFiles.add(result.files.first);
-      });
+      for (var file in result.files) {
+        _files.add(PickedFile(file.name, file.size));
+      }
     }
   }
 
   void removeFile(int index) {
-    setState(() {
-      uploadedFiles.removeAt(index);
-    });
+    if (index >= 0 && index < _files.length) {
+      _files.removeAt(index);
+    }
   }
 
-  Widget fileTile(PlatformFile file, int index) {
+  Widget fileTile(PickedFile file, int index) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: Color(0xFFF6F7FB),
+        color: const Color(0xFFF6F7FB),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.btnBgColor),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Icon(Icons.insert_drive_file, color: AppColors.btnBgColor, size: 30),
+          const Icon(
+            Icons.insert_drive_file,
+            color: AppColors.btnBgColor,
+            size: 30,
+          ),
           const SizedBox(width: 10),
           Expanded(
             child: Text(
               file.name,
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -57,7 +76,11 @@ class _CustomFileUploadState extends State<CustomFileUpload> {
             fontsize: 12,
           ),
           IconButton(
-            icon: Icon(Icons.delete, color: AppColors.btnBgColor, size: 30),
+            icon: const Icon(
+              Icons.delete,
+              color: AppColors.btnBgColor,
+              size: 30,
+            ),
             onPressed: () => removeFile(index),
           ),
         ],
@@ -74,58 +97,52 @@ class _CustomFileUploadState extends State<CustomFileUpload> {
           onTap: pickFile,
           child: Container(
             height: 150,
+            width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: AppColors.formBgColor,
-              border: Border.all(
-                color: AppColors.btnBgColor,
-                style: BorderStyle.solid,
-                strokeAlign: BorderSide.strokeAlignInside,
-              ),
+              border: Border.all(color: AppColors.btnBgColor),
             ),
-            width: double.infinity,
-            child: Container(
-              padding: EdgeInsets.all(10),
-              width: double.infinity,
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  CustomTextWidget(text: 'Upload Your Files', fontsize: 14),
-                  SizedBox(height: 5),
-                  Icon(
-                    Icons.file_upload_outlined,
-                    color: AppColors.btnBgColor,
-                    size: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomTextWidget(
-                        text: 'in JPG, PNG, PDF',
-                        color: AppColors.textGrey,
-                        fontsize: 12,
-                      ),
-                      SizedBox(width: 5),
-                      CustomTextWidget(
-                        text: 'Browse',
-                        color: AppColors.btnBgColor,
-                        fontsize: 12,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ],
-                  ),
-                  // CustomTextWidget(text: 'in JPG, PNG, PDF',fontsize: 12,),
-                ],
-              ),
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomTextWidget(text: widget.title, fontsize: 14),
+                const Icon(
+                  Icons.file_upload_outlined,
+                  color: AppColors.btnBgColor,
+                  size: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomTextWidget(
+                      text: widget.subtitle,
+                      color: AppColors.textGrey,
+                      fontsize: 12,
+                    ),
+                    const SizedBox(width: 5),
+                    const CustomTextWidget(
+                      text: 'Browse',
+                      color: AppColors.btnBgColor,
+                      fontsize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
         const SizedBox(height: 10),
-        Column(
-          children: List.generate(
-            uploadedFiles.length,
-            (index) => fileTile(uploadedFiles[index], index),
+
+        /// show uploaded files
+        Obx(
+          () => Column(
+            children: List.generate(
+              _files.length,
+              (index) => fileTile(_files[index], index),
+            ),
           ),
         ),
       ],
