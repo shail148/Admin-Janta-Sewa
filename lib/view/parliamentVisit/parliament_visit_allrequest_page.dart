@@ -1,4 +1,6 @@
 import 'package:admin_jantasewa/controllers/parliamentVisit/parliament_visit_controller.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottom_sheet.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottomsheet_controller.dart';
 import 'package:admin_jantasewa/view/parliamentVisit/parliament_details_page.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
@@ -26,7 +28,7 @@ class _ParliamentVisitAllrequestPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'Janta Sewa',
+        title: 'Parliament Visit',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.primary),
         onLeftTap: () => Get.back(),
       ),
@@ -87,10 +89,24 @@ class _ParliamentVisitAllrequestPageState
                     return CustomInfoCard(
                       title: visit.parliamentVisitId,
                       rows: [
-                        InfoRowData(
+                        /* InfoRowData(
                           icon: Icons.perm_identity_outlined,
                           text: 'ID : ${visit.userId}',
-                        ),
+                        ), */
+                         InfoRowData(
+                          icon: Icons.perm_identity_outlined,
+                          text: 'ID : ${visit.userId}',
+                          onTap: () async {
+                          final controller = Get.put(UserDetailBottomSheetController());
+                          await controller.loadUserData();
+                          if (!context.mounted) return; 
+                          showModalBottomSheet(
+                          context: context,
+                          builder: (context) => UserDetailBottomSheet(userId: visit.userId),
+                         );
+                       },
+
+                 ),
                         InfoRowData(
                           icon: Icons.calendar_today,
                           text: 'Requested Date : ${visit.requestDate}',

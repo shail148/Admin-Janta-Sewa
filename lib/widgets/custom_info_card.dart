@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class InfoRowData {
   final IconData icon;
   final String text;
-  InfoRowData({required this.icon, required this.text});
+  final VoidCallback? onTap; 
+  InfoRowData({required this.icon, required this.text, this.onTap,});
 }
 
 class CustomInfoCard extends StatelessWidget {
@@ -16,7 +17,9 @@ class CustomInfoCard extends StatelessWidget {
   final String status; // Approved/Pending/Rejected
   final Color statusColor;
   final String buttonText;
-  final VoidCallback onButtonTap;
+ final VoidCallback onButtonTap;
+ 
+ 
 
   const CustomInfoCard({
     super.key,
@@ -27,6 +30,7 @@ class CustomInfoCard extends StatelessWidget {
     required this.statusColor,
     this.buttonText = 'View',
     required this.onButtonTap,
+    
   });
 
   @override
@@ -85,7 +89,7 @@ class CustomInfoCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
 
-                    ...rows.map(
+                    /* ...rows.map(
                       (r) => Padding(
                         padding: const EdgeInsets.only(bottom: 8, right: 8),
                         child: Row(
@@ -108,7 +112,39 @@ class CustomInfoCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
+                    ), */
+
+                    ...rows.map(
+  (r) => Padding(
+    padding: const EdgeInsets.only(bottom: 8, right: 8),
+    child: GestureDetector(
+      onTap: r.onTap, // <-- Tap callback
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(r.icon, size: 20, color: Colors.black),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                r.text,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 12,
+                  decoration:
+                      r.onTap != null ? TextDecoration.underline : null, // Optional visual cue
+                  color: r.onTap != null ? AppColors.black : null, // Optional visual cue
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
+),
+
 
                     //   Row(
                     //     crossAxisAlignment: CrossAxisAlignment.start,

@@ -79,7 +79,7 @@ class _NewHomePageState extends State<NewHomePage> {
 
               // Department
               CustomTextWidget(
-                text: 'Department',
+                text: 'Departments',
                 fontWeight: FontWeight.bold,
                 fontsize: 14,
               ),

@@ -98,6 +98,12 @@ class AuthorizedUserDetailScreen extends StatelessWidget {
                   "City/Village": authorizedUser.cityVillage,
                   "Ward Number": authorizedUser.wardNumber,
                   "Pin Code": authorizedUser.pincode,
+                  
+                },
+              ),
+              DetailsCard(
+                title: "Authorized Level",
+                details: {
                   "Select Post": authorizedUser.selectedPost,
                   "Forwarded Level": authorizedUser.forwardedLevel,
                 },

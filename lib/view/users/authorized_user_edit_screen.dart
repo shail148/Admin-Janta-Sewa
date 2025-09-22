@@ -158,8 +158,8 @@ class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
               _buildField("City/Village", cityVillage, "Enter City or Village"),
               _buildField("Ward Number", wardNumber, "Enter Ward Number"),
               _buildField("Pincode", pincode, "Enter Pincode"),
-              _buildField("Pincode", selectedPost, "Enter Selected Post"),
-              _buildField("Pincode", forwardedLevel, "Enter Forwarded Level"),
+              _buildField("Selected Post", selectedPost, "Enter Selected Post"),
+              _buildField("Forwarded Level", forwardedLevel, "Enter Forwarded Level"),
 
 
 

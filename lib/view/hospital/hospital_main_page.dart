@@ -1,4 +1,6 @@
 import 'package:admin_jantasewa/controllers/hospital/hospital_admission_controller.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottom_sheet.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottomsheet_controller.dart';
 import 'package:admin_jantasewa/view/hospital/hospital_admission_details_page.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
@@ -28,7 +30,7 @@ class _HospitalMainPageState extends State<HospitalMainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'Janta Sewa',
+        title: 'Hospital Admission',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.primary),
         onLeftTap: () => Get.back(),
       ),
@@ -89,10 +91,25 @@ class _HospitalMainPageState extends State<HospitalMainPage> {
                     return CustomInfoCard(
                       title: hostpital.requestId,
                       rows: [
+                        /* InfoRowData(
+                          icon: Icons.perm_identity_outlined,
+                          text: 'ID : ${hostpital.userId}',
+                        ), */
+
                         InfoRowData(
                           icon: Icons.perm_identity_outlined,
                           text: 'ID : ${hostpital.userId}',
-                        ),
+                          onTap: () async {
+                          final controller = Get.put(UserDetailBottomSheetController());
+                          await controller.loadUserData();
+                          if (!context.mounted) return; 
+                          showModalBottomSheet(
+                          context: context,
+                          builder: (context) => UserDetailBottomSheet(userId: hostpital.userId),
+                         );
+                       },
+
+                 ), 
                         InfoRowData(
                           icon: Icons.calendar_today,
                           text: 'Requested Date : ${hostpital.requestDate}',

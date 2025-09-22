@@ -1,0 +1,44 @@
+{
+  "userDetails": {
+    "fullName": "Karan Sharma",
+    "mobileNumber": "9931051525",
+    "whatsAppNumber": "9931051525",
+    "emailId": "karan@gmail.com",
+    "dob": "25-06-2001",
+    "bloodGroup": "AB+",
+    "aadharNumber": "123456789012",
+    "address": "A-204, Block -C, Sunshine Apartments",
+    "state": "Chhattisgarh",
+    "district": "Bhilai",
+    "block": "Dongargarh",
+    "vidhansabha": "Narayanpur",
+    "cityVillage": "Barapali",
+    "wardNumber": "15",
+    "pincode": "492007"
+  },
+
+  
+  "userHistory": [
+    {
+      "ticketId": "TKT10214",
+      "bookingDate": "25-Aug-2023",
+      "status": "Pending"
+    },
+    {
+      "ticketId": "TKT10215",
+      "bookingDate": "26-Aug-2023",
+      "status": "Rejected"
+    },
+    {
+      "ticketId": "TKT10225",
+      "bookingDate": "26-Aug-2023",
+      "status": "Approved"
+    },
+    {
+      "ticketId": "TKT10250",
+      "bookingDate": "26-Aug-2023",
+      "status": "In Process"
+    }
+
+  ]
+}
