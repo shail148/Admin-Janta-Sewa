@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Admin Janta Sewa',
 
-        //added for routes
+        // added for routes
         initialRoute: AppRoutes.dashboard,
         getPages: AppPages.pages,
         initialBinding: AppBinding(), // Inject all controllers here
@@ -40,12 +40,10 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
         // Initial route
-        //home: DashboardPage(),
+        // home: JantaSewaMediaScreen(),
 
         // Define the initial route
       ),
     );
   }
 }
-
-//Testing of the branch
