@@ -1,4 +1,6 @@
 import 'package:admin_jantasewa/controllers/budgetDemand/budget_demand_controller.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottom_sheet.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottomsheet_controller.dart';
 import 'package:admin_jantasewa/view/budgetDemand/budget_details_page.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
@@ -21,7 +23,7 @@ class _BudgetAllRequestPageState extends State<BudgetAllRequestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'Janta Sewa',
+        title: 'Budget Demand',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.primary),
         onLeftTap: () => Get.back(),
       ),
@@ -82,10 +84,25 @@ class _BudgetAllRequestPageState extends State<BudgetAllRequestPage> {
                     return CustomInfoCard(
                       title: budget.budgetDemandId,
                       rows: [
+                        /* InfoRowData(
+                          icon: Icons.perm_identity_outlined,
+                          text: 'ID : ${budget.userId}',
+                        ), */
+
                         InfoRowData(
                           icon: Icons.perm_identity_outlined,
                           text: 'ID : ${budget.userId}',
-                        ),
+                          onTap: () async {
+                          final controller = Get.put(UserDetailBottomSheetController());
+                          await controller.loadUserData();
+                          if (!context.mounted) return; 
+                          showModalBottomSheet(
+                          context: context,
+                          builder: (context) => UserDetailBottomSheet(userId: budget.userId),
+                         );
+                       },
+
+                 ), 
                         InfoRowData(
                           icon: Icons.calendar_today,
                           text: 'Requested Date : ${budget.requestDate}',

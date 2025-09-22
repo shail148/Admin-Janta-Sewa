@@ -1,4 +1,6 @@
 import 'package:admin_jantasewa/controllers/complaintLetter/complaint_letter_controller.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottom_sheet.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottomsheet_controller.dart';
 import 'package:admin_jantasewa/view/complaintLetter/complaint_letter_details_page.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
@@ -23,7 +25,7 @@ class _ComplaintLetterAllRequestPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'Complaint Letters',
+        title: 'Complaint Letter',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.primary),
         onLeftTap: () => Get.back(),
       ),
@@ -52,10 +54,25 @@ class _ComplaintLetterAllRequestPageState
                     return CustomInfoCard(
                       title: complaint.complaintId,
                       rows: [
-                        InfoRowData(
+                        /* InfoRowData(
                           icon: Icons.perm_identity_outlined,
                           text: 'ID : ${complaint.userId}',
-                        ),
+                        ), */
+
+                         InfoRowData(
+                          icon: Icons.perm_identity_outlined,
+                          text: 'ID : ${complaint.userId}',
+                          onTap: () async {
+                          final controller = Get.put(UserDetailBottomSheetController());
+                          await controller.loadUserData();
+                          if (!context.mounted) return; 
+                          showModalBottomSheet(
+                          context: context,
+                          builder: (context) => UserDetailBottomSheet(userId: complaint.userId),
+                         );
+                       },
+
+                 ),
                         InfoRowData(
                           icon: Icons.calendar_today,
                           text: 'Requested Date : ${complaint.date}',

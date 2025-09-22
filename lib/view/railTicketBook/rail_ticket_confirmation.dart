@@ -1,4 +1,7 @@
 import 'package:admin_jantasewa/controllers/railTicket/rail_ticket_controller.dart';
+import 'package:admin_jantasewa/controllers/user_controller.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottom_sheet.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottomsheet_controller.dart';
 import 'package:admin_jantasewa/view/railTicketBook/rail_ticket_details_page.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
@@ -92,10 +95,25 @@ class RailTicketConfirmationPage extends StatelessWidget {
                     return CustomInfoCard(
                       title: t.ticketId,
                       rows: [
-                        InfoRowData(
+                        /* InfoRowData(
                           icon: Icons.perm_identity_outlined,
                           text: 'ID : ${t.userId}',
-                        ),
+                        ), */
+                         InfoRowData(
+                          icon: Icons.perm_identity_outlined,
+                          text: 'ID : ${t.userId}',
+                          onTap: () async {
+                          final controller = Get.put(UserDetailBottomSheetController());
+                          await controller.loadUserData();
+                          if (!context.mounted) return; 
+                          showModalBottomSheet(
+                          context: context,
+                          builder: (context) => UserDetailBottomSheet(userId: t.userId),
+                         );
+                       },
+
+                 ), 
+
                         InfoRowData(
                           icon: Icons.train,
                           text: '${t.trainName}  •  #${t.trainNumber}',

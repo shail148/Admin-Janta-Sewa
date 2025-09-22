@@ -1,4 +1,6 @@
 import 'package:admin_jantasewa/controllers/suggestioncontroller/suggestion_letter_controller.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottom_sheet.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottomsheet_controller.dart';
 import 'package:admin_jantasewa/view/suggestionLetter/suggestion_letter_details_page.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
@@ -24,7 +26,7 @@ class _SuggestionLetterAllRequestPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'Janta Sewa',
+        title: 'Suggestion Letter',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.primary),
         onLeftTap: () => Get.back(),
       ),
@@ -85,10 +87,24 @@ class _SuggestionLetterAllRequestPageState
                     return CustomInfoCard(
                       title: suggestion.letterId,
                       rows: [
-                        InfoRowData(
+                        /* InfoRowData(
                           icon: Icons.perm_identity_outlined,
                           text: 'ID : ${suggestion.userId}',
-                        ),
+                        ), */
+                         InfoRowData(
+                          icon: Icons.perm_identity_outlined,
+                          text: 'ID : ${suggestion.userId}',
+                          onTap: () async {
+                          final controller = Get.put(UserDetailBottomSheetController());
+                          await controller.loadUserData();
+                          if (!context.mounted) return; 
+                          showModalBottomSheet(
+                          context: context,
+                          builder: (context) => UserDetailBottomSheet(userId: suggestion.userId),
+                         );
+                       },
+
+                 ),
                         InfoRowData(
                           icon: Icons.calendar_today,
                           text: 'Requested Date : ${suggestion.date}',

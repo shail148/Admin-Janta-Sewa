@@ -1,4 +1,6 @@
 import 'package:admin_jantasewa/controllers/recommendation/recommendation_controller.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottom_sheet.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottomsheet_controller.dart';
 import 'package:admin_jantasewa/view/recommendation/recommendation_details_page.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
@@ -24,7 +26,7 @@ class _RecommendationAllRequestPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'Janta Sewa',
+        title: 'Recommendation Letter',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.primary),
         onLeftTap: () => Get.back(),
       ),
@@ -85,10 +87,25 @@ class _RecommendationAllRequestPageState
                     return CustomInfoCard(
                       title: recommendation.recommendationId,
                       rows: [
-                        InfoRowData(
+                        /* InfoRowData(
                           icon: Icons.perm_identity_outlined,
                           text: 'ID : ${recommendation.userId}',
-                        ),
+                        ), */
+
+                         InfoRowData(
+                          icon: Icons.perm_identity_outlined,
+                          text: 'ID : ${recommendation.userId}',
+                          onTap: () async {
+                          final controller = Get.put(UserDetailBottomSheetController());
+                          await controller.loadUserData();
+                          if (!context.mounted) return; 
+                          showModalBottomSheet(
+                          context: context,
+                          builder: (context) => UserDetailBottomSheet(userId: recommendation.userId),
+                         );
+                       },
+
+                 ),
                         InfoRowData(
                           icon: Icons.calendar_today,
                           text: 'Requested Date : ${recommendation.date}',

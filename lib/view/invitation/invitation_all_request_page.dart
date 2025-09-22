@@ -1,4 +1,6 @@
 import 'package:admin_jantasewa/controllers/invitation/invitation_controller.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottom_sheet.dart';
+import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottomsheet_controller.dart';
 import 'package:admin_jantasewa/view/invitation/invitation_details_page.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
@@ -22,7 +24,7 @@ class _InvitationAllRequestPageState extends State<InvitationAllRequestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'Janta Sewa',
+        title: 'Invitation',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.primary),
         onLeftTap: () => Get.back(),
       ),
@@ -83,10 +85,25 @@ class _InvitationAllRequestPageState extends State<InvitationAllRequestPage> {
                     return CustomInfoCard(
                       title: invitation.invitationId,
                       rows: [
-                        InfoRowData(
+                        /* InfoRowData(
                           icon: Icons.perm_identity_outlined,
                           text: 'ID : ${invitation.userId}',
-                        ),
+                        ), */
+
+                         InfoRowData(
+                          icon: Icons.perm_identity_outlined,
+                          text: 'ID : ${invitation.userId}',
+                          onTap: () async {
+                          final controller = Get.put(UserDetailBottomSheetController());
+                          await controller.loadUserData();
+                          if (!context.mounted) return; 
+                          showModalBottomSheet(
+                          context: context,
+                          builder: (context) => UserDetailBottomSheet(userId: invitation.userId),
+                         );
+                       },
+
+                 ),
                         InfoRowData(
                           icon: Icons.calendar_today,
                           text: 'Requested Date : ${invitation.requestDate}',
