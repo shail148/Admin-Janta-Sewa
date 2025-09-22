@@ -1,10 +1,6 @@
 // main.dart
 // JANTA SEWA – Media Upload (Banner | Speeches | Gallery)
 // Full, self-contained demo that matches your UI mocks.
-// Replace the mock controller with your real one when integrating.
-
-// ignore_for_file: unused_element_parameter, unused_field
-
 import 'dart:math' as math;
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
@@ -82,7 +78,6 @@ class _PrimaryButton extends StatelessWidget {
   }
 }
 
-/// ===== Segmented Top Tabs (323×38 Hug like your mock) =====
 class _TopTabs extends StatelessWidget {
   const _TopTabs({super.key});
 
@@ -138,7 +133,6 @@ class _SegmentTab extends StatelessWidget {
   }
 }
 
-/// ===== Dotted/boxed upload area =====
 class UploadDropZone extends StatelessWidget {
   final String title;
   final String subText;
@@ -616,18 +610,14 @@ class _GalleryTab extends StatelessWidget {
   }
 }
 
-/// ======================================================================
-/// MOCKS (so this file runs standalone). Replace with your real controller.
-/// ======================================================================
 
-/// Minimal file model used by tiles.
+
 class PickedFile {
   final String name;
   final int size; // in bytes
   PickedFile(this.name, this.size);
 }
 
-/// Demo GetX controller that mimics your methods/fields.
 class MediaUploadController extends GetxController {
   // Banner
   final RxList<PickedFile> bannerFiles = <PickedFile>[].obs;
