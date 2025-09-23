@@ -1,5 +1,6 @@
 import 'package:admin_jantasewa/models/user_model.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
+import 'package:admin_jantasewa/routes/app_routes.dart';
 import 'package:admin_jantasewa/view/users/user_edit_screen.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:admin_jantasewa/widgets/custom_delete_dialog_box.dart';
@@ -17,13 +18,14 @@ class UserDetailScreen extends StatelessWidget {
     final user = Get.arguments as UserModel;
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'Janta Sewa',
+        title: 'User Details',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.btnBgColor),
         rightIcon: CustomPopupMenu(
           onSelected: (value) {
             if (value == "Edit") {
               // Navigate to the UserEditScreen and pass the user data
-              Get.to(() => UserEditScreen(user: user));
+              //Get.to(() => UserEditScreen(user: user));
+             Get.toNamed(AppRoutes.userEditScreen, arguments: user);
             } else if (value == "Inactive") {
               if (kDebugMode) {
                 print("Marked as inactive");

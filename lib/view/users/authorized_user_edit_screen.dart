@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:admin_jantasewa/controllers/image_picker_controller.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/models/authorized_user_model.dart';
+import 'package:admin_jantasewa/routes/app_routes.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
 import 'package:admin_jantasewa/widgets/label_text.dart';
@@ -90,7 +91,7 @@ class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'Edit User',
+        title: 'Edit Authorized User',
         leftIcon: Icon(Icons.arrow_back_ios),
         onLeftTap: Get.back,
         ),
@@ -256,7 +257,20 @@ class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
 
     // Save updatedUser to backend or local storage
 
-    Get.snackbar("Success", "Profile updated",
-        backgroundColor: Colors.green, colorText: Colors.white);
+    Get.snackbar(
+        "Success", "Profile updated",
+        backgroundColor: Colors.green, 
+        colorText: Colors.white);
+
+            // navigate to the user detail screen
+       Get.toNamed(
+          AppRoutes.authorizedUserDetailScreen,
+          arguments: updatedUser, // pass data if needed
+        );  
+
+         // Get.back(result: updatedUser);
+
   }
+
+  
 }
