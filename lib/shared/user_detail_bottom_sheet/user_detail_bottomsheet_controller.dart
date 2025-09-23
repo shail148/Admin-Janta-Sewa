@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:admin_jantasewa/models/ticket/ticket_model.dart';
 import 'package:admin_jantasewa/shared/user_detail_bottom_sheet/user_detail_bottom_sheet_model.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart'; // to load JSON

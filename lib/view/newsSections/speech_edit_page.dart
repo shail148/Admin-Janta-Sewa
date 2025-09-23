@@ -3,29 +3,31 @@ import 'package:get/get.dart';
 import 'package:admin_jantasewa/controllers/media_upload_controller.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
 
-class GalleryEditPage extends StatefulWidget {
-  final GalleryItem gallery;
+class SpeechEditPage extends StatefulWidget {
+  final SpeechItem speech;
   final MediaUploadController controller;
 
-  const GalleryEditPage({
+  const SpeechEditPage({
     super.key,
-    required this.gallery,
+    required this.speech,
     required this.controller,
   });
 
   @override
-  State<GalleryEditPage> createState() => _GalleryEditPageState();
+  State<SpeechEditPage> createState() => _SpeechEditPageState();
 }
 
-class _GalleryEditPageState extends State<GalleryEditPage> {
+class _SpeechEditPageState extends State<SpeechEditPage> {
   late TextEditingController descController;
+  late TextEditingController titleController;
   late DateTime selectedDate;
 
   @override
   void initState() {
     super.initState();
-    descController = TextEditingController(text: widget.gallery.description);
-    selectedDate = widget.gallery.date;
+    titleController = TextEditingController(text: widget.speech.title);
+    descController = TextEditingController(text: widget.speech.description);
+    selectedDate = widget.speech.date;
   }
 
   @override
@@ -39,7 +41,7 @@ class _GalleryEditPageState extends State<GalleryEditPage> {
           onPressed: () => Get.back(),
         ),
         title: const Text(
-          "Edit Gallery",
+          "Edit Speech",
           style: TextStyle(
             fontWeight: FontWeight.w600,
             color: Color(0xFF3D3270),
@@ -56,10 +58,27 @@ class _GalleryEditPageState extends State<GalleryEditPage> {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                widget.gallery.imagePath,
+                widget.speech.imagePath,
                 width: double.infinity,
                 height: 200,
                 fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // ===== Title =====
+            const Text(
+              "Addressed by",
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+            ),
+            const SizedBox(height: 6),
+            TextFormField(
+              controller: titleController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                hintText: "Enter name/title",
               ),
             ),
             const SizedBox(height: 16),
@@ -122,25 +141,21 @@ class _GalleryEditPageState extends State<GalleryEditPage> {
               text: "Save Changes",
               textSize: 14,
               onPressed: () {
-                // Update object (kyunki fields final hain -> ek naya object banana hoga)
-                final updated = GalleryItem(
-                  title: widget.gallery.title,
+                final updated = SpeechItem(
+                  title: titleController.text,
                   description: descController.text,
-                  imagePath: widget.gallery.imagePath,
+                  imagePath: widget.speech.imagePath,
                   date: selectedDate,
                 );
 
-                // Replace in list
-                final index = widget.controller.galleries.indexOf(
-                  widget.gallery,
-                );
+                final index = widget.controller.speeches.indexOf(widget.speech);
                 if (index != -1) {
-                  widget.controller.galleries[index] = updated;
-                  widget.controller.galleries.refresh();
+                  widget.controller.speeches[index] = updated;
+                  widget.controller.speeches.refresh();
                 }
 
-                Get.back(); // Close edit page
-                Get.snackbar("Updated", "Gallery updated successfully");
+                Get.back();
+                Get.snackbar("Updated", "Speech updated successfully");
               },
             ),
           ],

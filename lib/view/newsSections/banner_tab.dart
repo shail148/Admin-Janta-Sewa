@@ -14,17 +14,14 @@ class BannerTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      // ✅ Show form if active
       if (controller.showBannerForm.value) {
         return _BannerForm(controller: controller);
       }
 
-      // ✅ Empty State
-      if (controller.bannerFiles.isEmpty) {
+      if (controller.banners.isEmpty) {
         return _EmptyState(onAdd: () => controller.showBannerForm.value = true);
       }
 
-      // ✅ List State
       return _BannerList(controller: controller);
     });
   }
@@ -112,7 +109,6 @@ class _BannerForm extends StatelessWidget {
                       Get.snackbar("Error", "Please add a file first");
                       return;
                     }
-
                     Get.snackbar(
                       "Preview",
                       "Showing preview of selected banner",
@@ -128,7 +124,7 @@ class _BannerForm extends StatelessWidget {
                   onPressed: () async {
                     final ok = await controller.submitBanner();
                     if (ok) {
-                      controller.showBannerForm.value = false; // Go to list
+                      controller.showBannerForm.value = false;
                       Get.snackbar('Success', 'Banner uploaded');
                     } else {
                       Get.snackbar('Error', 'Please add a file before upload');
@@ -145,109 +141,160 @@ class _BannerForm extends StatelessWidget {
 }
 
 /// ===== List State =====
-/// ===== List State =====
 class _BannerList extends StatelessWidget {
   final MediaUploadController controller;
-  const _BannerList({required this.controller});
+  const _BannerList({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       child: Column(
         children: [
+          // Header row
           Row(
             children: [
-              const Expanded(child: CustomTextWidget(text: "Uploaded Banners")),
-              CustomButton(
-                textSize: 14,
-                text: "+ Add",
+              const Expanded(
+                child: Text(
+                  "Banner",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: Color(0xFF2F2A4A),
+                  ),
+                ),
+              ),
+              ElevatedButton(
                 onPressed: () => controller.showBannerForm.value = true,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF3D3270),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 8,
+                  ),
+                ),
+                child: const Text(
+                  "+ Add",
+                  style: TextStyle(fontSize: 14, color: Colors.white),
+                ),
               ),
             ],
           ),
           const SizedBox(height: 16),
 
-          /// ✅ Banner List UI
+          // List of banners
           Expanded(
-            child: ListView.builder(
-              itemCount: controller.bannerFiles.length,
-              itemBuilder: (ctx, i) {
-                final file = controller.bannerFiles[i];
-
-                return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 6),
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 10,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.grey.shade300),
-                  ),
-                  child: Row(
-                    children: [
-                      /// Thumbnail
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          color: Colors.grey.shade200,
-                          child: const Icon(
-                            Icons.image,
-                            color: Colors.grey,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(width: 12),
-
-                      /// File Name + Size
-                      Expanded(
-                        child: Text(
-                          "${file.name} ${(file.size / (1024 * 1024)).toStringAsFixed(1)} MB",
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black87,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-
-                      /// Edit Button
-                      IconButton(
-                        icon: const Icon(
-                          Icons.edit,
-                          color: Colors.grey,
-                          size: 22,
-                        ),
-                        onPressed: () {
-                          Get.snackbar(
-                            "Edit",
-                            "Edit ${controller.bannerFiles[i].name}",
-                          );
-                        },
-                      ),
-
-                      /// Delete Button
-                      IconButton(
-                        icon: const Icon(
-                          Icons.delete,
-                          color: Colors.red,
-                          size: 22,
-                        ),
-                        onPressed: () =>
-                            controller.removeAt(controller.bannerFiles, i),
-                      ),
-                    ],
+            child: Obx(() {
+              if (controller.banners.isEmpty) {
+                return const Center(
+                  child: Text(
+                    "No banners uploaded yet",
+                    style: TextStyle(color: Colors.grey),
                   ),
                 );
-              },
-            ),
+              }
+
+              return ListView.builder(
+                itemCount: controller.banners.length,
+                itemBuilder: (ctx, i) {
+                  final banner = controller.banners[i];
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 14),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Stack(
+                      children: [
+                        // Banner Image
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.network(
+                            banner.imagePath,
+                            width: double.infinity,
+                            height: 180,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+
+                        // 3-dot PopupMenu
+                        Positioned(
+                          top: 6,
+                          right: 6,
+                          child: PopupMenuButton<String>(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            color: Colors.white,
+                            onSelected: (value) {
+                              if (value == "preview") {
+                                Get.snackbar(
+                                  "Preview",
+                                  "Preview banner ${i + 1}",
+                                );
+                              } else if (value == "edit") {
+                                controller.showBannerForm.value = true;
+                              } else if (value == "delete") {
+                                controller.banners.removeAt(i);
+                              }
+                            },
+                            itemBuilder: (context) => [
+                              const PopupMenuItem(
+                                value: "preview",
+                                child: ListTile(
+                                  leading: Icon(
+                                    Icons.visibility,
+                                    color: Colors.black54,
+                                  ),
+                                  title: Text("Preview"),
+                                ),
+                              ),
+                              const PopupMenuItem(
+                                value: "edit",
+                                child: ListTile(
+                                  leading: Icon(
+                                    Icons.edit,
+                                    color: Colors.black54,
+                                  ),
+                                  title: Text("Edit"),
+                                ),
+                              ),
+                              const PopupMenuItem(
+                                value: "delete",
+                                child: ListTile(
+                                  leading: Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                  ),
+                                  title: Text(
+                                    "Delete",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                              ),
+                            ],
+                            icon: const Icon(
+                              Icons.more_vert,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            }),
           ),
         ],
       ),

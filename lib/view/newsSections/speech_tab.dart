@@ -187,7 +187,7 @@ class _SpeechForm extends StatelessWidget {
 /// ===== List State =====
 class _SpeechList extends StatelessWidget {
   final MediaUploadController controller;
-  const _SpeechList({required this.controller});
+  const _SpeechList({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -200,7 +200,7 @@ class _SpeechList extends StatelessWidget {
             children: [
               const Expanded(
                 child: Text(
-                  "Uploaded Speeches",
+                  "Speeches",
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -240,6 +240,7 @@ class _SpeechList extends StatelessWidget {
                   ),
                 );
               }
+
               return ListView.builder(
                 itemCount: controller.speeches.length,
                 itemBuilder: (ctx, i) {
@@ -268,7 +269,7 @@ class _SpeechList extends StatelessWidget {
                             bottomLeft: Radius.circular(12),
                           ),
                           child: Image.network(
-                            speech.imageUrl,
+                            speech.imagePath,
                             width: 100,
                             height: 90,
                             fit: BoxFit.cover,
@@ -313,12 +314,56 @@ class _SpeechList extends StatelessWidget {
                           ),
                         ),
 
-                        // Menu Button (3 dots)
-                        IconButton(
-                          icon: const Icon(Icons.more_vert, size: 20),
-                          onPressed: () {
-                            // TODO: edit/delete menu
+                        // 3-dot Popup Menu
+                        PopupMenuButton<String>(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          onSelected: (value) {
+                            if (value == "preview") {
+                              Get.snackbar(
+                                "Preview",
+                                "Preview speech ${i + 1}",
+                              );
+                            } else if (value == "edit") {
+                              controller.showSpeechForm.value = true;
+                            } else if (value == "delete") {
+                              controller.speeches.removeAt(i);
+                            }
                           },
+                          itemBuilder: (context) => [
+                            const PopupMenuItem(
+                              value: "preview",
+                              child: ListTile(
+                                leading: Icon(
+                                  Icons.visibility,
+                                  color: Colors.black54,
+                                ),
+                                title: Text("Preview"),
+                              ),
+                            ),
+                            const PopupMenuItem(
+                              value: "edit",
+                              child: ListTile(
+                                leading: Icon(
+                                  Icons.edit,
+                                  color: Colors.black54,
+                                ),
+                                title: Text("Edit"),
+                              ),
+                            ),
+                            const PopupMenuItem(
+                              value: "delete",
+                              child: ListTile(
+                                leading: Icon(Icons.delete, color: Colors.red),
+                                title: Text(
+                                  "Delete",
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ),
+                            ),
+                          ],
+                          icon: const Icon(Icons.more_vert, color: Colors.grey),
                         ),
                       ],
                     ),

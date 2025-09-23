@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:admin_jantasewa/controllers/media_upload_controller.dart';
-import 'gallery_edit_page.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
+import 'speech_edit_page.dart';
 
-class GalleryPreviewPage extends StatelessWidget {
-  final GalleryItem gallery;
+class SpeechPreviewPage extends StatelessWidget {
+  final SpeechItem speech;
   final MediaUploadController controller;
 
-  const GalleryPreviewPage({
+  const SpeechPreviewPage({
     super.key,
-    required this.gallery,
+    required this.speech,
     required this.controller,
   });
 
@@ -42,7 +42,7 @@ class GalleryPreviewPage extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                gallery.imagePath,
+                speech.imagePath,
                 width: double.infinity,
                 height: 220,
                 fit: BoxFit.cover,
@@ -61,7 +61,7 @@ class GalleryPreviewPage extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              "${gallery.date.toLocal()}".split(' ')[0],
+              "${speech.date.toLocal()}".split(' ')[0],
               style: const TextStyle(color: Colors.black54),
             ),
             const SizedBox(height: 16),
@@ -77,12 +77,12 @@ class GalleryPreviewPage extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              gallery.description,
+              speech.description,
               style: const TextStyle(fontSize: 13, color: Colors.black87),
             ),
             const Spacer(),
 
-            // ===== Delete & Edit Buttons =====
+            // ===== Buttons =====
             Row(
               children: [
                 Expanded(
@@ -90,9 +90,9 @@ class GalleryPreviewPage extends StatelessWidget {
                     text: "Delete",
                     textSize: 14,
                     onPressed: () {
-                      controller.galleries.remove(gallery);
+                      controller.speeches.remove(speech);
                       Get.back();
-                      Get.snackbar("Deleted", "Gallery item removed");
+                      Get.snackbar("Deleted", "Speech removed");
                     },
                   ),
                 ),
@@ -102,8 +102,8 @@ class GalleryPreviewPage extends StatelessWidget {
                     text: "Edit",
                     textSize: 14,
                     onPressed: () {
-                      Get.to(() => GalleryEditPage(
-                            gallery: gallery,
+                      Get.to(() => SpeechEditPage(
+                            speech: speech,
                             controller: controller,
                           ));
                     },

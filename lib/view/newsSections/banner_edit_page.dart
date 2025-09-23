@@ -3,29 +3,27 @@ import 'package:get/get.dart';
 import 'package:admin_jantasewa/controllers/media_upload_controller.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
 
-class GalleryEditPage extends StatefulWidget {
-  final GalleryItem gallery;
+class BannerEditPage extends StatefulWidget {
+  final BannerItem banner;
   final MediaUploadController controller;
 
-  const GalleryEditPage({
+  const BannerEditPage({
     super.key,
-    required this.gallery,
+    required this.banner,
     required this.controller,
   });
 
   @override
-  State<GalleryEditPage> createState() => _GalleryEditPageState();
+  State<BannerEditPage> createState() => _BannerEditPageState();
 }
 
-class _GalleryEditPageState extends State<GalleryEditPage> {
-  late TextEditingController descController;
+class _BannerEditPageState extends State<BannerEditPage> {
   late DateTime selectedDate;
 
   @override
   void initState() {
     super.initState();
-    descController = TextEditingController(text: widget.gallery.description);
-    selectedDate = widget.gallery.date;
+    selectedDate = widget.banner.date;
   }
 
   @override
@@ -39,7 +37,7 @@ class _GalleryEditPageState extends State<GalleryEditPage> {
           onPressed: () => Get.back(),
         ),
         title: const Text(
-          "Edit Gallery",
+          "Edit Banner",
           style: TextStyle(
             fontWeight: FontWeight.w600,
             color: Color(0xFF3D3270),
@@ -52,19 +50,19 @@ class _GalleryEditPageState extends State<GalleryEditPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ===== Image Preview =====
+            // Image preview
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                widget.gallery.imagePath,
+                widget.banner.imagePath,
                 width: double.infinity,
-                height: 200,
+                height: 180,
                 fit: BoxFit.cover,
               ),
             ),
             const SizedBox(height: 16),
 
-            // ===== Date Picker =====
+            // Date picker
             const Text(
               "Date",
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
@@ -97,50 +95,26 @@ class _GalleryEditPageState extends State<GalleryEditPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
-
-            // ===== Description =====
-            const Text(
-              "Description",
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
-            ),
-            const SizedBox(height: 6),
-            TextFormField(
-              controller: descController,
-              maxLines: 3,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                hintText: "Enter description",
-              ),
-            ),
             const Spacer(),
 
-            // ===== Save Button =====
+            // Save button
             CustomButton(
               text: "Save Changes",
               textSize: 14,
               onPressed: () {
-                // Update object (kyunki fields final hain -> ek naya object banana hoga)
-                final updated = GalleryItem(
-                  title: widget.gallery.title,
-                  description: descController.text,
-                  imagePath: widget.gallery.imagePath,
+                final updated = BannerItem(
+                  imagePath: widget.banner.imagePath,
                   date: selectedDate,
                 );
 
-                // Replace in list
-                final index = widget.controller.galleries.indexOf(
-                  widget.gallery,
-                );
+                final index = widget.controller.banners.indexOf(widget.banner);
                 if (index != -1) {
-                  widget.controller.galleries[index] = updated;
-                  widget.controller.galleries.refresh();
+                  widget.controller.banners[index] = updated;
+                  widget.controller.banners.refresh();
                 }
 
-                Get.back(); // Close edit page
-                Get.snackbar("Updated", "Gallery updated successfully");
+                Get.back();
+                Get.snackbar("Updated", "Banner updated successfully");
               },
             ),
           ],

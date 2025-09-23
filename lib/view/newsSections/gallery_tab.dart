@@ -224,93 +224,129 @@ class _GalleryList extends StatelessWidget {
                 itemCount: controller.galleries.length,
                 itemBuilder: (ctx, i) {
                   final g = controller.galleries[i];
-                  return GestureDetector(
-                    onTap: () {
-                      Get.to(
-                        () => GalleryPreviewPage(
-                          gallery: g,
-                          controller: controller,
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFFE6E6F0)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
                         ),
-                      );
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFFE6E6F0)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 4,
-                            offset: const Offset(0, 2),
+                      ],
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Thumbnail
+                        ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            bottomLeft: Radius.circular(12),
                           ),
-                        ],
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Thumbnail
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              bottomLeft: Radius.circular(12),
-                            ),
-                            child: Image.network(
-                              g.imageUrl,
-                              width: 100,
-                              height: 90,
-                              fit: BoxFit.cover,
-                            ),
+                          child: Image.network(
+                            g.imagePath,
+                            width: 100,
+                            height: 90,
+                            fit: BoxFit.cover,
                           ),
-                          const SizedBox(width: 12),
+                        ),
+                        const SizedBox(width: 12),
 
-                          // Content
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "${g.date.toLocal()}".split(' ')[0],
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey,
-                                    ),
+                        // Content
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${g.date.toLocal()}".split(' ')[0],
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey,
                                   ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    g.title,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14,
-                                    ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  g.title,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
                                   ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    g.description,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black54,
-                                    ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  g.description,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.black54,
                                   ),
-                                ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        // ✅ 3-dot menu (Popup)
+                        PopupMenuButton<String>(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          onSelected: (value) {
+                            if (value == "preview") {
+                              Get.to(
+                                () => GalleryPreviewPage(
+                                  gallery: g,
+                                  controller: controller,
+                                ),
+                              );
+                            } else if (value == "edit") {
+                              controller.showGalleryForm.value = true;
+                            } else if (value == "delete") {
+                              controller.galleries.removeAt(i);
+                            }
+                          },
+                          itemBuilder: (context) => [
+                            const PopupMenuItem(
+                              value: "preview",
+                              child: ListTile(
+                                leading: Icon(
+                                  Icons.visibility,
+                                  color: Colors.black54,
+                                ),
+                                title: Text("Preview"),
                               ),
                             ),
-                          ),
-
-                          // 3-dot menu
-                          IconButton(
-                            icon: const Icon(Icons.more_vert, size: 20),
-                            onPressed: () {
-                              // TODO: edit/delete options
-                            },
-                          ),
-                        ],
-                      ),
+                            const PopupMenuItem(
+                              value: "edit",
+                              child: ListTile(
+                                leading: Icon(
+                                  Icons.edit,
+                                  color: Colors.black54,
+                                ),
+                                title: Text("Edit"),
+                              ),
+                            ),
+                            const PopupMenuItem(
+                              value: "delete",
+                              child: ListTile(
+                                leading: Icon(Icons.delete, color: Colors.red),
+                                title: Text(
+                                  "Delete",
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ),
+                            ),
+                          ],
+                          icon: const Icon(Icons.more_vert, color: Colors.grey),
+                        ),
+                      ],
                     ),
                   );
                 },

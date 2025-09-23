@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:admin_jantasewa/controllers/media_upload_controller.dart';
-import 'gallery_edit_page.dart';
 import 'package:admin_jantasewa/widgets/custom_button.dart';
+import 'banner_edit_page.dart';
 
-class GalleryPreviewPage extends StatelessWidget {
-  final GalleryItem gallery;
+class BannerPreviewPage extends StatelessWidget {
+  final BannerItem banner;
   final MediaUploadController controller;
 
-  const GalleryPreviewPage({
+  const BannerPreviewPage({
     super.key,
-    required this.gallery,
+    required this.banner,
     required this.controller,
   });
 
@@ -38,13 +38,13 @@ class GalleryPreviewPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ===== Uploaded Image =====
+            // ===== Banner Image =====
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                gallery.imagePath,
+                banner.imagePath,
                 width: double.infinity,
-                height: 220,
+                height: 200,
                 fit: BoxFit.cover,
               ),
             ),
@@ -61,28 +61,12 @@ class GalleryPreviewPage extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              "${gallery.date.toLocal()}".split(' ')[0],
+              "${banner.date.toLocal()}".split(' ')[0],
               style: const TextStyle(color: Colors.black54),
-            ),
-            const SizedBox(height: 16),
-
-            // ===== Description =====
-            const Text(
-              "Description",
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              gallery.description,
-              style: const TextStyle(fontSize: 13, color: Colors.black87),
             ),
             const Spacer(),
 
-            // ===== Delete & Edit Buttons =====
+            // ===== Buttons =====
             Row(
               children: [
                 Expanded(
@@ -90,9 +74,9 @@ class GalleryPreviewPage extends StatelessWidget {
                     text: "Delete",
                     textSize: 14,
                     onPressed: () {
-                      controller.galleries.remove(gallery);
+                      controller.banners.remove(banner);
                       Get.back();
-                      Get.snackbar("Deleted", "Gallery item removed");
+                      Get.snackbar("Deleted", "Banner removed");
                     },
                   ),
                 ),
@@ -102,8 +86,8 @@ class GalleryPreviewPage extends StatelessWidget {
                     text: "Edit",
                     textSize: 14,
                     onPressed: () {
-                      Get.to(() => GalleryEditPage(
-                            gallery: gallery,
+                      Get.to(() => BannerEditPage(
+                            banner: banner,
                             controller: controller,
                           ));
                     },

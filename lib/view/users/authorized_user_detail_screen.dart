@@ -1,9 +1,7 @@
 import 'package:admin_jantasewa/models/authorized_user_model.dart';
-import 'package:admin_jantasewa/models/user_model.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
 import 'package:admin_jantasewa/routes/app_routes.dart';
 import 'package:admin_jantasewa/view/users/authorized_user_edit_screen.dart';
-import 'package:admin_jantasewa/view/users/user_edit_screen.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:admin_jantasewa/widgets/custom_delete_dialog_box.dart';
 import 'package:admin_jantasewa/widgets/custom_text.dart';
