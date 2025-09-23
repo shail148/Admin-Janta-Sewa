@@ -262,13 +262,15 @@ class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
         backgroundColor: Colors.green, 
         colorText: Colors.white);
 
-            // navigate to the user detail screen
-       Get.toNamed(
+        // navigate to the user detail screen
+        Get.toNamed(
           AppRoutes.authorizedUserDetailScreen,
           arguments: updatedUser, // pass data if needed
         );  
-
+ 
          // Get.back(result: updatedUser);
+
+         //Get.back();
 
   }
 
