@@ -13,10 +13,14 @@ import 'package:image_picker/image_picker.dart';
 class AuthorizedUserEditScreen extends StatefulWidget {
   final AuthorizedUserModel authorizedUserModel;
 
-  const AuthorizedUserEditScreen({super.key, required this.authorizedUserModel});
+  const AuthorizedUserEditScreen({
+    super.key,
+    required this.authorizedUserModel,
+  });
 
   @override
-  State<AuthorizedUserEditScreen> createState() => _AuthorizedUserEditScreenState();
+  State<AuthorizedUserEditScreen> createState() =>
+      _AuthorizedUserEditScreenState();
 }
 
 class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
@@ -37,32 +41,44 @@ class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
   late TextEditingController selectedPost;
   late TextEditingController forwardedLevel;
 
-
-
-  final ImagePickerController imagePickerController =
-      Get.put(ImagePickerController());
+  final ImagePickerController imagePickerController = Get.put(
+    ImagePickerController(),
+  );
 
   @override
   void initState() {
     super.initState();
 
     fullName = TextEditingController(text: widget.authorizedUserModel.name);
-    mobileNumber = TextEditingController(text: widget.authorizedUserModel.phone);
-    whatsappNumber = TextEditingController(text: widget.authorizedUserModel.phone);
+    mobileNumber = TextEditingController(
+      text: widget.authorizedUserModel.phone,
+    );
+    whatsappNumber = TextEditingController(
+      text: widget.authorizedUserModel.phone,
+    );
     email = TextEditingController(text: widget.authorizedUserModel.email);
     dob = TextEditingController(text: widget.authorizedUserModel.dob);
-    bloodGroup = TextEditingController(text: widget.authorizedUserModel.gender); 
-    aadharNumber = TextEditingController(text: widget.authorizedUserModel.nationality); 
+    bloodGroup = TextEditingController(text: widget.authorizedUserModel.gender);
+    aadharNumber = TextEditingController(
+      text: widget.authorizedUserModel.nationality,
+    );
     address = TextEditingController(text: widget.authorizedUserModel.address);
     stateCtrl = TextEditingController(text: widget.authorizedUserModel.state);
     district = TextEditingController(text: widget.authorizedUserModel.district);
     block = TextEditingController(text: widget.authorizedUserModel.block);
-    cityVillage = TextEditingController(text: widget.authorizedUserModel.cityVillage);
-    wardNumber = TextEditingController(text: widget.authorizedUserModel.wardNumber);
+    cityVillage = TextEditingController(
+      text: widget.authorizedUserModel.cityVillage,
+    );
+    wardNumber = TextEditingController(
+      text: widget.authorizedUserModel.wardNumber,
+    );
     pincode = TextEditingController(text: widget.authorizedUserModel.pincode);
-    selectedPost = TextEditingController(text: widget.authorizedUserModel.selectedPost);
-    forwardedLevel = TextEditingController(text: widget.authorizedUserModel.forwardedLevel);
-
+    selectedPost = TextEditingController(
+      text: widget.authorizedUserModel.selectedPost,
+    );
+    forwardedLevel = TextEditingController(
+      text: widget.authorizedUserModel.forwardedLevel,
+    );
   }
 
   @override
@@ -93,7 +109,7 @@ class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
         title: 'Edit User',
         leftIcon: Icon(Icons.arrow_back_ios),
         onLeftTap: Get.back,
-        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -113,14 +129,28 @@ class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
                         backgroundColor: AppColors.formBgColor,
                         backgroundImage: selectedImage != null
                             ? FileImage(selectedImage)
-                            : (widget.authorizedUserModel.profileImageUrl.isNotEmpty
-                                ? NetworkImage(widget.authorizedUserModel.profileImageUrl)
-                                    as ImageProvider
-                                : null),
-                        child: selectedImage == null &&
-                                widget.authorizedUserModel.profileImageUrl.isEmpty
-                            ? Icon(Icons.person,
-                                size: 50, color: AppColors.btnBgColor)
+                            : (widget
+                                      .authorizedUserModel
+                                      .profileImageUrl
+                                      .isNotEmpty
+                                  ? NetworkImage(
+                                          widget
+                                              .authorizedUserModel
+                                              .profileImageUrl,
+                                        )
+                                        as ImageProvider
+                                  : null),
+                        child:
+                            selectedImage == null &&
+                                widget
+                                    .authorizedUserModel
+                                    .profileImageUrl
+                                    .isEmpty
+                            ? Icon(
+                                Icons.person,
+                                size: 50,
+                                color: AppColors.btnBgColor,
+                              )
                             : null,
                       );
                     }),
@@ -135,8 +165,11 @@ class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
                             shape: BoxShape.circle,
                             color: AppColors.btnBgColor,
                           ),
-                          child: const Icon(Icons.camera_alt,
-                              color: AppColors.white, size: 20),
+                          child: const Icon(
+                            Icons.camera_alt,
+                            color: AppColors.white,
+                            size: 20,
+                          ),
                         ),
                       ),
                     ),
@@ -146,11 +179,23 @@ class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
               const SizedBox(height: 20),
               _buildField("Full Name", fullName, "Enter Full Name"),
               _buildField("Mobile Number", mobileNumber, "Enter Mobile Number"),
-              _buildField("WhatsApp Number", whatsappNumber, "Enter WhatsApp Number"),
+              _buildField(
+                "WhatsApp Number",
+                whatsappNumber,
+                "Enter WhatsApp Number",
+              ),
               _buildField("Email", email, "Enter Email Address"),
               _buildField("Date of Birth", dob, "Enter Date of Birth"),
-              _buildField("Gender/Blood Group", bloodGroup, "Enter Gender or Blood Group"),
-              _buildField("Aadhar/Nationality", aadharNumber, "Enter Aadhar or Nationality"),
+              _buildField(
+                "Gender/Blood Group",
+                bloodGroup,
+                "Enter Gender or Blood Group",
+              ),
+              _buildField(
+                "Aadhar/Nationality",
+                aadharNumber,
+                "Enter Aadhar or Nationality",
+              ),
               _buildField("Address", address, "Enter Address"),
               _buildField("State", stateCtrl, "Enter State"),
               _buildField("District", district, "Enter District"),
@@ -159,19 +204,21 @@ class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
               _buildField("Ward Number", wardNumber, "Enter Ward Number"),
               _buildField("Pincode", pincode, "Enter Pincode"),
               _buildField("Selected Post", selectedPost, "Enter Selected Post"),
-              _buildField("Forwarded Level", forwardedLevel, "Enter Forwarded Level"),
-
-
+              _buildField(
+                "Forwarded Level",
+                forwardedLevel,
+                "Enter Forwarded Level",
+              ),
 
               const SizedBox(height: 20),
               CustomButton(
-                      text: 'Save'.tr,
-                      onPressed: _saveProfile,
-                      textSize: 14,
-                      backgroundColor: AppColors.btnBgColor,
-                      height: 52,
-                      width: double.infinity,
-                  ),
+                text: 'Save'.tr,
+                onPressed: _saveProfile,
+                textSize: 14,
+                backgroundColor: AppColors.btnBgColor,
+                height: 52,
+                width: double.infinity,
+              ),
             ],
           ),
         ),
@@ -179,12 +226,20 @@ class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
     );
   }
 
-  Widget _buildField(String label, TextEditingController controller,  String hintText) {
+  Widget _buildField(
+    String label,
+    TextEditingController controller,
+    String hintText,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomLabelText(text: label),
-        CustomTextFormField(controller: controller, enabled: true, hintText: hintText),
+        CustomTextFormField(
+          controller: controller,
+          enabled: true,
+          hintText: hintText,
+        ),
         const SizedBox(height: 10),
       ],
     );
@@ -194,7 +249,8 @@ class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
       builder: (context) => Wrap(
         children: [
           ListTile(
@@ -256,7 +312,11 @@ class _AuthorizedUserEditScreenState extends State<AuthorizedUserEditScreen> {
 
     // Save updatedUser to backend or local storage
 
-    Get.snackbar("Success", "Profile updated",
-        backgroundColor: Colors.green, colorText: Colors.white);
+    Get.snackbar(
+      "Success",
+      "Profile updated",
+      backgroundColor: Colors.green,
+      colorText: Colors.white,
+    );
   }
 }
