@@ -373,7 +373,6 @@ class JantaSewaMediaScreen extends StatelessWidget {
     );
   }
 }
-
 /// ---------- BANNER TAB ----------
 class _BannerTab extends StatelessWidget {
   final MediaUploadController controller;
@@ -609,8 +608,6 @@ class _GalleryTab extends StatelessWidget {
     );
   }
 }
-
-
 
 class PickedFile {
   final String name;

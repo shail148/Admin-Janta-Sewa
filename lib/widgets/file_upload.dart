@@ -23,7 +23,7 @@ class CustomFileUpload extends StatefulWidget {
 }
 
 class _CustomFileUploadState extends State<CustomFileUpload> {
-  RxList<PickedFile> _internalFiles = <PickedFile>[].obs;
+  final RxList<PickedFile> _internalFiles = <PickedFile>[].obs;
 
   RxList<PickedFile> get _files =>
       widget.targetFiles ?? _internalFiles; // ✅ fallback if null
@@ -36,11 +36,12 @@ class _CustomFileUploadState extends State<CustomFileUpload> {
 
     if (result != null && result.files.isNotEmpty) {
       for (var file in result.files) {
-        _files.add(PickedFile(file.name, file.size));
+        _files.add(PickedFile(file.name, file.size, file.path ?? ''));
       }
     }
   }
 
+  // 7579325568
   void removeFile(int index) {
     if (index >= 0 && index < _files.length) {
       _files.removeAt(index);
