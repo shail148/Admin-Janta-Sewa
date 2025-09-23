@@ -81,6 +81,7 @@ class _NewHomePageState extends State<NewHomePage> {
               CustomTextWidget(
                 text: 'Departments',
                 fontWeight: FontWeight.bold,
+                
                 fontsize: 14,
               ),
               const SizedBox(height: 10),

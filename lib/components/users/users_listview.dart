@@ -1,5 +1,6 @@
 import 'package:admin_jantasewa/controllers/user_controller.dart';
 import 'package:admin_jantasewa/models/user_model.dart';
+import 'package:admin_jantasewa/routes/app_routes.dart';
 import 'package:admin_jantasewa/view/users/user_detail_screen.dart';
 import 'package:admin_jantasewa/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,9 @@ class UserListView extends StatelessWidget {
                 final UserModel user = c.filteredList[index];
                 return GestureDetector(
                   onTap: () {
-                    Get.to(() => UserDetailScreen(), arguments: user);
+                    //Get.to(() => UserDetailScreen(), arguments: user); //this can cause global key red screen error later,plz avoid not for production app
+                    Get.toNamed(AppRoutes.userDetailScreen, arguments: user);
+
                   },
                   child: Card(
                     elevation: 0,

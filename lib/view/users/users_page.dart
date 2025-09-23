@@ -16,7 +16,7 @@ class _UsersPageState extends State<UsersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'Janta Sewa',
+        title: 'All Users',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.btnBgColor),
         onLeftTap: () {
           Get.back();

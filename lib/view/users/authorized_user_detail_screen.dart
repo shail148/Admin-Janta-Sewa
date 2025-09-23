@@ -1,5 +1,6 @@
 import 'package:admin_jantasewa/models/authorized_user_model.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
+import 'package:admin_jantasewa/routes/app_routes.dart';
 import 'package:admin_jantasewa/view/users/authorized_user_edit_screen.dart';
 import 'package:admin_jantasewa/widgets/custom_app_bar.dart';
 import 'package:admin_jantasewa/widgets/custom_delete_dialog_box.dart';
@@ -20,14 +21,15 @@ class AuthorizedUserDetailScreen extends StatelessWidget {
     final authorizedUser = Get.arguments as AuthorizedUserModel;
     return Scaffold(
       appBar: CustomTopAppBar(
-        title: 'Janta Sewa',
+        title: 'Authorized User Details',
         leftIcon: Icon(Icons.arrow_back_ios, color: AppColors.btnBgColor),
         rightIcon: CustomPopupMenu(
           onSelected: (value) {
             if (value == "Edit") {
                // Navigate to the UserEditScreen and pass the user data
            //Get.to(() => AuthorizedUserEditScreen(authorizedUser: authorizedUser));
-           Get.to(() => AuthorizedUserEditScreen(authorizedUserModel: authorizedUser));
+           //Get.to(() => AuthorizedUserEditScreen(authorizedUserModel: authorizedUser));
+           Get.toNamed(AppRoutes.authorizedUserEditScreen,arguments: authorizedUser);
 
             } else if (value == "Inactive") {
               if (kDebugMode) {

@@ -1,5 +1,6 @@
 import 'package:admin_jantasewa/controllers/auth/authorized_user_controller.dart';
 import 'package:admin_jantasewa/models/authorized_user_model.dart';
+import 'package:admin_jantasewa/routes/app_routes.dart';
 import 'package:admin_jantasewa/view/users/authorized_user_detail_screen.dart';
 import 'package:admin_jantasewa/view/users/create_autorized_user.dart';
 import 'package:admin_jantasewa/constants/colors.dart';
@@ -50,7 +51,8 @@ class _AuthorizedUserListviewState extends State<AuthorizedUserListview> {
               text: "Add",
               textSize: 14,
               onPressed: () {
-                Get.to(() => CreateAuthorizedUserPage());
+                //Get.to(() => CreateAuthorizedUserPage()); //dont use , can cause global key red screen error later as it pushes new screen on top of a existing screen in navigation stack
+                Get.toNamed(AppRoutes.createAuthorizedUserPage);
               },
               height: 35,
             ),
@@ -66,7 +68,8 @@ class _AuthorizedUserListviewState extends State<AuthorizedUserListview> {
                 final AuthorizedUserModel authorizedUserModel = controller.filteredList[index];
                 return GestureDetector(
                   onTap: () {
-                    Get.to(() => AuthorizedUserDetailScreen(), arguments: authorizedUserModel);
+                    //Get.to(() => AuthorizedUserDetailScreen(), arguments: authorizedUserModel);
+                    Get.toNamed(AppRoutes.authorizedUserDetailScreen, arguments: authorizedUserModel);
                   },
                   child: Card(
                     elevation: 0,
